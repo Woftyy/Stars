@@ -1,0 +1,30 @@
+
+
+
+
+
+#registerForm .tb{
+	padding-top:200px;
+	width:300px;
+	
+} 
+#registerForm .tb tr{
+
+
+} 
+#registerForm .tb td{
+	padding-bottom:20px;
+} 
+
+#warning1{
+	display:block;
+	font-size:15px;
+	color:red;
+	
+}
+#warning2{
+	display:block;
+	font-size:15px;
+	color:red;
+	
+}
