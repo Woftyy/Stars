@@ -1,0 +1,65 @@
+
+
+
+
+#mainItem .introduction{
+	
+	
+}
+#mainItem .introduction img{
+	height:100px;
+	width:100px;
+	
+}
+
+#mainItem .data button{
+	    border: 0;
+
+    line-height: unset;
+    font-size: unset;
+    display: inline-block;
+    padding: 0 16px;
+    line-height: 32px;
+    text-align: center;
+    cursor: pointer;
+    background: none;
+    border-radius: 3px;
+}
+#mainItem .data .rightButton{
+	position : relative;
+	left:30px;
+	    border: 0;
+    line-height: unset;
+    font-size: unset;
+    display: inline-block;
+    padding: 0 16px;
+    line-height: 32px;
+    text-align: center;
+    cursor: pointer;
+    background: none;
+    border-radius: 3px;
+}
+
+.TagButton ul li a{
+	color : black;
+}
+#mainItem .RightItem .positive img{
+	height:30px;
+	height:30px;
+	
+}
+#mainItem .RightItem .positive ul{
+	list-style:none;
+	
+}
+#mainItem .RightItem .positive li{
+	padding-bottom:20px;
+	
+}
+#mainItem .RightItem .positive img{
+	list-style:none;
+	position:relative;
+	right:20px;
+	text-align:center;
+	
+}
