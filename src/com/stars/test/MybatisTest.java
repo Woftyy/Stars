@@ -29,9 +29,9 @@ public class MybatisTest {
 		User user = new User();
 		Timestamp d = new Timestamp(System.currentTimeMillis()); 
 		user.setEmail("123@qq.com");
-		user.setName("ÓÃ»§01");
+		user.setName("ç”¨æˆ·02");
 		user.setPassword("123");
-		user.setSex("ÄÐ");
+		user.setSex("ç”·");
 		user.setTime(d);
 		userMapper.add(user);
 	}

@@ -11,7 +11,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<title>天上星河-首页</title>
+<title>天上星河-科普讨论</title>
 <!-- 引入Bootstrap核心样式表文件 -->
 <link href="weblib/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css" type="text/css">
@@ -63,34 +63,13 @@
 		</nav>
 	</header>
 	<!-- /头部区域 -->
-	<!-- 广告轮播 -->
-	<div class="container">
-		<section id="main_ad" class="carousel slide" data-ride="carousel">
-			<!-- 下面的小点点，活动指示器 -->
-			<ol class="carousel-indicators">
-				<li data-target="#main_ad" data-slide-to="0" class="active"></li>
-				<li data-target="#main_ad" data-slide-to="1"></li>
-				<li data-target="#main_ad" data-slide-to="2"></li>
-				<li data-target="#main_ad" data-slide-to="3"></li>
-			</ol>
-			<!-- 轮播项 -->
-			<div class="carousel-inner" role="listbox">
-				<div class="item active" data-image-lg="images/slide01.jpg"
-					data-image-xs="images/slide01.jpg"></div>
-				<div class="item" data-image-lg="images/slide02.jpg"
-					data-image-xs="images/slide02.jpg"></div>
-				<div class="item" data-image-lg="images/slide03.jpg"
-					data-image-xs="images/slide02.jpg"></div>
-				<div class="item" data-image-lg="images/slide04.jpg"
-					data-image-xs="images/slide02.jpg"></div>
-			</div>
-		</section>
-	</div>
-	<!-- /广告轮播 -->
 	<!-- 主要内容 -->
 	<div class="container">
 		<div id="mainItem">
 			<!-- 左边卡片 -->
+			<div class="Card LeftItem">
+			
+			</div>
 			<%
 				for (int i = 0; i <= 4; i++) {
 			%>
