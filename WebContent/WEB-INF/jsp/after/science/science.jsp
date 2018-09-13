@@ -173,18 +173,18 @@
 	
 	 $(document).ready(function(){
          //页面加载的时候，内容框默认显示 a.html
-         $('#con').load('fragment/science_theme.jsp');
+         $('#con').load('${pageContext.request.contextPath}/science_theme');
          //单击 a 链接，加载 a.html
          $("#a1").click(function(){
-             $('#con').load('fragment/science_theme.jsp');
+             $('#con').load('${pageContext.request.contextPath}/science_theme');
              
          });
          //单击 b 链接，加载 b.html
          $("#a2").click(function(){
-             $('#con').load('fragment/science_hot.jsp');
+             $('#con').load('${pageContext.request.contextPath}/science_hot');
          });
          $("#a3").click(function(){
-             $('#con').load('fragment/science_reply.jsp');
+             $('#con').load('${pageContext.request.contextPath}/science_reply');
          });
      });
 	 

@@ -11,10 +11,11 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<title>天上星河-首页</title>
+<title>天上星河-科普讨论</title>
 <!-- 引入Bootstrap核心样式表文件 -->
 <link href="weblib/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="css/main.css" type="text/css">
+<link rel="stylesheet" href="css/science.css" type="text/css">
 
 <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
 <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
@@ -63,77 +64,44 @@
 		</nav>
 	</header>
 	<!-- /头部区域 -->
-	<!-- 广告轮播 -->
-	<div class="container">
-		<section id="main_ad" class="carousel slide" data-ride="carousel">
-			<!-- 下面的小点点，活动指示器 -->
-			<ol class="carousel-indicators">
-				<li data-target="#main_ad" data-slide-to="0" class="active"></li>
-				<li data-target="#main_ad" data-slide-to="1"></li>
-				<li data-target="#main_ad" data-slide-to="2"></li>
-				<li data-target="#main_ad" data-slide-to="3"></li>
-			</ol>
-			<!-- 轮播项 -->
-			<div class="carousel-inner" role="listbox">
-				<div class="item active" data-image-lg="images/slide01.jpg"
-					data-image-xs="images/slide01.jpg"></div>
-				<div class="item" data-image-lg="images/slide02.jpg"
-					data-image-xs="images/slide02.jpg"></div>
-				<div class="item" data-image-lg="images/slide03.jpg"
-					data-image-xs="images/slide02.jpg"></div>
-				<div class="item" data-image-lg="images/slide04.jpg"
-					data-image-xs="images/slide02.jpg"></div>
-			</div>
-		</section>
-	</div>
-	<!-- /广告轮播 -->
 	<!-- 主要内容 -->
 	<div class="container">
 		<div id="mainItem">
 			<!-- 左边卡片 -->
-			<%
-				for (int i = 0; i <= 4; i++) {
-			%>
-			<div class="Card LeftItem">
-				<div class="WhererForumItem">
-					<span>来自：<a href="#">科普讨论</a></span>
-
-
-				</div>
-				<div class="UserItem">
-					<img src="images/photo_test01.jpg" alt="..." class="img-circle"><strong
-						class="name">用户名在这里</strong>
-				</div>
-
-				<div class="ContentItem">
-					<strong class="title">这是标题</strong>
-					<p>
-						<%
-							String s = "内容再循环对对对大幅度放单费三番四复身份度放单费三番四复度放单费三番四复度放单费三番" + "四复度放单费三番四复度放单费三番四复度放单费三番四复"
-										+ "度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复"
-										+ "度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复"
-										+ "度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复"
-										+ "度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复";
-								if (s.length() <= 70) {
-									out.println(s);
-								} else {
-									out.println(s.substring(0, 70) + "...");
-								}
-						%>
-					</p>
-
-					<span><a href="#">显示全文</a></span>
+			<!-- 介绍 -->
+			<div class="Card LeftItem introduction">
+				<div class="media">
+					<div class="media-left">
+						<a href="#"> <img class="media-object img-circle"
+							src="images/photo_test01.jpg" alt="...">
+						</a>
+					</div>
+					<div class="media-body">
+						<h2 class="media-heading">科普讨论</h2>
+						...
+					</div>
 				</div>
 
 			</div>
-			<!-- /左边卡片 -->
-			<%
-				}
-			%>
+			
+<div class="Card LeftItem TagButton">
+	<ul class="nav nav-pills nav-justified">
+	 <li role="presentation" class="active"><a href="#" id="a1">最新主题</a></li>
+	 <li role="presentation"><a href="#"  id="a2">最热</a></li>
+  <li role="presentation" ><a href="#" id="a3">最新回复</a></li>
+ 
+  
+</ul>
 
 
+</div>
+			<div id="con" >
+			
+			</div>
+
+		
 			<!-- 右边卡片 -->
-			<div class="Card RightItem">
+			<div class="Card RightItem ">
 
 				<div class="post">
 					<span class="glyphicon glyphicon-pencil"> </span><strong><a
@@ -141,19 +109,43 @@
 
 				</div>
 			</div>
+			<div class="Card RightItem data">
+				<button>
+					<div>
+						<div>总访问数</div>
+						<div>21321421</div>
+					</div>
+				</button>
+				<button class="rightButton">
+					<div>
+						<div>主题数</div>
+						<div>421</div>
+					</div>
+				</button>
+			</div>
 			<div class="Card RightItem">
-
-
-
-
-
+				<div class="positive">
+					<strong>活跃用户</strong>
+					<hr />
+					<ul>
+						<li><img class="img-circle"
+							src="images/photo_test01.jpg" alt="...">名字在这
+						</li>
+						<li><img class="img-circle"
+							src="images/photo_test01.jpg" alt="...">名字在这</li>
+						<li><img class="img-circle"
+							src="images/photo_test01.jpg" alt="...">名字在这</li>
+					</ul>
+				</div>
+			</div>
+			<div class="Card RightItem">
 				<div class="hotForum">
 					<strong>热门板块</strong>
 					<hr />
 					<ul>
 						<li><p>
-								<a href="${pageContext.request.contextPath}/science">科普讨论</a>
-							</p></li> 
+								<a href="science.jsp">科普讨论</a>
+							</p></li>
 						<li><p>
 								<a href="#">摄影天地</a>
 							</p></li>
@@ -174,6 +166,33 @@
 	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 	<script src="weblib/bootstrap/js/bootstrap.js"></script>
 	<script src="js/main.js"></script>
+	
+	<script>
 
+	
+	
+	 $(document).ready(function(){
+         //页面加载的时候，内容框默认显示 a.html
+         $('#con').load('${pageContext.request.contextPath}/science_theme');
+         //单击 a 链接，加载 a.html
+         $("#a1").click(function(){
+             $('#con').load('${pageContext.request.contextPath}/science_theme');
+             
+         });
+         //单击 b 链接，加载 b.html
+         $("#a2").click(function(){
+             $('#con').load('${pageContext.request.contextPath}/science_hot');
+         });
+         $("#a3").click(function(){
+             $('#con').load('${pageContext.request.contextPath}/science_reply');
+         });
+     });
+	 
+	 $(".TagButton ul li").click(function(){
+         $(".TagButton ul li").removeClass("active");
+         $(this).addClass("active");
+})
+	</script>
+	 
 </body>
 </html>
