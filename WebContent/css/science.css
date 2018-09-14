@@ -1,6 +1,18 @@
 
 
-
+button{
+	    border: 0;
+    outline:none;
+    line-height: unset;
+    font-size: unset;
+    display: inline-block;
+    padding: 0 16px;
+    line-height: 32px;
+    text-align: center;
+    cursor: pointer;
+    background: none;
+    border-radius: 3px;
+}
 
 #mainItem .introduction{
 	
@@ -14,7 +26,7 @@
 
 #mainItem .data button{
 	    border: 0;
-
+    outline:none;
     line-height: unset;
     font-size: unset;
     display: inline-block;
@@ -26,6 +38,7 @@
     border-radius: 3px;
 }
 #mainItem .data .rightButton{
+	outline:none;
 	position : relative;
 	left:30px;
 	    border: 0;
@@ -64,8 +77,11 @@
 	
 }
 
-.btn-default {
-    color: #333;
+.comment_button {
+	outline:none;
+    color:  #ccc;;
     background-color: #fff;
-    
+  border-color: rgba(0, 0, 0, .0001);
 }
+
+

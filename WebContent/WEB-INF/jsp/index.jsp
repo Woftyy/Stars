@@ -41,7 +41,7 @@
 				</a>
 				<div id="nav_list" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="index.jsp">首页</a></li>
+						<li class="active"><a href="">首页</a></li>
 					</ul>
 					<ul class="nav navbar-nav">
 						<li>
@@ -55,8 +55,8 @@
 						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right hidden-sm">
-						<li><a href="register.jsp" class="btn btn-link btn-sm">注册</a></li>
-						<li><a href="login.jsp" class="btn btn-link btn-sm">登录</a></li>
+						<li><a href="${pageContext.request.contextPath}/register" class="btn btn-link btn-sm">注册</a></li>
+						<li><a href="${pageContext.request.contextPath}/login" class="btn btn-link btn-sm">登录</a></li>
 					</ul>
 				</div>
 			</div>
@@ -152,7 +152,7 @@
 					<hr />
 					<ul>
 						<li><p>
-								<a href="${pageContext.request.contextPath}/science">科普讨论</a>
+								<a href="${pageContext.request.contextPath}/view/science">科普讨论</a>
 							</p></li> 
 						<li><p>
 								<a href="#">摄影天地</a>

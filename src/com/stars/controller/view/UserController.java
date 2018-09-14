@@ -1,4 +1,4 @@
-package com.stars.controller;
+package com.stars.controller.view;
 
 import java.util.List;
 
@@ -12,5 +12,17 @@ import com.stars.entity.Category;
 @RequestMapping("/")
 public class UserController {
 	
+	@RequestMapping("/")
+	public String returnIndex(){
+		return "index";
+	}
 	
+	@RequestMapping("/login")
+	public String returnLogin(){
+		return "login";
+	}
+	@RequestMapping("/register")
+	public String returnRegister(){
+		return "register";
+	}
 }

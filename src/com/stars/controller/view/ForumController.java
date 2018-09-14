@@ -1,10 +1,10 @@
-package com.stars.controller;
+package com.stars.controller.view;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping("/view")
 public class ForumController {
 	//返回science.jsp
 		@RequestMapping("/science")
@@ -23,4 +23,5 @@ public class ForumController {
 		public String ScienceTheme(){
 			return "view/science/science_theme";
 		}
+		
 }
