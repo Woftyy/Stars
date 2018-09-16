@@ -1,4 +1,4 @@
-package com.stars.controller.view;
+package com.stars.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

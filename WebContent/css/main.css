@@ -1,5 +1,5 @@
 /*
-* ���ǵ��Զ�����ʽ
+* 锟斤拷锟角碉拷锟皆讹拷锟斤拷锟斤拷式
 * @Author: iceStone
 * @Date:   2015-12-12 10:56:34
 * @Last Modified by:   iceStone
@@ -7,15 +7,15 @@
 */
 
 /**
- * 1. ��ʽ��ͨ��IDȥ�޶�
- * 2. �����ܶ�ʹ��ֱ���Ӵ�ѡ����
+ * 1. 锟斤拷式锟斤拷通锟斤拷ID去锟睫讹拷
+ * 2. 锟斤拷锟斤拷锟杰讹拷使锟斤拷直锟斤拷锟接达拷选锟斤拷锟斤拷
  */
 
 /**
- * ������ʽ������ɫ #e92322
- * ϣ���Ժ��CSS���б����ĸ���
- * ϣ����Ƕ���﷨
- * ϣ���л���﷨��Mixin��
+ * 锟斤拷锟斤拷锟斤拷式锟斤拷锟斤拷锟斤拷色 #e92322
+ * 希锟斤拷锟皆猴拷锟紺SS锟斤拷锟叫憋拷锟斤拷锟侥革拷锟斤拷
+ * 希锟斤拷锟斤拷嵌锟斤拷锟斤法
+ * 希锟斤拷锟叫伙拷锟斤拷锓拷锟組ixin锟斤拷
  */
 
 /*
@@ -67,7 +67,7 @@ function radius(r) {
   text-decoration: none;
 }*/
 
-/* ������ʽ */
+/* 锟斤拷锟斤拷锟斤拷式 */
 body {
 	font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue,
 		PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC,
@@ -81,7 +81,21 @@ body {
 p {
 	padding-top: 10px;
 }
-/* ͷ������ */
+button{
+	    border: 0;
+    outline:none;
+    line-height: unset;
+    font-size: unset;
+    display: inline-block;
+    padding: 0 16px;
+    line-height: 32px;
+    text-align: center;
+    cursor: pointer;
+    background: none;
+    border-radius: 3px;
+}
+
+/* 头锟斤拷锟斤拷锟斤拷 */
 #header {
 	
 }
@@ -153,7 +167,7 @@ p {
   background-color: #f00;
 }*/
 
-/* ͨ������ֲ� */
+/* 通锟斤拷锟斤拷锟斤拷植锟� */
 #main_ad {
 	padding-bottom: 20px;
 }
@@ -164,7 +178,7 @@ p {
 	background-size: cover;
 }
 
-/* ����Ļ��ȴ���768ʱ����Ԫ�ظ߶�����Ϊ410px */
+/* 锟斤拷锟斤拷幕锟斤拷却锟斤拷锟�768时锟斤拷锟斤拷元锟截高讹拷锟斤拷锟斤拷为410px */
 @media ( min-width : 768px) {
 	#main_ad>.carousel-inner>.item {
 		height: 410px;
@@ -175,7 +189,7 @@ p {
 	width: 100%;
 }
 
-/*��Ҫ����*/
+/*锟斤拷要锟斤拷锟斤拷*/
 #mainItem {
 	
 }
@@ -251,9 +265,15 @@ p {
 	text-decoration: none;
 }
 
-#mainItem .RightItem .post a:hover {
-	color: red;
-	text-decoration: none;
+#mainItem .RightItem button {
+	outline:none;
+    background-color: #fff;
+  border-color: rgba(0, 0, 0, .0001);
+}
+#mainItem .RightItem button: hover {
+	outline:none;
+    background-color: #fff;
+  border-color: rgba(0, 0, 0, .0001);
 }
 
 #mainItem .RightItem .hotForum ul {
@@ -287,7 +307,8 @@ p {
 	}
 }
 
-/* Bootstrap��չ��ʽ */
+
+/* Bootstrap锟斤拷展锟斤拷式 */
 .panel-czbk {
 	border: 0;
 	border-radius: 0;

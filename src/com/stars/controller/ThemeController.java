@@ -1,4 +1,4 @@
-package com.stars.controller.after;
+package com.stars.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;

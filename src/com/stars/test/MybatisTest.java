@@ -29,7 +29,7 @@ public class MybatisTest {
 		User user = new User();
 		Timestamp d = new Timestamp(System.currentTimeMillis()); 
 		user.setEmail("123@qq.com");
-		user.setName("用户02");
+		user.setName("用户03");
 		user.setPassword("123");
 		user.setSex("男");
 		user.setTime(d);

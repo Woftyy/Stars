@@ -95,7 +95,7 @@
 
 
 </div>
-<div id="editor" class="LeftItem" ></div>
+
 			<div id="con" >
 			
 			</div>
@@ -105,9 +105,10 @@
 			<div class="Card RightItem ">
 
 				<div class="post">
-					<span class="glyphicon glyphicon-pencil"> </span><strong><a
-						href="#" onclick="CreateEditor()" >发帖</a></strong>
-
+				<button onclick="window.location.href='${pageContext.request.contextPath}/login'">
+				<span class="glyphicon glyphicon-pencil"> </span><strong>发帖</strong>
+				</button>
+					
 				</div>
 			</div>
 			<div class="Card RightItem data">
@@ -167,7 +168,6 @@
 	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 	<script src="${pageContext.request.contextPath}/weblib/bootstrap/js/bootstrap.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
-	<script src="${pageContext.request.contextPath}/js/wangEditor.min.js"></script>
 	<script>
 
 	
@@ -194,19 +194,6 @@
          $(this).addClass("active");
 })
 
-function CreateEditor(){
-		  var E = window.wangEditor
-	        var editor = new E('#editor')
-		  var content = $("#editor").html();
-	        // 或者 var editor = new E( document.getElementById('editor') )
-		  if(content == null || content.length == 0){
-			  editor.create();
-		  }else{
-			  editor.innerHtml="";
-		  }
-	        
-		 
-	 }
 	</script>
 	 
 </body>

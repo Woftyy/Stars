@@ -1,4 +1,4 @@
-package com.stars.controller.view;
+package com.stars.controller;
 
 import java.util.List;
 
@@ -24,5 +24,9 @@ public class UserController {
 	@RequestMapping("/register")
 	public String returnRegister(){
 		return "register";
+	}
+	@RequestMapping("/after")
+	public String returnAlreadyLogin(){
+		return "/after/alreadyLogin";
 	}
 }

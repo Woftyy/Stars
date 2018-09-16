@@ -13,9 +13,9 @@
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <title>天上星河-科普讨论</title>
 <!-- 引入Bootstrap核心样式表文件 -->
-<link href="weblib/bootstrap/css/bootstrap.css" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css" type="text/css">
-<link rel="stylesheet" href="css/science.css" type="text/css">
+<link href="${pageContext.request.contextPath}/weblib/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/science.css" type="text/css">
 
 <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
 <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
@@ -42,7 +42,7 @@
 				</a>
 				<div id="nav_list" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="index.jsp">首页</a></li>
+						<li ><a href="${pageContext.request.contextPath}">首页</a></li>
 					</ul>
 					<ul class="nav navbar-nav">
 						<li>
@@ -56,8 +56,8 @@
 						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right hidden-sm">
-						<li><a href="register.jsp" class="btn btn-link btn-sm">注册</a></li>
-						<li><a href="login.jsp" class="btn btn-link btn-sm">登录</a></li>
+						<li><a href="${pageContext.request.contextPath}/register" class="btn btn-link btn-sm">注册</a></li>
+						<li><a href="${pageContext.request.contextPath}/login" class="btn btn-link btn-sm">登录</a></li>
 					</ul>
 				</div>
 			</div>
@@ -73,7 +73,7 @@
 				<div class="media">
 					<div class="media-left">
 						<a href="#"> <img class="media-object img-circle"
-							src="images/photo_test01.jpg" alt="...">
+							src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="...">
 						</a>
 					</div>
 					<div class="media-body">
@@ -95,6 +95,11 @@
 
 
 </div>
+<div  class="LeftItem" >
+<div id="editor"></div>
+<div></div>
+</div>
+
 			<div id="con" >
 			
 			</div>
@@ -104,9 +109,10 @@
 			<div class="Card RightItem ">
 
 				<div class="post">
-					<span class="glyphicon glyphicon-pencil"> </span><strong><a
-						href="#">发帖</a></strong>
-
+				<button onclick="CreateEditor()">
+				<span class="glyphicon glyphicon-pencil"> </span><strong>发帖</strong>
+				</button>
+					
 				</div>
 			</div>
 			<div class="Card RightItem data">
@@ -129,12 +135,12 @@
 					<hr />
 					<ul>
 						<li><img class="img-circle"
-							src="images/photo_test01.jpg" alt="...">名字在这
+							src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="...">名字在这
 						</li>
 						<li><img class="img-circle"
-							src="images/photo_test01.jpg" alt="...">名字在这</li>
+							src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="...">名字在这</li>
 						<li><img class="img-circle"
-							src="images/photo_test01.jpg" alt="...">名字在这</li>
+							src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="...">名字在这</li>
 					</ul>
 				</div>
 			</div>
@@ -144,7 +150,7 @@
 					<hr />
 					<ul>
 						<li><p>
-								<a href="science.jsp">科普讨论</a>
+								<a href="${pageContext.request.contextPath}/view/science">科普讨论</a>
 							</p></li>
 						<li><p>
 								<a href="#">摄影天地</a>
@@ -162,29 +168,29 @@
 	<!-- /主要内容 -->
 
 	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-	<script src="weblib/jquery/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/weblib/jquery/jquery.js"></script>
 	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-	<script src="weblib/bootstrap/js/bootstrap.js"></script>
-	<script src="js/main.js"></script>
-	
+	<script src="${pageContext.request.contextPath}/weblib/bootstrap/js/bootstrap.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/js/wangEditor.min.js"></script>
 	<script>
 
 	
 	
 	 $(document).ready(function(){
          //页面加载的时候，内容框默认显示 a.html
-         $('#con').load('${pageContext.request.contextPath}/science_theme');
+         $('#con').load('${pageContext.request.contextPath}/view/science_theme');
          //单击 a 链接，加载 a.html
          $("#a1").click(function(){
-             $('#con').load('${pageContext.request.contextPath}/science_theme');
+             $('#con').load('${pageContext.request.contextPath}/view/science_theme');
              
          });
          //单击 b 链接，加载 b.html
          $("#a2").click(function(){
-             $('#con').load('${pageContext.request.contextPath}/science_hot');
+             $('#con').load('${pageContext.request.contextPath}/view/science_hot');
          });
          $("#a3").click(function(){
-             $('#con').load('${pageContext.request.contextPath}/science_reply');
+             $('#con').load('${pageContext.request.contextPath}/view/science_reply');
          });
      });
 	 
@@ -192,6 +198,20 @@
          $(".TagButton ul li").removeClass("active");
          $(this).addClass("active");
 })
+
+function CreateEditor(){
+		  var E = window.wangEditor
+	        var editor = new E('#editor')
+		  var content = $("#editor").html();
+	        // 或者 var editor = new E( document.getElementById('editor') )
+		  if(content == null || content.length == 0){
+			  editor.create();
+		  }else{
+			  editor.innerHtml="";
+		  }
+	        
+		 
+	 }
 	</script>
 	 
 </body>

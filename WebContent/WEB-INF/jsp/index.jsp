@@ -136,9 +136,9 @@
 			<div class="Card RightItem">
 
 				<div class="post">
-					<span class="glyphicon glyphicon-pencil"> </span><strong><a
-						href="#">发帖</a></strong>
-
+				<button class="publish_button" onclick="window.location.href='${pageContext.request.contextPath}/login'">
+					<span class="glyphicon glyphicon-pencil"> </span><strong>发帖</strong>
+</button>
 				</div>
 			</div>
 			<div class="Card RightItem">
