@@ -176,7 +176,7 @@
 		var create;
 		 create= document.getElementById("create");
 		if(
-			document.getElementById("username").value==''||
+			document.getElementById("name").value==''||
 			document.getElementById("pw1").value==''||
 			document.getElementById("pw2").value==''||
 			document.getElementById("email").value==''||

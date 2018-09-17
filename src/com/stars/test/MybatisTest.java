@@ -11,7 +11,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.stars.entity.Category;
 import com.stars.entity.User;
-import com.stars.mapper.CategoryMapper;
 import com.stars.mapper.UserMapper;
 
 
@@ -19,8 +18,7 @@ import com.stars.mapper.UserMapper;
 @ContextConfiguration("classpath:applicationContext.xml")
 public class MybatisTest {
 
-	@Autowired
-	private CategoryMapper categoryMapper;
+
 	@Autowired
 	private UserMapper userMapper;
 
@@ -36,13 +34,5 @@ public class MybatisTest {
 		userMapper.add(user);
 	}
 
-	@Test
-	public void testList() {
-		System.out.println(categoryMapper);
-		List<Category> cs=categoryMapper.list();
-		for (Category c : cs) {
-			System.out.println(c.getName());
-		}
-	}
 
 }

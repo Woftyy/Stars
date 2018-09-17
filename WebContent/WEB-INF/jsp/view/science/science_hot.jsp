@@ -25,21 +25,17 @@
 	      <script src="weblib/respond/respond.min.js"></script>
 	    <![endif]-->
 
-<style>
 
-</style>
 </head>
 <body>
 	<%
 				for (int i = 0; i <= 4; i++) {
 			%>
 			<div class="Card LeftItem">
-			
 				<div class="UserItem">
 					<img src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="..." class="img-circle"><strong
 						class="name">用户名在这里</strong>
 				</div>
-
 				<div class="ContentItem">
 					<strong class="title">这是标题</strong>
 					<p>
@@ -56,8 +52,12 @@
 								}
 						%>
 					</p>
-
-					<span><a href="#">显示全文</a></span>
+                   <button type="button" class="comment_button">
+  <span class="glyphicon glyphicon-comment" aria-hidden="true">18条评论</span>
+</button>
+					<button type="button" class="comment_button">
+  <span class="glyphicon glyphicon-eye-open" aria-hidden="true">15487查看</span>
+</button>
 				</div>
 
 			</div>
@@ -65,7 +65,6 @@
 			<%
 				}
 			%>
-
 	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 	<script src="${pageContext.request.contextPath}/weblib/jquery/jquery.js"></script>
 	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->

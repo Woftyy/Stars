@@ -14,7 +14,10 @@ public interface UserMapper {
       
     public User get(int id);  
      
-      
+    public User getUserByName(String name); 
+    
+    public boolean checkName(String name); 
+    
     public int update(User user);   
        
       

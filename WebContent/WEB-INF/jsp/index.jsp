@@ -94,18 +94,18 @@
 			<%
 				for (int i = 0; i <= 4; i++) {
 			%>
-			<div class="Card LeftItem">
+			<div class="Card LeftItem" >
 				<div class="WhererForumItem">
-					<span>来自：<a href="#">科普讨论</a></span>
+					<span>来自：<a href="${pageContext.request.contextPath}/view/science">科普讨论</a></span>
 
 
 				</div>
 				<div class="UserItem">
 					<img src="images/photo_test01.jpg" alt="..." class="img-circle"><strong
-						class="name">用户名在这里</strong>
+						class="name"><a href="#">用户名在这里</a></strong>
 				</div>
 
-				<div class="ContentItem">
+				<div class="ContentItem" onclick="window.location.href='${pageContext.request.contextPath}/login'">
 					<strong class="title">这是标题</strong>
 					<p>
 						<%
@@ -122,7 +122,7 @@
 						%>
 					</p>
 
-					<span><a href="#">显示全文</a></span>
+			
 				</div>
 
 			</div>

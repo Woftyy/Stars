@@ -16,7 +16,13 @@
 	    <select id="get" parameterType="_int" resultType="User">
 	        select * from   user  where id= #{id}    
 	    </select>
-
+	    <select id="getUserByName" parameterType="String" resultType="User">
+	        select * from   user  where name= #{name}    
+	    </select>
+     <select id="checkName" parameterType="String" resultType="boolean">
+        select * from   user  where name= #{name}
+	            
+	    </select>
 	    <update id="update" parameterType="User" >
 	        update user set name=#{name} where id=#{id}    
 	    </update>

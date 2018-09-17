@@ -24,6 +24,7 @@
 	      <script src="weblib/html5shiv/html5shiv.min.js"></script>  
 	      <script src="weblib/respond/respond.min.js"></script>
 	    <![endif]-->
+	
 </head>
 <body >
 	<!-- 头部区域 -->
@@ -67,12 +68,13 @@
 	<!-- /头部区域 -->
 	<div class="container">
 		<div id="registerForm">
-			<form action="" method="post" >
+			<form action="${pageContext.request.contextPath}/register/do" method="post" >
 				<table class="tb" align="center">
 					<caption>注册</caption>
 					<tr>
-						<td><input type="text" class="form-control" name="username"
-							placeholder="请输入用户名" id="username"  onclick="VoidCheck()" onblur="VoidCheck()"></td>
+						<td><input type="text" class="form-control" name="name"
+							placeholder="请输入用户名" id="name"  onclick="VoidCheck()" onblur="VoidCheck();validate()">
+							<label id="usermsg" >${msg} 123</label></td>
 							<td></td>
 					</tr>
 					<tr>
@@ -121,8 +123,48 @@
 	<script src="weblib/bootstrap/js/bootstrap.js"></script>
 	<script src="js/main.js"></script>
 	<script src="js/register.js"></script>
-	<script>
-	
-    </script>
+	<script type="text/javascript">
+	var goodTemplate1 = $("#name").val();
+	goodTemplate1=goodTemplate1.replace(/\%/g,'%25');
+
+	var req;
+	function validate() {
+		var idField = document.getElementById("name");
+		var url = "${pageContext.request.contextPath}/validate?name=" + (idField.value);
+		//alert(url);
+		if(window.XMLHttpRequest) {
+			req = new XMLHttpRequest();
+		} else if (window.ActiveXObject) {
+			req = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		req.open("GET", url, true);
+/* 		req.onreadystatechange = callback; */
+		req.send(null);
+	}
+	 
+/* 	function callback() {
+		if(req.readyState == 4) {
+			if(req.status == 200) {
+				//alert(req.responseText);
+				var msg = req.responseXML.getElementsByTagName("label")[0];
+				//alert(msg);
+		        setMsg(msg.childNodes[0].nodeValue);
+			}
+		}
+	}  */
+	 
+	function setMsg(msg) {
+		//alert(msg);
+		mdiv = document.getElementById("usermsg");
+		if(msg == "invalid") {
+			mdiv.style.display="show";
+			mdiv.innerHTML = "用户名存在";
+		} else {
+			mdiv.style.display="show";
+			mdiv.innerHTML = "用户名不存在";
+		}
+	}
+
+	</script>
 </body>
 </html>

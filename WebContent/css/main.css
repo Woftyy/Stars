@@ -94,6 +94,12 @@ button{
     background: none;
     border-radius: 3px;
 }
+.comment_button {
+	outline:none;
+    color:  #ccc;;
+    background-color: #fff;
+  border-color: rgba(0, 0, 0, .0001);
+}
 
 /* 头锟斤拷锟斤拷锟斤拷 */
 #header {
@@ -233,8 +239,12 @@ button{
 	font-style: sans-serif;
 	font-size: 15px
 }
-
+#mainItem  .ContentItem{
+	cursor:pointer
+	
+}
 #mainItem  .ContentItem .title {
+	
 	font-style:;
 	font-size: 23px;
 	padding-bottom: 10px;

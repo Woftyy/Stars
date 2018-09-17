@@ -11,8 +11,12 @@ public class ThemeController {
 
 
 	
-	@RequestMapping("/post")
-	public String returnLogin(){
-		return "after/post/post";
+	@RequestMapping("/editing")
+	public String returnEditing(){
+		return "after/common/editing";
+	}
+	@RequestMapping("/reading")
+	public String returnReading(){
+		return "after/common/reading";
 	}
 }

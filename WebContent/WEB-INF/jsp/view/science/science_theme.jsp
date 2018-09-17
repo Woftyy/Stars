@@ -53,9 +53,11 @@
 						%>
 					</p>
                    <button type="button" class="comment_button">
-  <span class="glyphicon glyphicon-comment" aria-hidden="true">18条新评论</span>
+  <span class="glyphicon glyphicon-comment" aria-hidden="true">18条评论</span>
 </button>
-					<span><a href="#">显示全文</a></span>
+					<button type="button" class="comment_button">
+  <span class="glyphicon glyphicon-eye-open" aria-hidden="true">15487查看</span>
+</button>
 				</div>
 
 			</div>

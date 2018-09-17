@@ -53,9 +53,9 @@
 						%>
 					</p>
                    <button type="button" class="btn btn-default btn-lg">
-  <span class="glyphicon glyphicon-comment" aria-hidden="true"></span> Star
+  <span class="glyphicon glyphicon-comment" aria-hidden="true">18条评论</span>
 </button>
-					<span><a href="#">显示全文</a></span>
+					
 				</div>
 
 			</div>
