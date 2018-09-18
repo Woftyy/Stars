@@ -31,10 +31,30 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean checkName(String name) {
 		// TODO Auto-generated method stub
-		if(userMapper.checkName(name)) {
+		if(userMapper.checkName(name)==null) {
+			return false;
+		}else {
 			return true;
 		}
-		return false;
+	}
+	@Override
+	public boolean checkLogin(String name, String password) {
+		// TODO Auto-generated method stub
+		if(userMapper.checkName(name)!=null) {
+			User user =userMapper.getUserByName(name);
+			if (user.getPassword().equals(password)) {
+				return true;
+			}else {
+				return false;
+			}
+		}else {
+			return false;
+		}
+	}
+	@Override
+	public User getUserByName(String name) {
+		// TODO Auto-generated method stub
+		return userMapper.getUserByName(name);
 	}
 
 

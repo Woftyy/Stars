@@ -13,9 +13,9 @@
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <title>天上星河-注册</title>
 <!-- 引入Bootstrap核心样式表文件 -->
-<link href="weblib/bootstrap/css/bootstrap.css" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css" type="text/css">
-<link rel="stylesheet" href="css/register.css" type="text/css">
+<link href="${pageContext.request.contextPath}/weblib/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/register.css" type="text/css">
 
 <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
 <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
@@ -73,8 +73,8 @@
 					<caption>注册</caption>
 					<tr>
 						<td><input type="text" class="form-control" name="name"
-							placeholder="请输入用户名" id="name"  onclick="VoidCheck()" onblur="VoidCheck();validate()">
-							<label id="usermsg" >${msg} 123</label></td>
+							placeholder="请输入用户名" id="name"  onclick="VoidCheck()" onblur="VoidCheck();checkname()">
+							<label id="usermsg" >${msg}</label></td>
 							<td></td>
 					</tr>
 					<tr>
@@ -118,53 +118,52 @@
 		</div>
 	</div>
 	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-	<script src="weblib/jquery/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/weblib/jquery/jquery.js"></script>
 	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-	<script src="weblib/bootstrap/js/bootstrap.js"></script>
-	<script src="js/main.js"></script>
-	<script src="js/register.js"></script>
+	<script src="${pageContext.request.contextPath}/weblib/bootstrap/js/bootstrap.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/js/register.js"></script>
 	<script type="text/javascript">
-	var goodTemplate1 = $("#name").val();
-	goodTemplate1=goodTemplate1.replace(/\%/g,'%25');
-
-	var req;
-	function validate() {
-		var idField = document.getElementById("name");
-		var url = "${pageContext.request.contextPath}/validate?name=" + (idField.value);
-		//alert(url);
-		if(window.XMLHttpRequest) {
-			req = new XMLHttpRequest();
-		} else if (window.ActiveXObject) {
-			req = new ActiveXObject("Microsoft.XMLHTTP");
+	function checkname(){
+		var f=false;
+		//javascript所有的变量都是以var定义的
+		//javascript的变量属于弱类型
+		//获取用户输入的用户名
+		var name = document.getElementById("name").value;
+		//去除字符串两端空格
+		name=name.trim();
+		//判断是否为空
+		if(name==""){
+			document.getElementById("usermsg").innerHTML="用户名不能为空";
+			document.getElementById("usermsg").style.display="show";
+		}else if(name.length<1||name.length>16){
+			document.getElementById("usermsg").innerHTML="用户名的长度为1-16位";
 		}
-		req.open("GET", url, true);
-/* 		req.onreadystatechange = callback; */
-		req.send(null);
+		else{
+			document.getElementById("usermsg").innerHTML="";
+			//校验用户名是否存在
+			//使用ajax异步校验用户名
+			$.ajax({
+				url:"${pageContext.request.contextPath}/register/checkName",
+				type:"post",
+				data:{"name":name},//json数据格式的用户名从jsp传递给controller
+				dataType:"json",
+				async:false,//让ajax执行代码顺序同步
+				success:function(data){
+					if(data.msg=="true"){
+						document.getElementById("usermsg").style.display="show";
+						document.getElementById("usermsg").innerHTML="用户名已存在";
+					}else{
+						document.getElementById("usermsg").style.display="show";
+						document.getElementById("usermsg").innerHTML="用户名可用";
+						f=true;
+					}
+				}
+			});	
+			
+		}
+		return f;
 	}
-	 
-/* 	function callback() {
-		if(req.readyState == 4) {
-			if(req.status == 200) {
-				//alert(req.responseText);
-				var msg = req.responseXML.getElementsByTagName("label")[0];
-				//alert(msg);
-		        setMsg(msg.childNodes[0].nodeValue);
-			}
-		}
-	}  */
-	 
-	function setMsg(msg) {
-		//alert(msg);
-		mdiv = document.getElementById("usermsg");
-		if(msg == "invalid") {
-			mdiv.style.display="show";
-			mdiv.innerHTML = "用户名存在";
-		} else {
-			mdiv.style.display="show";
-			mdiv.innerHTML = "用户名不存在";
-		}
-	}
-
 	</script>
 </body>
 </html>

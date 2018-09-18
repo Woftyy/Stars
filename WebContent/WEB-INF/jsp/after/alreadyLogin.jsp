@@ -41,7 +41,7 @@
 				</a>
 				<div id="nav_list" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="alreadyLogin.jsp">首页</a></li>
+						<li class="active"><a href="${pageContext.request.contextPath}/after">首页</a></li>
 					</ul>
 					<ul class="nav navbar-nav">
 						<li>
@@ -56,8 +56,8 @@
 					</ul>
 					<ul class="nav navbar-nav navbar-right hidden-sm">
 						<li><img src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="..." height="30px" width="30px" class="img-circle"></li>
-						<li><a href="#" class="btn btn-link btn-sm"
-							data-toggle="modal" data-target="#login_form">退出登录</a></li>
+						<li><a href="${pageContext.request.contextPath}/logout" class="btn btn-link btn-sm"
+							>退出登录</a></li>
 					</ul>
 				</div>
 			</div>
@@ -93,6 +93,7 @@
 		<div id="mainItem">
 			<!-- 左边卡片 -->
 			<%
+		 System.out.print("用户id为"+request.getAttribute("uid")); 
 				for (int i = 0; i <= 4; i++) {
 			%>
 			<div class="Card LeftItem">
@@ -139,7 +140,7 @@
 			<div class="Card RightItem">
 
 				<div class="post">
-								<button class="publish_button" onclick="window.location.href='${pageContext.request.contextPath}/after/editing'">
+								<button class="publish_button" onclick="window.location.href='${pageContext.request.contextPath}/after/editing?uid=${uid}'">
 					<span class="glyphicon glyphicon-pencil"> </span><strong>发帖</strong>
 </button>
 

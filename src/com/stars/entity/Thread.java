@@ -6,9 +6,18 @@ public class Thread {
 	private int id;
 	private int uid;
 	private int fid;
+	private String title;
 	private String content;
 	private int views;
 	private Timestamp time;
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
 	public int getId() {
 		return id;

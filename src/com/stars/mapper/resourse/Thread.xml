@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.stars.mapper.ThreadMapper">
+	    <insert id="add" parameterType="Thread" >
+	        insert into thread ( uid,fid,title,content,views,time ) values (#{uid},#{fid},#{title},#{content},#{views},#{time})    
+	    </insert>
+	    
+	       <delete id="delete" parameterType="Thread" >
+	        delete from thread where id= #{id}   
+	    </delete>
+	    
+	    <select id="getById" parameterType="_int" resultType="Thread">
+	        select * from   thread  where id= #{id}    
+	    </select>
+	    <update id="update" parameterType="Thread" >
+	        update thread set name=#{name} where id=#{id}    
+	    </update>
+	    <select id="list" resultType="Thread">
+	        select * from   thread      
+	    </select>	
+	</mapper>
+

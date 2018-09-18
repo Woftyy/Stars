@@ -19,7 +19,7 @@
 	    <select id="getUserByName" parameterType="String" resultType="User">
 	        select * from   user  where name= #{name}    
 	    </select>
-     <select id="checkName" parameterType="String" resultType="boolean">
+     <select id="checkName" parameterType="String" resultType="Boolean">
         select * from   user  where name= #{name}
 	            
 	    </select>

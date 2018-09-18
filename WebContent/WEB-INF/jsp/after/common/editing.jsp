@@ -49,10 +49,10 @@
 		</nav>
 	</header>
 	<!-- /头部区域 -->
-
+<% System.out.print("用户id为"+request.getAttribute("uid")); %>
 <div class="container">
 <h2>编辑</h2>
-<form method="get" action="${pageContext.request.contextPath}/after/editing/post">
+<form method="post" action="${pageContext.request.contextPath}/after/editing/post">
 <br>
 <select class="form-control" name="forum" >
   <option>科普讨论</option>
@@ -60,7 +60,11 @@
   <option>电影宇宙</option>
 </select>
 <br>
+<input type="text" class="form-control"  name="title" placeholder="请输入标题" >
+<br>
 <div id="editor"></div>
+<div style="display:none;"><textarea id="text" name="content" style="width:100%; height:200px;"></textarea></div>
+<input type="text" style="display:none" name="uid" value="${uid}">
 <br>
  <button type="submit" class="btn btn-default" >发布</button>
 </form>
@@ -79,10 +83,16 @@
 	  var E = window.wangEditor
       var editor = new E('#editor')
       // 或者 var editor = new E( document.getElementById('editor') )
-		  editor.create();
-	
+	  var $text = $('#text')
+      editor.customConfig.onchange = function (text) {
+          // 监控变化，同步更新到 textarea
+          $text.val(text)
+      }
+      editor.create()
+      // 初始化 textarea 的值
+      $text1.val(editor.txt.text())
       
-	 
+	
 
 
 

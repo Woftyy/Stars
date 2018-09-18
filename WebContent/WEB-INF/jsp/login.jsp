@@ -13,9 +13,9 @@
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <title>天上星河-登录</title>
 <!-- 引入Bootstrap核心样式表文件 -->
-<link href="weblib/bootstrap/css/bootstrap.css" rel="stylesheet">
-<link rel="stylesheet" href="css/main.css" type="text/css">
-<link rel="stylesheet" href="css/login.css" type="text/css">
+<link href="${pageContext.request.contextPath}/weblib/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" type="text/css">
 <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
 <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
 <!-- 条件注释   1 让浏览器识别html5 2respond让低版本浏览器可以使用css3媒体查询-->
@@ -66,11 +66,11 @@
 	<!-- /头部区域 -->
 <div class="container">
 		<div id="loginForm">
-			<form action="" method="post" >
+			<form action="${pageContext.request.contextPath}/doLogin" method="post" >
 				<table class="tb" align="center">
 					<caption>登录</caption>
 					<tr>
-						<td><input type="text" class="form-control" name="username"
+						<td><input type="text" class="form-control" name="name"
 							placeholder="请输入用户名" id="username"  onclick="VoidCheck()" onblur="VoidCheck()"></td>
 							<td></td>
 					</tr>
@@ -84,16 +84,17 @@
 						<input type="submit" value="登录"  disabled="disabled"  id="create" class="btn btn-warning" ></td>
 					</tr>
 				</table>
+				<p align="center">${msg}</p>
 			</form>
 		</div>
 	</div>
 
 
 	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-	<script src="weblib/jquery/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/weblib/jquery/jquery.js"></script>
 	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-	<script src="weblib/bootstrap/js/bootstrap.js"></script>
-	<script src="js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/weblib/bootstrap/js/bootstrap.js"></script>
+	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 	
 <script>
      function VoidCheck(){

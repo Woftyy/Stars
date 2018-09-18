@@ -190,7 +190,7 @@
 			document.getElementById("warning1").innerHTML="两次输入的密码不一致";
 			document.getElementById("warning1").style.display="show";
 			create.setAttribute("disabled","disabled");
-		}else if((document.getElementById("username").value!=''||
+		}else if((document.getElementById("name").value!=''||
 				document.getElementById("pw1").value!=''||
 				document.getElementById("pw2").value!=''||
 				document.getElementById("email").value!=''||
