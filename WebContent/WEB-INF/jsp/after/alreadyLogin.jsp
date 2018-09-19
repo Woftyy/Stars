@@ -1,3 +1,8 @@
+<%@page import="com.stars.entity.Forum"%>
+<%@page import="com.stars.entity.User"%>
+<%@page import="com.stars.entity.Thread"%>
+<%@page import="java.util.List"%>
+<%@page import="com.stars.service.ThreadService"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -13,9 +18,14 @@
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <title>天上星河-首页</title>
 <!-- 引入Bootstrap核心样式表文件 -->
-<link href="${pageContext.request.contextPath}/weblib/bootstrap/css/bootstrap.css" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/alreadyLogin.css" type="text/css">
+<link
+	href="${pageContext.request.contextPath}/weblib/bootstrap/css/bootstrap.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/main.css" type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/alreadyLogin.css"
+	type="text/css">
 <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
 <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
 <!-- 条件注释   1 让浏览器识别html5 2respond让低版本浏览器可以使用css3媒体查询-->
@@ -41,7 +51,8 @@
 				</a>
 				<div id="nav_list" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="${pageContext.request.contextPath}/after">首页</a></li>
+						<li class="active"><a
+							href="${pageContext.request.contextPath}/after">首页</a></li>
 					</ul>
 					<ul class="nav navbar-nav">
 						<li>
@@ -55,9 +66,11 @@
 						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right hidden-sm">
-						<li><img src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="..." height="30px" width="30px" class="img-circle"></li>
-						<li><a href="${pageContext.request.contextPath}/logout" class="btn btn-link btn-sm"
-							>退出登录</a></li>
+						<li><img
+							src="${pageContext.request.contextPath}/images/photo_test01.jpg"
+							alt="..." height="30px" width="30px" class="img-circle"></li>
+						<li><a href="${pageContext.request.contextPath}"
+							class="btn btn-link btn-sm">退出登录</a></li>
 					</ul>
 				</div>
 			</div>
@@ -76,13 +89,17 @@
 			</ol>
 			<!-- 轮播项 -->
 			<div class="carousel-inner" role="listbox">
-				<div class="item active" data-image-lg="${pageContext.request.contextPath}/images/slide01.jpg"
+				<div class="item active"
+					data-image-lg="${pageContext.request.contextPath}/images/slide01.jpg"
 					data-image-xs="${pageContext.request.contextPath}/images/slide01.jpg"></div>
-				<div class="item" data-image-lg="${pageContext.request.contextPath}/images/slide02.jpg"
+				<div class="item"
+					data-image-lg="${pageContext.request.contextPath}/images/slide02.jpg"
 					data-image-xs="${pageContext.request.contextPath}/images/slide02.jpg"></div>
-				<div class="item" data-image-lg="${pageContext.request.contextPath}/images/slide03.jpg"
+				<div class="item"
+					data-image-lg="${pageContext.request.contextPath}/images/slide03.jpg"
 					data-image-xs="${pageContext.request.contextPath}/images/slide02.jpg"></div>
-				<div class="item" data-image-lg="${pageContext.request.contextPath}/images/slide04.jpg"
+				<div class="item"
+					data-image-lg="${pageContext.request.contextPath}/images/slide04.jpg"
 					data-image-xs="${pageContext.request.contextPath}/images/slide02.jpg"></div>
 			</div>
 		</section>
@@ -93,42 +110,44 @@
 		<div id="mainItem">
 			<!-- 左边卡片 -->
 			<%
-		 System.out.print("用户id为"+request.getAttribute("uid")); 
-				for (int i = 0; i <= 4; i++) {
+				System.out.print("用户id为" + request.getAttribute("uid"));
+				List<Thread> threads = (List<Thread>) request.getAttribute("threads");
+				List<Forum> forums = (List<Forum>) request.getAttribute("forums");
+				List<User> users = (List<User>) request.getAttribute("users");
+				User user = new User();
+				Forum forum = new Forum();
+				Thread thread = new Thread();
+				for (int i = threads.size() - 1; i >= 0; i--) {
+					thread = threads.get(i);
+					forum = forums.get(i);
+					user = users.get(i);
 			%>
 			<div class="Card LeftItem">
 				<div class="WhererForumItem">
-					<span>来自：<a href="#">科普讨论</a></span>
+					<span>来自：<a href="#"><%=forum.getName()%></a></span>
 
 
 				</div>
 				<div class="UserItem">
-					<img src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="..." class="img-circle"><strong
-						class="name">用户名在这里</strong>
+					<img
+						src="${pageContext.request.contextPath}/images/photo_test01.jpg"
+						alt="..." class="img-circle"><strong class="name"><%=user.getName()%></strong>
 				</div>
 
-				<div class="ContentItem" onclick="window.location.href='${pageContext.request.contextPath}/after/reading'">
-					<strong class="title">这是标题</strong>
-					<p>
-						<%
-							String s = "内容再循环对对对大幅度放单费三番四复身份度放单费三番四复度放单费三番四复度放单费三番" + "四复度放单费三番四复度放单费三番四复度放单费三番四复"
-										+ "度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复"
-										+ "度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复"
-										+ "度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复"
-										+ "度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复";
-								if (s.length() <= 70) {
-									out.println(s);
-								} else {
-									out.println(s.substring(0, 70) + "...");
-								}
-						%>
-					</p>
-					                   <button type="button" class="comment_button">
-  <span class="glyphicon glyphicon-comment" aria-hidden="true">18条评论</span>
-</button>
+				<div class="ContentItem"
+					onclick="javascript:window.open('${pageContext.request.contextPath}/after/reading?uid=<%=user.getId() %>&tid=<%=thread.getId()%>','_blank')">
+					<strong class="title"><%=thread.getTitle()%></strong>
+					<% System.out.println("alreadyuid="+user.getId()); 
+					System.out.println("alreadyuname="+user.getName()); 
+					%>
+					<p></p>
 					<button type="button" class="comment_button">
-  <span class="glyphicon glyphicon-eye-open" aria-hidden="true">15487查看</span>
-</button>
+						<span class="glyphicon glyphicon-comment" aria-hidden="true">18条评论</span>
+					</button>
+					&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" class="comment_button">
+						<span class="glyphicon glyphicon-eye-open" aria-hidden="true">15487查看</span>
+					</button>
 				</div>
 
 			</div>
@@ -140,18 +159,14 @@
 			<div class="Card RightItem">
 
 				<div class="post">
-								<button class="publish_button" onclick="window.location.href='${pageContext.request.contextPath}/after/editing?uid=${uid}'">
-					<span class="glyphicon glyphicon-pencil"> </span><strong>发帖</strong>
-</button>
+					<button class="publish_button"
+						onclick="window.location.href='${pageContext.request.contextPath}/after/editing?uid=${uid}'">
+						<span class="glyphicon glyphicon-pencil"> </span><strong>发帖</strong>
+					</button>
 
 				</div>
 			</div>
 			<div class="Card RightItem">
-
-
-
-
-
 				<div class="hotForum">
 					<strong>热门板块</strong>
 					<hr />
@@ -175,9 +190,11 @@
 	<!-- /主要内容 -->
 
 	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-	<script src="${pageContext.request.contextPath}/weblib/jquery/jquery.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/weblib/jquery/jquery.js"></script>
 	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-	<script src="${pageContext.request.contextPath}/weblib/bootstrap/js/bootstrap.js"></script>
+	<script
+		src="${pageContext.request.contextPath}/weblib/bootstrap/js/bootstrap.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 
 </body>

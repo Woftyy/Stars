@@ -17,4 +17,6 @@ public interface ForumMapper {
 	public void update(Forum forum);
 	
 	public List<Forum> list();
+	
+	public List<Forum> getForumByThreadFid();
 }

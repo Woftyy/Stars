@@ -28,6 +28,10 @@
 	    </update>
 	    <select id="list" resultType="User">
 	        select * from   user      
-	    </select>	    
+	    </select>	 
+	        <select id="getUserByThreadUid"  resultType="User">
+	        select user.id,user.name,password,email,sex,thread.time 
+	        from user,thread where user.id=uid  ORDER BY thread.time  
+	    </select>	
 	</mapper>
 

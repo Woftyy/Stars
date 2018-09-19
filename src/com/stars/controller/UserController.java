@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.stars.entity.Category;
+import com.stars.entity.Forum;
 import com.stars.entity.Thread;
 import com.stars.entity.User;
+import com.stars.service.ForumService;
 import com.stars.service.ThreadService;
 import com.stars.service.UserService;
 
@@ -27,12 +29,22 @@ public class UserController {
 	private UserService userService;
 	@Autowired
 	private ThreadService threadService;
+	@Autowired
+	private ForumService forumService;
 	
 	@RequestMapping("/")
-	
-	public String returnIndex(Model model){
+	//主页
+	public String returnIndex(Model model ,HttpServletRequest request){
+		if (request.getSession()!=null) {
+			request.getSession().setAttribute("account", null);
+		}
+		
 	List<Thread> threads =threadService.list();
+	List<Forum> forums = forumService.getforumByThreadFid();
+	List<User> users =userService.getUserByThreadUid();
 	 model.addAttribute("threads",threads);
+	 model.addAttribute("forums",forums);
+	 model.addAttribute("users",users);
 		return "index";
 	}
 	
@@ -40,6 +52,14 @@ public class UserController {
 	public String returnLogin(){
 		return "login";
 	}
+	
+	/**
+	 * 处理登陆
+	 * @param name
+	 * @param password
+	 * @param request
+	 * @return 
+	 */
 	@RequestMapping(value="/doLogin", method=RequestMethod.POST)
 	@ResponseBody
 	public ModelAndView doLogin(@RequestParam("name")String name,@RequestParam("password")String password,HttpServletRequest request){
@@ -48,6 +68,12 @@ public class UserController {
 			User user =  new User();
 			user= userService.getUserByName(name);
 			mav.addObject("uid",user.getId());
+			List<Thread> threads =threadService.list();
+			List<Forum> forums = forumService.getforumByThreadFid();
+			List<User> users =userService.getUserByThreadUid();
+			mav.addObject("threads",threads);
+			mav.addObject("forums",forums);
+			mav.addObject("users",users);
 			mav.setViewName("after/alreadyLogin");
 		}else {
 			mav.addObject("msg","用户名或密码错误");
@@ -89,7 +115,14 @@ public class UserController {
 		return modelAndView;
 	}
 	@RequestMapping("/after")
-	public String returnAlreadyLogin(){
+	public String returnAlreadyLogin(Model model){
+		
+		List<Thread> threads =threadService.list();
+		List<Forum> forums = forumService.getforumByThreadFid();
+		List<User> users =userService.getUserByThreadUid();
+		 model.addAttribute("threads",threads);
+		 model.addAttribute("forums",forums);
+		 model.addAttribute("users",users);
 		return "/after/alreadyLogin";
 	}
 	
@@ -99,9 +132,15 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/logout")
-	public String logout(HttpServletRequest request){
+	public String logout(Model model,HttpServletRequest request){
 		request.getSession().setAttribute("account", null);
 			System.out.println("session为"+request.getSession()+"登出了");
+			List<Thread> threads =threadService.list();
+			List<Forum> forums = forumService.getforumByThreadFid();
+			List<User> users =userService.getUserByThreadUid();
+			 model.addAttribute("threads",threads);
+			 model.addAttribute("forums",forums);
+			 model.addAttribute("users",users);
 			return "index";
 		
 	}

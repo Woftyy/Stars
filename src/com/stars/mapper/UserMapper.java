@@ -20,6 +20,7 @@ public interface UserMapper {
     
     public int update(User user);   
        
-      
     public List<User> list();
+    
+    public List<User> getUserByThreadUid();
 }

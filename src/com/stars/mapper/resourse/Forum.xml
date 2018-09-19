@@ -25,6 +25,10 @@
 	    </update>
 	    <select id="list" resultType="Forum">
 	        select * from   forum      
-	    </select>	    
+	    </select>	   
+	         <select id="getForumByThreadFid"  resultType="Forum">
+	        select forum.id,forum.name,introduction,forum.views 
+	        from forum,thread where forum.id=fid   
+	    </select> 
 	</mapper>
 

@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.stars.entity.Thread;
+import com.stars.entity.User;
 import com.stars.service.ThreadService;
+import com.stars.service.UserService;
 
 
 
@@ -21,6 +24,8 @@ public class ThreadController {
 
 	@Autowired
 	private ThreadService threadService;
+	@Autowired
+	private UserService userService;
 	
 //点击发帖后的编辑页面	
 	@RequestMapping("/editing")
@@ -45,7 +50,15 @@ public class ThreadController {
 	}
 	
 	@RequestMapping("/reading")
-	public String returnReading(){
+	public String returnReading(Model model, @RequestParam("tid")int tid,@RequestParam("uid")int uid,HttpServletRequest request){
+		System.out.println("reading uid"+uid);
+		System.out.println("reading tid"+tid);
+		Thread thread = new Thread();
+		User user = new User();
+		thread = threadService.getById(tid);
+		user = userService.getById(uid);
+		model.addAttribute("thread",thread);
+		model.addAttribute("user",user);
 		return "after/common/reading";
 	}
 	

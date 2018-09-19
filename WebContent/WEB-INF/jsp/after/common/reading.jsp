@@ -1,3 +1,5 @@
+<%@page import="com.stars.entity.Thread"%>
+<%@page import="com.stars.entity.User"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -64,12 +66,16 @@
 		</nav>
 	</header>
 	<!-- /头部区域 -->
+	<%  User user = (User)request.getAttribute("user");
+     Thread thread =(Thread) request.getAttribute("thread");
+
+%>
 	<div class="container">
 	<div id="mainItem">
 	<!--  Top -->
 	<div class="Top Card">
 	<div>
-		<h2>这里是标题</h2>
+	  &nbsp;&nbsp;&nbsp;<h2><%=thread.getTitle() %></h2>
 	</div>
 						                   <button type="button" class="comment_button">
   <span class="glyphicon glyphicon-comment" aria-hidden="true">18条评论</span>
@@ -84,18 +90,12 @@
 		
 	<div class="Card LeftItem">
 <div class="UserItem">
+ 
 					<img src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="..." class="img-circle"><strong
-						class="name">用户名在这里</strong>
+						class="name"><%=user.getName() %></strong>
 				</div>
 				<div  class="contents">
-					<p>
-						内容再循环对对对大幅度放单费三番四复身份度放单费三番四复度放单费三番四复度放单费三番" + "四复度放单费三番四复度放单费三番四复度内容再循环对对对大幅度放单费三番四复身份度放单费三番四复度放单费三番四复度放单费三番" + "四复度放单费三番四复度放单费三番四复度内容再循环对对对大幅度放单费三番四复身份度
-						内容再循环对对对大幅度放单费三番四复身份度放单费三番四复度放单费三番四复度放单费三番" + "四复度放单费三番四复度放单费三番四复度
-						内容再循环对对对大幅度放单费三番四复身份度放单费三番四复度放单费三番四复度放单费三番" + "四复度放单费三番四复度放单费三番四复度
-						内容再循环对对对大幅度放单费三番四复身份度放单费三番四复度放单费三番四复度放单费三番" + "四复度放单费三番四复度放单费三番四复度
-						内容再循环对对对大幅度放单费三番四复身份度放单费三番四复度放单费三番四复度放单费三番" + "四复度放单费三番四复度放单费三番四复度
-						内容再循环对对对大幅度放单费三番四复身份度放单费三番四复度放单费三番四复度放单费三番" + "四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番" + "四复度放单费三番四复度放单费三番四复度
-					</p>
+					<%=thread.getContent() %>
 
 				</div>
 

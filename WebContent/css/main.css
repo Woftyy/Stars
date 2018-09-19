@@ -201,7 +201,7 @@ button{
 }
 
 #mainItem .LeftItem {
-	width: 800px;
+	width: 880px;
 	position: relative;
 	padding: 16px 20px;
 	float: left;
@@ -260,10 +260,10 @@ button{
 }
 
 #mainItem .RightItem {
-	width: 320px;
+	width: 250px;
 	position: relative;
 	padding: 16px 20px;
-	left: 20px;
+	left: 10px;
 }
 
 #mainItem .RightItem .post strong {
@@ -305,7 +305,7 @@ button{
 }
 
 #mainItem .RightItem .hotForum p {
-	padding-left: 50px;
+	padding-left: 10px;
 }
 
 @media ( max-width : 800px) {

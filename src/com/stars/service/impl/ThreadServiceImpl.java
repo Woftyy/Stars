@@ -40,5 +40,10 @@ public class ThreadServiceImpl implements ThreadService{
 		// TODO Auto-generated method stub
 		return threadMapper.list();
 	}
+	@Override
+	public Thread getById(int id) {
+		// TODO Auto-generated method stub
+		return threadMapper.getById(id);
+	}
 
 }

@@ -1,3 +1,5 @@
+<%@page import="com.stars.entity.Forum"%>
+<%@page import="com.stars.entity.User"%>
 <%@page import="com.stars.entity.Thread"%>
 <%@page import="java.util.List"%>
 <%@page import="com.stars.service.ThreadService"%>
@@ -96,33 +98,36 @@
 			<!-- 左边卡片 -->
 			<%
 			  List<Thread> threads = (List<Thread>) request.getAttribute("threads");
-			  Thread thread = new Thread();
-				for (int i = 0; i < threads.size(); i++) {
+			List<Forum> forums = (List<Forum>) request.getAttribute("forums");
+			List<User> users = (List<User>) request.getAttribute("users");
+			User user = new User();
+			Forum forum = new Forum();
+			Thread thread= new Thread();
+				for (int i = threads.size()-1; i>=0 ; i--) {
 					thread = threads.get(i);
+					forum=forums.get(i);
+					user = users.get(i);
 			%>
 			<div class="Card LeftItem" >
 				<div class="WhererForumItem">
-					<span>来自：<a href="${pageContext.request.contextPath}/view/science">科普讨论</a></span>
+					<span>来自：<a href="${pageContext.request.contextPath}/view/science"><%=forum.getName() %></a></span>
 
 
 				</div>
 				<div class="UserItem">
 					<img src="images/photo_test01.jpg" alt="..." class="img-circle"><strong
-						class="name"><a href="#">用户名在这里</a></strong>
+						class="name"><a href="#"><%=user.getName() %></a></strong>
 				</div>
 
-				<div class="ContentItem" style="height:110px;" onclick="window.location.href='${pageContext.request.contextPath}/login'">
+				<div class="ContentItem"  onclick="window.location.href='${pageContext.request.contextPath}/login'">
 					<strong class="title"><%=thread.getTitle()%></strong>
-					<p>
-						<%=thread.getContent()
-							/* String s =  "假按揭安监局";
-								if (s.length() <= 70) {
-									out.println(s);
-								} else {
-									out.println(s.substring(0, 70) + "...");
-								} */
-						%>
-					</p>
+						<p></p>
+					                   <button type="button" class="comment_button">
+  <span class="glyphicon glyphicon-comment" aria-hidden="true">18条评论</span>
+</button>&nbsp;&nbsp;&nbsp;&nbsp;
+					<button type="button" class="comment_button">
+  <span class="glyphicon glyphicon-eye-open" aria-hidden="true">15487查看</span>
+</button>
 				</div>
 			</div>
 			<!-- /左边卡片 -->

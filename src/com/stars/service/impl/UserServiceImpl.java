@@ -1,6 +1,7 @@
 package com.stars.service.impl;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.omg.CORBA.UShortSeqHolder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +56,16 @@ public class UserServiceImpl implements UserService{
 	public User getUserByName(String name) {
 		// TODO Auto-generated method stub
 		return userMapper.getUserByName(name);
+	}
+	@Override
+	public List<User> getUserByThreadUid() {
+		// TODO Auto-generated method stub
+		return userMapper.getUserByThreadUid();
+	}
+	@Override
+	public User getById(int id) {
+		// TODO Auto-generated method stub
+		return userMapper.get(id);
 	}
 
 
