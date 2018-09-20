@@ -6,13 +6,31 @@ import java.util.Date;
 public class User {
 	private int id;
 	private String name;
+	private String nickname;
 	private String password;
 	private String email;
 	private String sex;
+	private String src;
 	private Timestamp time;
 
 	public int getId() {
 		return id;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getSrc() {
+		return src;
+	}
+
+	public void setSrc(String src) {
+		this.src = src;
 	}
 
 	public void setId(int id) {

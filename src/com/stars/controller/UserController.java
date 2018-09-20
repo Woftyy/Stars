@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,12 +32,18 @@ public class UserController {
 	private ThreadService threadService;
 	@Autowired
 	private ForumService forumService;
-	
+	/**
+	 *  未登录的主页
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+
 	@RequestMapping("/")
-	//主页
+
 	public String returnIndex(Model model ,HttpServletRequest request){
 		if (request.getSession()!=null) {
-			request.getSession().setAttribute("account", null);
+			request.getSession().invalidate();
 		}
 		
 	List<Thread> threads =threadService.list();
@@ -47,6 +54,11 @@ public class UserController {
 	 model.addAttribute("users",users);
 		return "index";
 	}
+	/*
+	 * 
+	 * 登录
+	 * 
+	 */
 	
 	@RequestMapping("/login")
 	public String returnLogin(){
@@ -67,10 +79,11 @@ public class UserController {
 		if (userService.checkLogin(name, password)) {
 			User user =  new User();
 			user= userService.getUserByName(name);
-			mav.addObject("uid",user.getId());
 			List<Thread> threads =threadService.list();
 			List<Forum> forums = forumService.getforumByThreadFid();
 			List<User> users =userService.getUserByThreadUid();
+			HttpSession session =request.getSession();
+			session.setAttribute("uid", user.getId());
 			mav.addObject("threads",threads);
 			mav.addObject("forums",forums);
 			mav.addObject("users",users);
@@ -82,6 +95,9 @@ public class UserController {
 		return mav;
 		
 	}
+	/*
+	 * 注册
+	 */
 	@RequestMapping("/register")
 	public String returnRegister(){
 		return "register";
@@ -94,10 +110,18 @@ public class UserController {
 			return "{\"msg\":\"true\"}";
 		}else {
 		}
-		  
 		  return "{\"msg\":\"false\"}";
 	}
-   //处理注册
+	
+
+	/**处理注册
+	 * @param name
+	 * @param password
+	 * @param sex
+	 * @param email
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/register/do")
 	@ResponseBody
 	public ModelAndView DoRegister(@RequestParam("name")String name,@RequestParam("password")String password,
@@ -114,7 +138,12 @@ public class UserController {
 		
 		return modelAndView;
 	}
+	/**登录后界面
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/after")
+	
 	public String returnAlreadyLogin(Model model){
 		
 		List<Thread> threads =threadService.list();
@@ -144,4 +173,17 @@ public class UserController {
 			return "index";
 		
 	}
+	
+	
+	/**返回个人中心
+	 * @return
+	 * 2018-09-20 15:12:27
+	 */
+	@RequestMapping("after/personalCenter")
+	public String personalCenter() {
+		
+		return "after/common/personalCenter";
+		
+	}
+	
 }

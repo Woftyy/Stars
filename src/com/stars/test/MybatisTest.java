@@ -1,7 +1,8 @@
 package com.stars.test;
 
+
+
 import java.sql.Timestamp;
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.stars.entity.Category;
 import com.stars.entity.User;
 import com.stars.mapper.UserMapper;
 
@@ -35,4 +35,9 @@ public class MybatisTest {
 	}
 
 
+        @Test
+		public void testName() throws Exception {
+			System.out.println(String.valueOf((int)(Math.random()*9+1)*1000000));
+			System.out.println(String.valueOf((int)(Math.random()*10000000)));
+		}
 }

@@ -11,4 +11,6 @@ public interface ThreadService {
 	public List<com.stars.entity.Thread> list();
 	
 	public Thread getById(int id);
+	
+	public Thread getLatestThreadByUid(int uid);
 }

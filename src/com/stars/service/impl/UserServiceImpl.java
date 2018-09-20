@@ -23,10 +23,12 @@ public class UserServiceImpl implements UserService{
 		User user =new User();
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		user.setName(name);
+		user.setNickname("用户"+String.valueOf((int)(Math.random()*10000000)));
 		user.setPassword(password);
 		user.setSex(sex);
 		user.setEmail(email);
 		user.setTime(time);
+		user.setSrc("a");
 		userMapper.add(user);
 	}
 	@Override

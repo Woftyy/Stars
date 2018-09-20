@@ -60,15 +60,14 @@
 								<input type="text" class="form-control"
 									placeholder="Search for..."> <span
 									class="input-group-btn">
-									<button class="btn btn-default" type="button">Go!</button>
+									<button class="btn btn-default" type="button">搜索</button>
 								</span>
 							</div> <!-- /input-group -->
 						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right hidden-sm">
-						<li><img
-							src="${pageContext.request.contextPath}/images/photo_test01.jpg"
-							alt="..." height="30px" width="30px" class="img-circle"></li>
+						<li><a href="${pageContext.request.contextPath}/after/personalCenter"><img src="${pageContext.request.contextPath}/images/photo_test01.jpg" 
+						alt="..." height="30px" width="30px" class="img-circle"></a></li>
 						<li><a href="${pageContext.request.contextPath}"
 							class="btn btn-link btn-sm">退出登录</a></li>
 					</ul>
@@ -110,7 +109,7 @@
 		<div id="mainItem">
 			<!-- 左边卡片 -->
 			<%
-				System.out.print("用户id为" + request.getAttribute("uid"));
+				int uid =(int)session.getAttribute("uid");
 				List<Thread> threads = (List<Thread>) request.getAttribute("threads");
 				List<Forum> forums = (List<Forum>) request.getAttribute("forums");
 				List<User> users = (List<User>) request.getAttribute("users");
@@ -131,7 +130,7 @@
 				<div class="UserItem">
 					<img
 						src="${pageContext.request.contextPath}/images/photo_test01.jpg"
-						alt="..." class="img-circle"><strong class="name"><%=user.getName()%></strong>
+						alt="..." class="img-circle"><strong class="name"><%=user.getNickname()%></strong>
 				</div>
 
 				<div class="ContentItem"
@@ -160,7 +159,7 @@
 
 				<div class="post">
 					<button class="publish_button"
-						onclick="window.location.href='${pageContext.request.contextPath}/after/editing?uid=${uid}'">
+						onclick="window.location.href='${pageContext.request.contextPath}/after/editing?uid=<%=uid%>'">
 						<span class="glyphicon glyphicon-pencil"> </span><strong>发帖</strong>
 					</button>
 

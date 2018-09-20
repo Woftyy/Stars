@@ -45,5 +45,14 @@ public class ThreadServiceImpl implements ThreadService{
 		// TODO Auto-generated method stub
 		return threadMapper.getById(id);
 	}
+	
+	
+	
+	
+	@Override
+	public Thread getLatestThreadByUid(int uid) {
+		// TODO Auto-generated method stub
+		return threadMapper.getLatestThreadByUid(uid);
+	}
 
 }

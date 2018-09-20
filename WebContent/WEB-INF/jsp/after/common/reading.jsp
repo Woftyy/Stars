@@ -43,7 +43,7 @@
 				</a>
 				<div id="nav_list" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li class="active"><a href="alreadyLogin.jsp">首页</a></li>
+						<li class="active"><a href="${pageContext.request.contextPath}/after">首页</a></li>
 					</ul>
 					<ul class="nav navbar-nav">
 						<li>
@@ -57,9 +57,10 @@
 						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right hidden-sm">
-						<li><img src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="..." height="30px" width="30px" class="img-circle"></li>
-						<li><a href="#" class="btn btn-link btn-sm"
-							data-toggle="modal" data-target="#login_form">退出登录</a></li>
+						<li><a href="${pageContext.request.contextPath}/after/personalCenter"><img src="${pageContext.request.contextPath}/images/photo_test01.jpg" 
+						alt="..." height="30px" width="30px" class="img-circle"></a></li>
+						<li><a href="${pageContext.request.contextPath}" class="btn btn-link btn-sm"
+							>退出登录</a></li>
 					</ul>
 				</div>
 			</div>
@@ -92,7 +93,7 @@
 <div class="UserItem">
  
 					<img src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="..." class="img-circle"><strong
-						class="name"><%=user.getName() %></strong>
+						class="name"><%=user.getNickname() %></strong>
 				</div>
 				<div  class="contents">
 					<%=thread.getContent() %>

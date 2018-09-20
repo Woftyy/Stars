@@ -5,8 +5,8 @@
 
 	<mapper namespace="com.stars.mapper.UserMapper">
 	    <insert id="add" parameterType="User" >
-	        insert into user ( name,password,email,sex,time ) values (#{name},#{password}
-	        ,#{email},#{sex},#{time})    
+	        insert into user ( name,nickname,password,email,sex,src,time ) values (#{name},#{nickname},#{password}
+	        ,#{email},#{sex},#{src},#{time})    
 	    </insert>
 	    
 	    <delete id="delete" parameterType="User" >
@@ -30,8 +30,10 @@
 	        select * from   user      
 	    </select>	 
 	        <select id="getUserByThreadUid"  resultType="User">
-	        select user.id,user.name,password,email,sex,thread.time 
+	        select user.id,user.name,nickname,password,email,sex,src,thread.time 
 	        from user,thread where user.id=uid  ORDER BY thread.time  
 	    </select>	
+	
+	    
 	</mapper>
 

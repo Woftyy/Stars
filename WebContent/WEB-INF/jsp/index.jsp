@@ -116,7 +116,7 @@
 				</div>
 				<div class="UserItem">
 					<img src="images/photo_test01.jpg" alt="..." class="img-circle"><strong
-						class="name"><a href="#"><%=user.getName() %></a></strong>
+						class="name"><a href="#"><%=user.getNickname() %></a></strong>
 				</div>
 
 				<div class="ContentItem"  onclick="window.location.href='${pageContext.request.contextPath}/login'">

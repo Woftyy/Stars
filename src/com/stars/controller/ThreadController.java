@@ -27,7 +27,13 @@ public class ThreadController {
 	@Autowired
 	private UserService userService;
 	
-//点击发帖后的编辑页面	
+
+	/**点击发帖后的编辑页面
+	 * @param uid
+	 * @param model
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/editing")
 	public String returnEditing(@RequestParam("uid")String uid,Model model,HttpServletRequest request){
 		System.out.println("ThreadController:"+uid);
@@ -44,8 +50,11 @@ public class ThreadController {
 		threadService.add(forum, uid, title, content);
 		System.out.println("发布成功");
 		mav.addObject("uid",uid);
-		mav.addObject("success","发布成功");
-		mav.setViewName("after/alreadyLogin");
+		Thread thread = threadService.getLatestThreadByUid(uid);
+		User user = userService.getById(uid);
+		mav.addObject("thread",thread);
+		mav.addObject("user",user);
+		mav.setViewName("after/common/reading");
 		return mav;
 	}
 	
