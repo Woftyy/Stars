@@ -1,3 +1,9 @@
+<%@page import="com.alibaba.druid.sql.visitor.functions.Substring"%>
+<%@page import="com.stars.entity.Forum"%>
+<%@page import="com.stars.entity.User"%>
+<%@page import="com.stars.entity.Thread"%>
+<%@page import="java.util.List"%>
+<%@page import="com.stars.service.ThreadService"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -65,9 +71,15 @@
 	</header>
 	<!-- /头部区域 -->
 	<!-- 主要内容 -->
+		<%
+		  List<Thread> threads = (List<Thread>) request.getAttribute("threads");
+				List<User> users = (List<User>) request.getAttribute("users");
+				Forum forum = (Forum) request.getAttribute("forum");
+		%>
 	<div class="container">
 		<div id="mainItem">
 			<!-- 左边卡片 -->
+			<div class="LeftItemContainer">
 			<!-- 介绍 -->
 			<div class="Card LeftItem introduction">
 				<div class="media">
@@ -78,30 +90,26 @@
 					</div>
 					<div class="media-body">
 						<h2 class="media-heading">科普讨论</h2>
-						...
+						<%=forum.getIntroduction() %>
 					</div>
 				</div>
-
 			</div>
-			
 <div class="Card LeftItem TagButton">
 	<ul class="nav nav-pills nav-justified">
 	 <li role="presentation" class="active"><a href="#" id="a1">最新主题</a></li>
 	 <li role="presentation"><a href="#"  id="a2">最热</a></li>
-  <li role="presentation" ><a href="#" id="a3">最新回复</a></li>
- 
-  
+  <li role="presentation" ><a href="#" id="a3">最多评论</a></li>
 </ul>
-
-
 </div>
-
 			<div id="con" >
-			
 			</div>
-
+</div>
+		<!-- /左边卡片 -->
+	
+		
 		
 			<!-- 右边卡片 -->
+			<div class="RightItemContainer">
 			<div class="Card RightItem ">
 
 				<div class="post">
@@ -115,13 +123,13 @@
 				<button>
 					<div>
 						<div>总访问数</div>
-						<div>21321421</div>
+						<div><%=forum.getViews() %></div>
 					</div>
 				</button>
 				<button class="rightButton">
 					<div>
 						<div>主题数</div>
-						<div>421</div>
+						<div><%=threads.size() %></div>
 					</div>
 				</button>
 			</div>
@@ -156,6 +164,7 @@
 							</p></li>
 					</ul>
 				</div>
+			</div>
 			</div>
 			<!-- /右边卡片 -->
 		</div>

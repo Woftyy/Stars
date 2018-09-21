@@ -182,7 +182,7 @@ public class UserController {
 	@RequestMapping("after/personalCenter")
 	public String personalCenter() {
 		
-		return "after/common/personalCenter";
+		return "after/center/personalCenter";
 		
 	}
 	

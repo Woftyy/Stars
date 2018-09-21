@@ -41,6 +41,15 @@ public class ThreadController {
 		return "after/common/editing";
 	}
 	
+	/**处理发布主题
+	 * @param forum
+	 * @param uid
+	 * @param title
+	 * @param content
+	 * @param request
+	 * @return
+	 * 2018-09-21 14:19:11
+	 */
 	@RequestMapping("/editing/post")
 	@ResponseBody
 	public ModelAndView PostEditing(@RequestParam("forum")String forum,@RequestParam("uid")int uid,

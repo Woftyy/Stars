@@ -8,8 +8,21 @@ public class Thread {
 	private int fid;
 	private String title;
 	private String content;
+	private int replyNum;
 	private int views;
 	private Timestamp time;
+	
+	
+	
+	public int getReplyNum() {
+		return replyNum;
+	}
+
+	public void setReplyNum(int replyNum) {
+		this.replyNum = replyNum;
+	}
+
+
 
 	public String getTitle() {
 		return title;

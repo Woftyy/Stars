@@ -8,4 +8,6 @@ public interface ForumService {
 
 	//通过Thread fid 获取Forum
 		public List<Forum> getforumByThreadFid();
+		
+		public Forum getById(int id);
 }

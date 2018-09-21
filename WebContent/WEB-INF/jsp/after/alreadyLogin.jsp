@@ -107,6 +107,8 @@
 	<!-- 主要内容 -->
 	<div class="container">
 		<div id="mainItem">
+		<!-- LeftItemContainer -->
+			<div class="LeftItemContainer">
 			<!-- 左边卡片 -->
 			<%
 				int uid =(int)session.getAttribute("uid");
@@ -154,7 +156,9 @@
 			<%
 				}
 			%>
+			</div>
 			<!-- 右边卡片 -->
+				<div class="RightItemContainer">
 			<div class="Card RightItem">
 
 				<div class="post">
@@ -181,6 +185,7 @@
 							</p></li>
 					</ul>
 				</div>
+			</div>
 			</div>
 			<!-- /右边卡片 -->
 		</div>

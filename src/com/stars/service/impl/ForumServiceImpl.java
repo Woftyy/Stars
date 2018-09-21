@@ -21,6 +21,14 @@ public class ForumServiceImpl implements ForumService{
 		// TODO Auto-generated method stub
 		return forumMapper.getForumByThreadFid();
 	}
+	/* (non-Javadoc)
+	 * @see com.stars.service.ForumService#getById(int)
+	 */
+	@Override
+	public Forum getById(int id) {
+		// TODO Auto-generated method stub
+		return forumMapper.getById(id);
+	}
 
 	
 }

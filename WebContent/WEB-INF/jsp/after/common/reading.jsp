@@ -74,7 +74,7 @@
 	<div class="container">
 	<div id="mainItem">
 	<!--  Top -->
-	<div class="Top Card">
+	<div class="Top Card" style="padding:16px 20px;">
 	<div>
 	  &nbsp;&nbsp;&nbsp;<h2><%=thread.getTitle() %></h2>
 	</div>
@@ -88,7 +88,7 @@
 <span class="glyphicon glyphicon-edit" aria-hidden="true">2019.09.17 16:46:32</span></button>
 	</div>
 		<!--  /Top -->
-		
+		<div class="LeftItemContainer">
 	<div class="Card LeftItem">
 <div class="UserItem">
  
@@ -105,9 +105,11 @@
 
 
 </div>
+</div>
 			<!-- /左边卡片 -->
 			
 			<!-- 右边卡片 -->
+			<div class="RightItemContainer">
 			<div class="Card RightItem">
 
 				<div class="">
@@ -116,11 +118,6 @@
 				</div>
 			</div>
 			<div class="Card RightItem">
-
-
-
-
-
 				<div class="hotForum">
 					<strong>热门板块</strong>
 					<hr />
@@ -136,6 +133,7 @@
 							</p></li>
 					</ul>
 				</div>
+			</div>
 			</div>
 			<!-- /右边卡片 -->
 			

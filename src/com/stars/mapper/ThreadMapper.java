@@ -23,4 +23,19 @@ public interface ThreadMapper {
 	 * @return
 	 */
 	public Thread getLatestThreadByUid(int uid);
+	
+	/**获取相应版块里的主题默认时间排序
+	 * @param fid
+	 * @return
+	 * 2018-09-21 15:10:49
+	 */
+	public List<Thread> getListByfid(int fid);
+	
+	
+	/**获取相应版块里最多查看的主题
+	 * @param fid
+	 * @return
+	 * 2018-09-21 15:11:11
+	 */
+	public List<Thread> getMostViewsByfid(int fid);
 }

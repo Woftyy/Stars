@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.stars.mapper.ReplyThreadMapper">
+	    <insert id="add" parameterType="ReplyThread" >
+	        insert into reply_thread ( uid,tid,content,num,time ) values (#{uid},#{tid},#{content},#{num},#{time})    
+	    </insert>
+	    
+	       <delete id="delete" parameterType="ReplyThread" >
+	        delete from reply_thread where id= #{id}   
+	    </delete>
+	    
+	    <select id="getById" parameterType="_int" resultType="ReplyThread">
+	        select * from   reply_thread  where id= #{id}    
+	    </select>
+	    <select id="list" resultType="ReplyThread">
+	        select * from   reply_thread      
+	    </select>	
+	
+	     <select id="getReplyThreadBytid" resultType="ReplyThread">
+	        select * from   reply_thread   where  tid=#{tid} 
+	    </select>	
+	    
+	    
+	</mapper>
+

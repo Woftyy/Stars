@@ -1,3 +1,4 @@
+<%@page import="com.alibaba.druid.sql.visitor.functions.Substring"%>
 <%@page import="com.stars.entity.Forum"%>
 <%@page import="com.stars.entity.User"%>
 <%@page import="com.stars.entity.Thread"%>
@@ -96,7 +97,9 @@
 	<div class="container">
 		<div id="mainItem">
 			<!-- 左边卡片 -->
+				<div class="LeftItemContainer">
 			<%
+			
 			  List<Thread> threads = (List<Thread>) request.getAttribute("threads");
 			List<Forum> forums = (List<Forum>) request.getAttribute("forums");
 			List<User> users = (List<User>) request.getAttribute("users");
@@ -130,13 +133,16 @@
 </button>
 				</div>
 			</div>
-			<!-- /左边卡片 -->
+			
 			<%
 				}
-			%>
 
+			%>
+			</div>
+<!-- /左边卡片 -->
 
 			<!-- 右边卡片 -->
+				<div class="RightItemContainer">
 			<div class="Card RightItem">
 
 				<div class="post">
@@ -166,6 +172,7 @@
 							</p></li>
 					</ul>
 				</div>
+			</div>
 			</div>
 			<!-- /右边卡片 -->
 		</div>

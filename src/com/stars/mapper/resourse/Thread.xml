@@ -5,7 +5,7 @@
 
 	<mapper namespace="com.stars.mapper.ThreadMapper">
 	    <insert id="add" parameterType="Thread" >
-	        insert into thread ( uid,fid,title,content,views,time ) values (#{uid},#{fid},#{title},#{content},#{views},#{time})    
+	        insert into thread ( uid,fid,title,content,reply_num,views,time ) values (#{uid},#{fid},#{title},#{content},#{replyNum},#{views},#{time})    
 	    </insert>
 	    
 	       <delete id="delete" parameterType="Thread" >
@@ -24,5 +24,13 @@
 	                <select id="getLatestThreadByUid"  resultType="Thread" parameterType="int">
 	          select * from thread where uid=#{uid} order by time DESC limit 1
 	    </select>	
+	    
+	     <select id="getListByfid"  resultType="Thread" parameterType="int">
+	          select * from thread where fid=#{fid}
+	    </select>	
+	     <select id="getMostViewsByfid"  resultType="Thread" parameterType="int">
+	          select * from thread where fid=#{fid} order by views desc
+	    </select>	
+	    
 	</mapper>
 

@@ -21,6 +21,7 @@ public class ThreadServiceImpl implements ThreadService{
 	private ThreadMapper threadMapper;
 	@Autowired
 	private ForumMapper forumMapper;
+
 	@Override
 	public void add(String name, int uid, String title,String content) {
 		// TODO Auto-generated method stub
@@ -33,6 +34,7 @@ public class ThreadServiceImpl implements ThreadService{
 		thread.setTitle(title);
 		thread.setTime(time);
 		thread.setViews(1);
+		thread.setReplyNum(0);
 	    threadMapper.add(thread);
 	}
 	@Override
@@ -53,6 +55,18 @@ public class ThreadServiceImpl implements ThreadService{
 	public Thread getLatestThreadByUid(int uid) {
 		// TODO Auto-generated method stub
 		return threadMapper.getLatestThreadByUid(uid);
+	}
+
+	@Override
+	public List<Thread> getListByfid(int fid) {
+		// TODO Auto-generated method stub
+		return threadMapper.getListByfid(fid);
+	}
+	
+	@Override
+	public List<Thread> getMostViewsByfid(int fid) {
+		// TODO Auto-generated method stub
+		return threadMapper.getMostViewsByfid(fid);
 	}
 
 }

@@ -8,9 +8,13 @@ public interface ThreadService {
 
 	public void add(String name,int uid,String title,String content);
 	
-	public List<com.stars.entity.Thread> list();
+	public List<Thread> list();
 	
 	public Thread getById(int id);
 	
 	public Thread getLatestThreadByUid(int uid);
+	
+	public List<Thread> getListByfid(int fid);
+	
+	public List<Thread> getMostViewsByfid(int fid);
 }

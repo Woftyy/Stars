@@ -94,6 +94,11 @@ button{
     background: none;
     border-radius: 3px;
 }
+.time{
+	float:right;
+	color:#8590a6;
+	
+}
 .comment_button {
 	outline:none;
     color:  #ccc;;
@@ -101,6 +106,16 @@ button{
   border-color: rgba(0, 0, 0, .0001);
 }
 
+.LeftItemContainer{
+	float:left;
+	width:840px;
+}
+.RightItemContainer{
+	float:left;
+	width:290px;
+	position: relative;
+    left: 10px;
+}
 /* 头锟斤拷锟斤拷锟斤拷 */
 #header {
 	
@@ -201,7 +216,7 @@ button{
 }
 
 #mainItem .LeftItem {
-	width: 880px;
+	width: 840px;
 	position: relative;
 	padding: 16px 20px;
 	float: left;
@@ -260,10 +275,10 @@ button{
 }
 
 #mainItem .RightItem {
-	width: 250px;
+	float:right;
+	width: 290px;
 	position: relative;
 	padding: 16px 20px;
-	left: 10px;
 }
 
 #mainItem .RightItem .post strong {
