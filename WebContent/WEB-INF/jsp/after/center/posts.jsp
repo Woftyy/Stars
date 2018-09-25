@@ -1,3 +1,6 @@
+<%@page import="com.stars.entity.Thread"%>
+<%@page import="com.stars.entity.User"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,41 +27,43 @@
 </style>
 </head>
 <body>
+<%
+      List<Thread> threads =  ( List<Thread>) request.getAttribute("threads");
+Thread thread= new Thread();
+   User user = (User)request.getAttribute("user");
+for (int i = threads.size()-1; i>=0 ; i--) {
+	thread = threads.get(i);
+%>
 
 	<div class="Card Card LeftItem">
 					<div class="UserItem">
 						<img
 							src="${pageContext.request.contextPath}/images/photo_test01.jpg"
-							alt="..." class="img-circle"><strong class="name">用户名</strong><span
-							style="position: relative; left: 400px;">发表于</span>
+							alt="..." class="img-circle"><strong class="name"><%=user.getNickname() %></strong><span
+							style="position: relative; left: 400px;">发表于<%=(String.valueOf(thread.getTime())).substring(0,19) %></span>
 					</div>
 
 					<div class="ContentItem"
 						onclick="javascript:window.open('${pageContext.request.contextPath}/after/reading?uid=&tid=%>','_blank')">
-						<strong class="title">tittle</strong>
-						<%-- 	<% System.out.println("alreadyuid="+user.getId()); 
-					System.out.println("alreadyuname="+user.getName()); 
-					%> --%>
+						<strong class="title"><%=thread.getTitle() %></strong>
+						
 						<p></p>
 						<button type="button" class="comment_button">
-							<span class="glyphicon glyphicon-comment" aria-hidden="true">18条评论</span>
+							<span class="glyphicon glyphicon-comment" aria-hidden="true"><%=thread.getReplyNum() %>条评论</span>
 						</button>
 						&nbsp;&nbsp;&nbsp;&nbsp;
 						<button type="button" class="comment_button">
-							<span class="glyphicon glyphicon-eye-open" aria-hidden="true">15487查看</span>
+							<span class="glyphicon glyphicon-eye-open" aria-hidden="true"><%=thread.getViews() %>查看</span>
 						</button>
 					</div>
 				</div>
+				<%} %>
 				
-				
-	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 	<script
 		src="${pageContext.request.contextPath}/weblib/jquery/jquery.js"></script>
-	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 	<script
 		src="${pageContext.request.contextPath}/weblib/bootstrap/js/bootstrap.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
-	<script src="${pageContext.request.contextPath}/js/wangEditor.min.js"></script>
 				
 </body>
 </html>

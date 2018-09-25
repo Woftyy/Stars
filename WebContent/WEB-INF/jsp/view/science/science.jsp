@@ -54,9 +54,9 @@
 						<li>
 							<div class="input-group">
 								<input type="text" class="form-control"
-									placeholder="Search for..."> <span
+									placeholder="输入关键字搜索"> <span
 									class="input-group-btn">
-									<button class="btn btn-default" type="button">Go!</button>
+									<button class="btn btn-default" type="button" onclick="window.location.href='${pageContext.request.contextPath}/login'">搜索</button>
 								</span>
 							</div> <!-- /input-group -->
 						</li>
@@ -97,7 +97,7 @@
 <div class="Card LeftItem TagButton">
 	<ul class="nav nav-pills nav-justified">
 	 <li role="presentation" class="active"><a href="#" id="a1">最新主题</a></li>
-	 <li role="presentation"><a href="#"  id="a2">最热</a></li>
+	 <li role="presentation"><a href="#"  id="a2">最多查看</a></li>
   <li role="presentation" ><a href="#" id="a3">最多评论</a></li>
 </ul>
 </div>
@@ -172,9 +172,7 @@
 	</div>
 	<!-- /主要内容 -->
 
-	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 	<script src="${pageContext.request.contextPath}/weblib/jquery/jquery.js"></script>
-	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 	<script src="${pageContext.request.contextPath}/weblib/bootstrap/js/bootstrap.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
 	<script>

@@ -3,6 +3,7 @@
  */
 package com.stars.service.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +32,15 @@ public class ReplyThreadServiceImpl implements ReplyThreadService{
 	 * @see com.stars.service.ReplyThreadService#add(com.stars.entity.ReplyThread)
 	 */
 	@Override
-	public void add(ReplyThread replyThread) {
+	public void add(int uid,int tid,String content) {
 		// TODO Auto-generated method stub
+		ReplyThread replyThread = new ReplyThread();
+		Timestamp time = new Timestamp(System.currentTimeMillis());
+		replyThread.setUid(uid);
+        replyThread.setTid(tid);
+        replyThread.setContent(content);
+        replyThread.setTime(time);
+        replyThread.setNum(0);
 		replyThreadMapper.add(replyThread);
 		
 	}

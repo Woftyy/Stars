@@ -1,4 +1,9 @@
-
+<%@page import="com.alibaba.druid.sql.visitor.functions.Substring"%>
+<%@page import="com.stars.entity.Forum"%>
+<%@page import="com.stars.entity.User"%>
+<%@page import="com.stars.entity.Thread"%>
+<%@page import="java.util.List"%>
+<%@page import="com.stars.service.ThreadService"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -27,34 +32,32 @@
 </head>
 <body>
 	<%
-				for (int i = 0; i <= 4; i++) {
+	 List<Thread> threads = (List<Thread>) request.getAttribute("threads");
+	List<Forum> forums = (List<Forum>) request.getAttribute("forums");
+	List<User> users = (List<User>) request.getAttribute("users");
+	User user = new User();
+	Forum forum = new Forum();
+	Thread thread= new Thread();
+		for (int i = 0; i<threads.size(); i++) {
+			thread = threads.get(i);
+			forum=forums.get(i);
+			user = users.get(i);
 			%>
 			<div class="Card LeftItem">
 				<div class="UserItem">
 					<img src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="..." class="img-circle"><strong
-						class="name">用户名在这里</strong>
+						class="name"><%=user.getNickname() %></strong>
 				</div>
-				<div class="ContentItem">
-					<strong class="title">这是标题</strong>
+				<div class="ContentItem" onclick="window.location.href='${pageContext.request.contextPath}/login'">
+					<strong class="title"><%=thread.getTitle()%></strong>
 					<p>
-						<%
-							String s = "内容再循环对对对大幅度放单费三番四复身份度放单费三番四复度放单费三番四复度放单费三番" + "四复度放单费三番四复度放单费三番四复度放单费三番四复"
-										+ "度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复"
-										+ "度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复"
-										+ "度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复"
-										+ "度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复度放单费三番四复";
-								if (s.length() <= 70) {
-									out.println(s);
-								} else {
-									out.println(s.substring(0, 70) + "...");
-								}
-						%>
+				
 					</p>
                    <button type="button" class="comment_button">
-  <span class="glyphicon glyphicon-comment" aria-hidden="true">18条评论</span>
+  <span class="glyphicon glyphicon-comment" aria-hidden="true"><%=thread.getReplyNum()%>条评论</span>
 </button>
 					<button type="button" class="comment_button">
-  <span class="glyphicon glyphicon-eye-open" aria-hidden="true">15487查看</span>
+  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"><%=thread.getViews()%>查看</span>
 </button>
 				</div>
 

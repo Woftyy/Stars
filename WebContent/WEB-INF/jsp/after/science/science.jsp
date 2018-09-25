@@ -1,3 +1,9 @@
+<%@page import="com.alibaba.druid.sql.visitor.functions.Substring"%>
+<%@page import="com.stars.entity.Forum"%>
+<%@page import="com.stars.entity.User"%>
+<%@page import="com.stars.entity.Thread"%>
+<%@page import="java.util.List"%>
+<%@page import="com.stars.service.ThreadService"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -13,15 +19,9 @@
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
 <title>天上星河-科普讨论</title>
 <!-- 引入Bootstrap核心样式表文件 -->
-<link
-	href="${pageContext.request.contextPath}/weblib/bootstrap/css/bootstrap.css"
-	rel="stylesheet">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/main.css" type="text/css">
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/science.css"
-	type="text/css">
-
+<link href="${pageContext.request.contextPath}/weblib/bootstrap/css/bootstrap.css" rel="stylesheet">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/science.css" type="text/css">
 
 <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
 <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
@@ -48,24 +48,24 @@
 				</a>
 				<div id="nav_list" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li><a href="${pageContext.request.contextPath}">首页</a></li>
+						<li ><a href="${pageContext.request.contextPath}">首页</a></li>
 					</ul>
 					<ul class="nav navbar-nav">
 						<li>
 							<div class="input-group">
 								<input type="text" class="form-control"
-									placeholder="Search for..."> <span
+									placeholder="输入关键字搜索"> <span
 									class="input-group-btn">
-									<button class="btn btn-default" type="button">Go!</button>
+									<button class="btn btn-default" type="button" onclick="window.location.href='${pageContext.request.contextPath}/login'">搜索</button>
 								</span>
 							</div> <!-- /input-group -->
 						</li>
 					</ul>
-					<ul class="nav navbar-nav navbar-right hidden-sm">
-						<li><a href="${pageContext.request.contextPath}/register"
-							class="btn btn-link btn-sm">注册</a></li>
-						<li><a href="${pageContext.request.contextPath}/login"
-							class="btn btn-link btn-sm">登录</a></li>
+						<ul class="nav navbar-nav navbar-right hidden-sm">
+						<li><a href="${pageContext.request.contextPath}/after/personalCenter"><img src="${pageContext.request.contextPath}/images/photo_test01.jpg" 
+						alt="..." height="30px" width="30px" class="img-circle"></a></li>
+						<li><a href="${pageContext.request.contextPath}" class="btn btn-link btn-sm"
+							>退出登录</a></li>
 					</ul>
 				</div>
 			</div>
@@ -73,97 +73,101 @@
 	</header>
 	<!-- /头部区域 -->
 	<!-- 主要内容 -->
+		<%
+		int uid = (int)request.getSession().getAttribute("uid");
+		  List<Thread> threads = (List<Thread>) request.getAttribute("threads");
+				List<User> users = (List<User>) request.getAttribute("users");
+				Forum forum = (Forum) request.getAttribute("forum");
+		%>
 	<div class="container">
 		<div id="mainItem">
-		<!-- 左边 -->
+			<!-- 左边卡片 -->
 			<div class="LeftItemContainer">
-				<!-- 介绍 -->
-				<div class="Card LeftItem introduction">
-					<div class="media">
-						<div class="media-left">
-							<a href="#"> <img class="media-object img-circle"
-								src="${pageContext.request.contextPath}/images/photo_test01.jpg"
-								alt="...">
-							</a>
-						</div>
-						<div class="media-body">
-							<h2 class="media-heading">科普讨论</h2>
-							...
-						</div>
+			<!-- 介绍 -->
+			<div class="Card LeftItem introduction">
+				<div class="media">
+					<div class="media-left">
+						<a href="#"> <img class="media-object img-circle"
+							src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="...">
+						</a>
+					</div>
+					<div class="media-body">
+						<h2 class="media-heading">科普讨论</h2>
+						<%=forum.getIntroduction() %>
 					</div>
 				</div>
-				<div class="Card LeftItem TagButton">
-					<ul class="nav nav-pills nav-justified">
-						<li role="presentation" class="active"><a href="#" id="a1">最新主题</a></li>
-						<li role="presentation"><a href="#" id="a2">最热</a></li>
-						<li role="presentation"><a href="#" id="a3">最新回复</a></li>
-					</ul>
-				</div>
-				<div class="LeftItem">
-					<div id="editor"></div>
-					<div></div>
-				</div>
-				<div id="con"></div>
 			</div>
-			<!-- 右边 -->
+<div class="Card LeftItem TagButton">
+	<ul class="nav nav-pills nav-justified">
+	 <li role="presentation" class="active"><a href="#" id="a1">最新主题</a></li>
+	 <li role="presentation"><a href="#"  id="a2">最多查看</a></li>
+  <li role="presentation" ><a href="#" id="a3">最多评论</a></li>
+</ul>
+</div>
+			<div id="con" >
+			</div>
+</div>
+		<!-- /左边卡片 -->
+	
+		
+		
 			<!-- 右边卡片 -->
 			<div class="RightItemContainer">
-				<div class="Card RightItem ">
+			<div class="Card RightItem ">
 
-					<div class="post">
-						<button onclick="CreateEditor()">
-							<span class="glyphicon glyphicon-pencil"> </span><strong>发帖</strong>
-						</button>
+				<div class="post">
+				<button onclick="window.location.href='${pageContext.request.contextPath}/after/editing?uid=<%=uid%>'">
+				<span class="glyphicon glyphicon-pencil"> </span><strong>发帖</strong>
+				</button>
+					
+				</div>
+			</div>
+			<div class="Card RightItem data">
+				<button>
+					<div>
+						<div>总访问数</div>
+						<div><%=forum.getViews() %></div>
 					</div>
-				</div>
-				<div class="Card RightItem data">
-					<button>
-						<div>
-							<div>总访问数</div>
-							<div>21321421</div>
-						</div>
-					</button>
-					<button class="rightButton">
-						<div>
-							<div>主题数</div>
-							<div>421</div>
-						</div>
-					</button>
-				</div>
-				<div class="Card RightItem">
-					<div class="positive">
-						<strong>活跃用户</strong>
-						<hr />
-						<ul>
-							<li><img class="img-circle"
-								src="${pageContext.request.contextPath}/images/photo_test01.jpg"
-								alt="...">名字在这</li>
-							<li><img class="img-circle"
-								src="${pageContext.request.contextPath}/images/photo_test01.jpg"
-								alt="...">名字在这</li>
-							<li><img class="img-circle"
-								src="${pageContext.request.contextPath}/images/photo_test01.jpg"
-								alt="...">名字在这</li>
-						</ul>
+				</button>
+				<button class="rightButton">
+					<div>
+						<div>主题数</div>
+						<div><%=threads.size() %></div>
 					</div>
+				</button>
+			</div>
+			<div class="Card RightItem">
+				<div class="positive">
+					<strong>活跃用户</strong>
+					<hr />
+					<ul>
+						<li><img class="img-circle"
+							src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="...">名字在这
+						</li>
+						<li><img class="img-circle"
+							src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="...">名字在这</li>
+						<li><img class="img-circle"
+							src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="...">名字在这</li>
+					</ul>
 				</div>
-				<div class="Card RightItem">
-					<div class="hotForum">
-						<strong>热门板块</strong>
-						<hr />
-						<ul>
-							<li><p>
-									<a href="${pageContext.request.contextPath}/view/science">科普讨论</a>
-								</p></li>
-							<li><p>
-									<a href="#">摄影天地</a>
-								</p></li>
-							<li><p>
-									<a href="#">电影宇宙</a>
-								</p></li>
-						</ul>
-					</div>
+			</div>
+			<div class="Card RightItem">
+				<div class="hotForum">
+					<strong>热门板块</strong>
+					<hr />
+					<ul>
+						<li><p>
+								<a href="${pageContext.request.contextPath}/view/science">科普讨论</a>
+							</p></li>
+						<li><p>
+								<a href="#">摄影天地</a>
+							</p></li>
+						<li><p>
+								<a href="#">电影宇宙</a>
+							</p></li>
+					</ul>
 				</div>
+			</div>
 			</div>
 			<!-- /右边卡片 -->
 		</div>
@@ -171,66 +175,36 @@
 	</div>
 	<!-- /主要内容 -->
 
-	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
-	<script
-		src="${pageContext.request.contextPath}/weblib/jquery/jquery.js"></script>
-	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
-	<script
-		src="${pageContext.request.contextPath}/weblib/bootstrap/js/bootstrap.js"></script>
+	<script src="${pageContext.request.contextPath}/weblib/jquery/jquery.js"></script>
+	<script src="${pageContext.request.contextPath}/weblib/bootstrap/js/bootstrap.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
-	<script src="${pageContext.request.contextPath}/js/wangEditor.min.js"></script>
 	<script>
-		$(document)
-				.ready(
-						function() {
-							//页面加载的时候，内容框默认显示 a.html
-							$('#con')
-									.load(
-											'${pageContext.request.contextPath}/view/science_theme');
-							//单击 a 链接，加载 a.html
-							$("#a1")
-									.click(
-											function() {
-												$('#con')
-														.load(
-																'${pageContext.request.contextPath}/view/science_theme');
 
-											});
-							//单击 b 链接，加载 b.html
-							$("#a2")
-									.click(
-											function() {
-												$('#con')
-														.load(
-																'${pageContext.request.contextPath}/view/science_hot');
-											});
-							$("#a3")
-									.click(
-											function() {
-												$('#con')
-														.load(
-																'${pageContext.request.contextPath}/view/science_reply');
-											});
-						});
+	
+	
+	 $(document).ready(function(){
+         //页面加载的时候，内容框默认显示 a.html
+         $('#con').load('${pageContext.request.contextPath}/after/science_theme');
+         //单击 a 链接，加载 a.html
+         $("#a1").click(function(){
+             $('#con').load('${pageContext.request.contextPath}/after/science_theme');
+             
+         });
+         //单击 b 链接，加载 b.html
+         $("#a2").click(function(){
+             $('#con').load('${pageContext.request.contextPath}/after/science_hot');
+         });
+         $("#a3").click(function(){
+             $('#con').load('${pageContext.request.contextPath}/after/science_reply');
+         });
+     });
+	 
+	 $(".TagButton ul li").click(function(){
+         $(".TagButton ul li").removeClass("active");
+         $(this).addClass("active");
+})
 
-		$(".TagButton ul li").click(function() {
-			$(".TagButton ul li").removeClass("active");
-			$(this).addClass("active");
-		})
-
-		function CreateEditor() {
-			var E = window.wangEditor
-			var editor = new E('#editor')
-			var content = $("#editor").html();
-			// 或者 var editor = new E( document.getElementById('editor') )
-			if (content == null || content.length == 0) {
-				editor.create();
-			} else {
-				editor.innerHtml = "";
-			}
-
-		}
 	</script>
-
+	 
 </body>
 </html>

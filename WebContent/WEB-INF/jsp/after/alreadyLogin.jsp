@@ -125,7 +125,7 @@
 			%>
 			<div class="Card LeftItem">
 				<div class="WhererForumItem">
-					<span>来自：<a href="#"><%=forum.getName()%></a></span>
+					<span>来自：<a href="${pageContext.request.contextPath}<%=forum.getUrlAfter()%>"><%=forum.getName()%></a></span>
 
 
 				</div>
@@ -143,11 +143,11 @@
 					%>
 					<p></p>
 					<button type="button" class="comment_button">
-						<span class="glyphicon glyphicon-comment" aria-hidden="true">18条评论</span>
+						<span class="glyphicon glyphicon-comment" aria-hidden="true"><%=thread.getReplyNum()%>条评论</span>
 					</button>
 					&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="button" class="comment_button">
-						<span class="glyphicon glyphicon-eye-open" aria-hidden="true">15487查看</span>
+						<span class="glyphicon glyphicon-eye-open" aria-hidden="true"><%=thread.getViews() %>查看</span>
 					</button>
 				</div>
 
@@ -175,7 +175,7 @@
 					<hr />
 					<ul>
 						<li><p>
-								<a href="#">科普讨论</a>
+								<a href="${pageContext.request.contextPath}/after/science">科普讨论</a>
 							</p></li>
 						<li><p>
 								<a href="#">摄影天地</a>
@@ -193,10 +193,8 @@
 	</div>
 	<!-- /主要内容 -->
 
-	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 	<script
 		src="${pageContext.request.contextPath}/weblib/jquery/jquery.js"></script>
-	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 	<script
 		src="${pageContext.request.contextPath}/weblib/bootstrap/js/bootstrap.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>

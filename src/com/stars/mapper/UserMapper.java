@@ -2,7 +2,6 @@ package com.stars.mapper;
 
 import java.util.List;
 
-import com.stars.entity.Category;
 import com.stars.entity.Thread;
 import com.stars.entity.User;
 

@@ -14,7 +14,7 @@ import com.stars.entity.ReplyThread;
 
 public interface ReplyThreadService {
 
-	public void add(ReplyThread replyThread);
+	public void add(int uid,int tid,String content);
 	
 	public List<ReplyThread> getReplyThreadBytid(int tid);
 

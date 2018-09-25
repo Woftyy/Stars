@@ -1,3 +1,5 @@
+<%@page import="com.stars.entity.Thread"%>
+<%@page import="com.stars.entity.User"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -11,11 +13,11 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<title>天上星河-登录</title>
+<title>天上星河-首页</title>
 <!-- 引入Bootstrap核心样式表文件 -->
 <link href="${pageContext.request.contextPath}/weblib/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" type="text/css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/css/alreadyLogin.css" type="text/css">
 <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
 <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
 <!-- 条件注释   1 让浏览器识别html5 2respond让低版本浏览器可以使用css3媒体查询-->
@@ -25,7 +27,7 @@
 	    <![endif]-->
 </head>
 <body>
-<!-- 头部区域 -->
+	<!-- 头部区域 -->
 	<header id="header">
 		<!-- <div class="topbar hidden-sm hidden-xs"> -->
 		<nav class="navbar navbar-itcast navbar-static-top" data-spy="affix"
@@ -41,7 +43,7 @@
 				</a>
 				<div id="nav_list" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
-						<li ><a href="${pageContext.request.contextPath}">首页</a></li>
+						<li class="active"><a href="${pageContext.request.contextPath}/after">首页</a></li>
 					</ul>
 					<ul class="nav navbar-nav">
 						<li>
@@ -51,65 +53,95 @@
 									class="input-group-btn">
 									<button class="btn btn-default" type="button">Go!</button>
 								</span>
-							</div>
-							<!-- /input-group -->
+							</div> <!-- /input-group -->
 						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right hidden-sm">
-						<li><a href="${pageContext.request.contextPath}/register" class="btn btn-link btn-sm">注册</a></li>
-						<li><a href="${pageContext.request.contextPath}/login" class="btn btn-link btn-sm">登录</a></li>
+						<li><a href="${pageContext.request.contextPath}/after/personalCenter"><img src="${pageContext.request.contextPath}/images/photo_test01.jpg" 
+						alt="..." height="30px" width="30px" class="img-circle"></a></li>
+						<li><a href="${pageContext.request.contextPath}" class="btn btn-link btn-sm"
+							>退出登录</a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</header>
 	<!-- /头部区域 -->
-<div class="container">
-		<div id="loginForm">
-			<form action="${pageContext.request.contextPath}/doLogin" method="post" >
-				<table class="tb" align="center">
-					<caption>登录</caption>
-					<tr>
-						<td><input type="text" class="form-control" name="name"
-							placeholder="请输入用户名" id="username"  onclick="VoidCheck()" onblur="VoidCheck()"></td>
-							<td></td>
-					</tr>
-					<tr>
-						<td><input type="password" class="form-control"
-							name="password" id="pw1" placeholder="请输入密码" onclick="VoidCheck()" onblur="VoidCheck()"   ></td>
-							<td></td>
-					</tr>
-					<tr>
-						<td><label id="warning" ></label>
-						<input type="submit" value="登录"  disabled="disabled"  id="create" class="btn btn-warning" ></td>
-					</tr>
-				</table>
-				<p align="center">${msg}</p>
-			</form>
-		</div>
+
+	<div class="container">
+	<div id="mainItem">
+	<!--  Top -->
+	<div class="Top Card" style="padding:16px 20px;">
+	<div>
+	  &nbsp;&nbsp;&nbsp;<h2>标题</h2>
 	</div>
+	<br>
+						                   <button type="button" class="comment_button">
+  <span class="glyphicon glyphicon-comment" aria-hidden="true">评论条评论</span>
+</button>
+					<button type="button" class="comment_button">
+  <span class="glyphicon glyphicon-eye-open" aria-hidden="true">查看</span>
+</button>
+<button type="button" class="comment_button">
+<span class="glyphicon glyphicon-edit" aria-hidden="true">时间</span></button>
+	</div>
+		<!--  /Top -->
+		<div class="LeftItemContainer">
+	<div class="Card LeftItem">
+<div class="UserItem">
+ 
+					<img src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="..." class="img-circle"><strong
+						class="name">昵称</strong>
+				</div>
+				<div  class="contents">
+				内容
+
+				</div>
+
+			</div>
+			<div class="reviews Card LeftItem">
 
 
+</div>
+</div>
+			<!-- /左边卡片 -->
+			
+			<!-- 右边卡片 -->
+			<div class="RightItemContainer">
+			<div class="Card RightItem">
+
+				<div class="">
+						<strong>关于作者</strong>		
+
+				</div>
+			</div>
+			<div class="Card RightItem">
+				<div class="hotForum">
+					<strong>热门板块</strong>
+					<hr />
+					<ul>
+						<li><p>
+								<a href="#">科普讨论</a>
+							</p></li>
+						<li><p>
+								<a href="#">摄影天地</a>
+							</p></li>
+						<li><p>
+								<a href="#">电影宇宙</a>
+							</p></li>
+					</ul>
+				</div>
+			</div>
+			</div>
+			<!-- /右边卡片 -->
+			
+			
+			</div>
+</div>
+<!-- /container -->
 	<script src="${pageContext.request.contextPath}/weblib/jquery/jquery.js"></script>
 	<script src="${pageContext.request.contextPath}/weblib/bootstrap/js/bootstrap.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
-	
-<script>
-     function VoidCheck(){
-    	 var create=document.getElementById("create");
-    	 if(document.getElementById("username").value!=''&&
-    	    document.getElementById("pw1").value!=''){
-    		 document.getElementById("warning").innerHTML=""
-    		 create.removeAttribute("disabled");
-    	 }else{
-    		 document.getElementById("warning").innerHTML="请输入用户名或密码";
-  			document.getElementById("warning").style.display="show";
-  			create.setAttribute("disabled","disabled");
-    	 }
-    		 
-     }
 
-
-</script>
 </body>
 </html>

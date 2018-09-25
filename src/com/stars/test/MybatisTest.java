@@ -2,7 +2,10 @@ package com.stars.test;
 
 
 
+import static org.junit.Assert.*;
+
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +14,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.stars.entity.User;
+import com.stars.mapper.ThreadMapper;
 import com.stars.mapper.UserMapper;
 
 
@@ -21,6 +25,8 @@ public class MybatisTest {
 
 	@Autowired
 	private UserMapper userMapper;
+	@Autowired
+	private ThreadMapper threadMapper;
 
 	@Test
 	public void testAdd() {
@@ -39,5 +45,10 @@ public class MybatisTest {
 		public void testName() throws Exception {
 			System.out.println(String.valueOf((int)(Math.random()*9+1)*1000000));
 			System.out.println(String.valueOf((int)(Math.random()*10000000)));
+		}
+        @Test
+		public void select() throws Exception {
+			List<com.stars.entity.Thread> threads =  threadMapper.getMostViewsByfid(1);
+			System.out.println("回复数为"+threads.get(1).getReplyNum());
 		}
 }

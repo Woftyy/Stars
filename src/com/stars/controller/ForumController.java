@@ -19,7 +19,7 @@ import com.stars.service.ThreadService;
 import com.stars.service.UserService;
 
 @Controller
-@RequestMapping("/view")
+@RequestMapping("")
 public class ForumController {
 	@Autowired
 	private UserService userService;
@@ -30,22 +30,24 @@ public class ForumController {
 	@Autowired
 	private ReplyThreadService replyThreadService;
 	
-		@RequestMapping("/science")
+		@RequestMapping("/view/science")
 		public String Science(Model model){
 			Forum forum =forumService.getById(1);
 			List<Thread> threads =threadService.getListByfid(1);
 			List<User> users =userService.getUserByThreadUid();
 			List<ReplyThread> replyThreads = new ArrayList<ReplyThread>(); 
-			for(int i=0; i< threads.size();i++) {
-				Thread thread = threads.get(i);
-				replyThreads = replyThreadService.getReplyThreadBytid(thread.getId());
-			}
 			 model.addAttribute("threads",threads);
 			 model.addAttribute("users",users);
 			 model.addAttribute("forum",forum);
 			return "view/science/science";
 		}
-		@RequestMapping("/science_hot")
+		
+		/**最热主题
+		 * @param model
+		 * @return
+		 * 2018-09-25 09:30:41
+		 */
+		@RequestMapping("/view/science_hot")
 		public String ScienceHot(Model model){
 			List<Thread> threads =threadService.getMostViewsByfid(1);
 			List<User> users =userService.getUserByThreadUid();
@@ -55,11 +57,25 @@ public class ForumController {
 			 model.addAttribute("forums",forums);
 			return "view/science/science_hot";
 		}
-		@RequestMapping("/science_reply")
+		
+		/**最多评论
+		 * @param model
+		 * @return
+		 * 2018-09-25 11:27:28
+		 */
+		@RequestMapping("/view/science_reply")
 		public String ScienceReply(Model model){
+			List<Thread> threads =threadService.getMostReplyNumByfid(1);
+			List<User> users =userService.getUserByThreadUid();
+			List<Forum> forums = forumService.getforumByThreadFid();
+			 model.addAttribute("threads",threads);
+			 model.addAttribute("users",users);
+			 model.addAttribute("forums",forums);
+			
 			return "view/science/science_reply";
 		}
-		@RequestMapping("/science_theme")
+		
+		@RequestMapping("/view/science_theme")
 		public String ScienceTheme(Model model){
 			
 			List<Thread> threads =threadService.getListByfid(1);
@@ -71,4 +87,51 @@ public class ForumController {
 			return "view/science/science_theme";
 		}
 		
+		@RequestMapping("/after/science")
+		public String AfterScience(Model model){
+			Forum forum =forumService.getById(1);
+			List<Thread> threads =threadService.getListByfid(1);
+			List<User> users =userService.getUserByThreadUid();
+			List<ReplyThread> replyThreads = new ArrayList<ReplyThread>(); 
+			 model.addAttribute("threads",threads);
+			 model.addAttribute("users",users);
+			 model.addAttribute("forum",forum);
+			return "after/science/science";
+		}
+		
+		
+		@RequestMapping("/after/science_theme")
+		public String AfterScienceTheme(Model model){
+			
+			List<Thread> threads =threadService.getListByfid(1);
+			List<User> users =userService.getUserByThreadUid();
+			List<Forum> forums = forumService.getforumByThreadFid();
+			 model.addAttribute("threads",threads);
+			 model.addAttribute("users",users);
+			 model.addAttribute("forums",forums);
+			return "after/science/science_theme";
+		}
+		
+		@RequestMapping("/after/science_reply")
+		public String AfterScienceReply(Model model){
+			List<Thread> threads =threadService.getMostReplyNumByfid(1);
+			List<User> users =userService.getUserByThreadUid();
+			List<Forum> forums = forumService.getforumByThreadFid();
+			 model.addAttribute("threads",threads);
+			 model.addAttribute("users",users);
+			 model.addAttribute("forums",forums);
+			
+			return "after/science/science_reply";
+		}
+		
+		@RequestMapping("/after/science_hot")
+		public String AfterScienceHot(Model model){
+			List<Thread> threads =threadService.getMostViewsByfid(1);
+			List<User> users =userService.getUserByThreadUid();
+			List<Forum> forums = forumService.getforumByThreadFid();
+			 model.addAttribute("threads",threads);
+			 model.addAttribute("users",users);
+			 model.addAttribute("forums",forums);
+			return "after/science/science_hot";
+		}
 }

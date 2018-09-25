@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.stars.entity.Category;
 import com.stars.entity.Forum;
 import com.stars.entity.Thread;
 import com.stars.entity.User;
@@ -144,7 +143,7 @@ public class UserController {
 	 */
 	@RequestMapping("/after")
 	
-	public String returnAlreadyLogin(Model model){
+	public String returnAlreadyLogin(Model model, HttpServletRequest request){
 		
 		List<Thread> threads =threadService.list();
 		List<Forum> forums = forumService.getforumByThreadFid();
@@ -180,10 +179,48 @@ public class UserController {
 	 * 2018-09-20 15:12:27
 	 */
 	@RequestMapping("after/personalCenter")
-	public String personalCenter() {
-		
+	public String personalCenter(Model model, HttpServletRequest request) {
+		int uid = (int)request.getSession().getAttribute("uid");
+		List<Thread> threads = threadService.getPostByUid(uid);
+		User user = userService.getById(uid);
+		model.addAttribute("threads",threads);
+		model.addAttribute("user",user);
 		return "after/center/personalCenter";
 		
 	}
 	
+	/**个人中心发布
+	 * @return
+	 * 2018-09-25 14:09:03
+	 */
+	@RequestMapping("after/center/posts")
+	public String personalCenterPost(Model model, HttpServletRequest request) {
+		int uid = (int)request.getSession().getAttribute("uid");
+		List<Thread> threads = threadService.getPostByUid(uid);
+		User user = userService.getById(uid);
+		model.addAttribute("threads",threads);
+		model.addAttribute("user",user);
+		return "after/center/posts";
+		
+	}
+	/**个人中心评论
+	 * @return
+	 * 2018-09-25 14:09:03
+	 */
+	@RequestMapping("after/center/comments")
+	public String personalCenterComment(Model model, HttpServletRequest request) {
+		
+		return "after/center/comments";
+		
+	}
+	/**个人中心收藏
+	 * @return
+	 * 2018-09-25 14:09:03
+	 */
+	@RequestMapping("after/center/collectionsr")
+	public String personalCenterColection(Model model, HttpServletRequest request) {
+		
+		return "after/center/collections";
+		
+	}
 }

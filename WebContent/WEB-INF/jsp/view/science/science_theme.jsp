@@ -48,13 +48,13 @@
 					<img src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="..." class="img-circle"><strong
 						class="name"><%=user.getNickname() %></strong>
 				</div>
-				<div class="ContentItem">
+				<div class="ContentItem" onclick="window.location.href='${pageContext.request.contextPath}/login'">
 					<strong class="title"><%=thread.getTitle()%></strong>
 					<p>
 					
 					</p>
                    <button type="button" class="comment_button">
-  <span class="glyphicon glyphicon-comment" aria-hidden="true">18条评论</span>
+  <span class="glyphicon glyphicon-comment" aria-hidden="true"><%=thread.getReplyNum()%>条评论</span>
 </button>
 					<button type="button" class="comment_button">
   <span class="glyphicon glyphicon-eye-open" aria-hidden="true"><%=thread.getViews()%>查看</span>

@@ -27,7 +27,7 @@
 	        select * from   forum      
 	    </select>	   
 	         <select id="getForumByThreadFid"  resultType="Forum">
-	        select forum.id,forum.name,introduction,forum.views 
+	        select forum.id,forum.name,introduction,forum.views,url_view,url_after
 	        from forum,thread where forum.id=fid   
 	    </select> 
 	</mapper>

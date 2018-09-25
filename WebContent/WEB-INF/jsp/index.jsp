@@ -53,9 +53,9 @@
 						<li>
 							<div class="input-group">
 								<input type="text" class="form-control"
-									placeholder="Search for..."> <span
+									placeholder="输入关键字搜索"> <span
 									class="input-group-btn">
-									<button class="btn btn-default" type="button">Go!</button>
+									<button class="btn btn-default" type="button" onclick="window.location.href='${pageContext.request.contextPath}/login'">搜索</button>
 								</span>
 							</div> <!-- /input-group -->
 						</li>
@@ -113,7 +113,7 @@
 			%>
 			<div class="Card LeftItem" >
 				<div class="WhererForumItem">
-					<span>来自：<a href="${pageContext.request.contextPath}/view/science"><%=forum.getName() %></a></span>
+					<span>来自：<a href="${pageContext.request.contextPath}<%=forum.getUrlView()%>"><%=forum.getName() %></a></span>
 
 
 				</div>
@@ -126,10 +126,10 @@
 					<strong class="title"><%=thread.getTitle()%></strong>
 						<p></p>
 					                   <button type="button" class="comment_button">
-  <span class="glyphicon glyphicon-comment" aria-hidden="true">18条评论</span>
+  <span class="glyphicon glyphicon-comment" aria-hidden="true"><%=thread.getReplyNum()%>条评论</span>
 </button>&nbsp;&nbsp;&nbsp;&nbsp;
 					<button type="button" class="comment_button">
-  <span class="glyphicon glyphicon-eye-open" aria-hidden="true">15487查看</span>
+  <span class="glyphicon glyphicon-eye-open" aria-hidden="true"><%=thread.getViews() %>查看</span>
 </button>
 				</div>
 			</div>
@@ -180,9 +180,7 @@
 	</div>
 	<!-- /主要内容 -->
 
-	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 	<script src="weblib/jquery/jquery.js"></script>
-	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 	<script src="weblib/bootstrap/js/bootstrap.js"></script>
 	<script src="js/main.js"></script>
 

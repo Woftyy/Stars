@@ -33,7 +33,7 @@ public class ThreadServiceImpl implements ThreadService{
 		thread.setContent(content);
 		thread.setTitle(title);
 		thread.setTime(time);
-		thread.setViews(1);
+		thread.setViews(0);
 		thread.setReplyNum(0);
 	    threadMapper.add(thread);
 	}
@@ -67,6 +67,22 @@ public class ThreadServiceImpl implements ThreadService{
 	public List<Thread> getMostViewsByfid(int fid) {
 		// TODO Auto-generated method stub
 		return threadMapper.getMostViewsByfid(fid);
+	}
+	/* (non-Javadoc)
+	 * @see com.stars.service.ThreadService#getMostReplyNumByfid(int)
+	 */
+	@Override
+	public List<Thread> getMostReplyNumByfid(int fid) {
+		// TODO Auto-generated method stub
+		return threadMapper.getMostReplyNumByfid(fid);
+	}
+	/* (non-Javadoc)
+	 * @see com.stars.service.ThreadService#getPostByUid(int)
+	 */
+	@Override
+	public List<Thread> getPostByUid(int uid) {
+		// TODO Auto-generated method stub
+		return threadMapper.getPostByUid(uid);
 	}
 
 }

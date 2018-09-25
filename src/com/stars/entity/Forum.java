@@ -5,6 +5,8 @@ public class Forum {
 	private String name;
 	private String introduction;
 	private int views;
+	private String urlView;
+	private String urlAfter;
 
 	public int getId() {
 		return id;
@@ -37,5 +39,22 @@ public class Forum {
 	public void setViews(int views) {
 		this.views = views;
 	}
+
+	public String getUrlView() {
+		return urlView;
+	}
+
+	public void setUrlView(String urlView) {
+		this.urlView = urlView;
+	}
+
+	public String getUrlAfter() {
+		return urlAfter;
+	}
+
+	public void setUrlAfter(String urlAfter) {
+		this.urlAfter = urlAfter;
+	}
+
 
 }

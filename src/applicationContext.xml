@@ -32,19 +32,24 @@
 	  <property name="password">  
 	      <value>root</value>  
 	  </property>  	
+	   
+	  
 	</bean>
 	
 	
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionFactoryBean">
-		<property name="typeAliasesPackage" value="com.stars.entity" />
+		
 		<property name="dataSource" ref="dataSource"/>
+			 <property name="configLocation" value="classpath:mybatis-config.xml"/>
+			 <property name="typeAliasesPackage" value="com.stars.entity" />
 		<property name="mapperLocations" value="classpath:com/stars/mapper/resourse/*.xml"/>
+	
+
+
 	</bean>
  
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.stars.mapper"/>
 	</bean>
-	
-
 
 </beans>

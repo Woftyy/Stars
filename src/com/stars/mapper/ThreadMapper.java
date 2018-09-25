@@ -38,4 +38,18 @@ public interface ThreadMapper {
 	 * 2018-09-21 15:11:11
 	 */
 	public List<Thread> getMostViewsByfid(int fid);
+
+	/**获取相应版块里最多评论的主题
+	 * @param fid
+	 * @return
+	 * 2018-09-25 11:24:56
+	 */
+	public List<Thread> getMostReplyNumByfid(int fid);
+	
+	/**根据用户uid获取Thread
+	 * @param uid
+	 * @return
+	 * 2018-09-25 14:15:18
+	 */
+	public List<Thread> getPostByUid(int uid);
 }

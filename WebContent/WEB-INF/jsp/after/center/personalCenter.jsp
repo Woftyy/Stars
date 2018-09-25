@@ -110,22 +110,12 @@
 			<!-- RightItem -->
 			<div class="RightItemContainer">
 				<div class="Card RightItem">
-
-					<div class="post">
-						<button class="publish_button"
-							onclick="window.location.href='${pageContext.request.contextPath}/login'">
-							<span class="glyphicon glyphicon-pencil"> </span><strong>发帖</strong>
-						</button>
-					</div>
 				</div>
-
-
-
 				<div class="Card RightItem data">
 					<button>
 						<div>
 							<div>总访问数</div>
-							<div>1211221</div>
+							<div></div>
 						</div>
 					</button>
 					<button class="rightButton">
@@ -142,10 +132,8 @@
 	</div>
 
 
-	<!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
 	<script
 		src="${pageContext.request.contextPath}/weblib/jquery/jquery.js"></script>
-	<!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
 	<script
 		src="${pageContext.request.contextPath}/weblib/bootstrap/js/bootstrap.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
@@ -154,10 +142,10 @@
 	
 	 $(document).ready(function(){
          //页面加载的时候，内容框默认显示 a.html
-         $('#con').load('${pageContext.request.contextPath}/view/science_theme');
+         $('#con').load('${pageContext.request.contextPath}/after/center/posts');
          //单击 a 链接，加载 a.html
          $("#a1").click(function(){
-             $('#con').load('${pageContext.request.contextPath}/view/science_theme');
+             $('#con').load('${pageContext.request.contextPath}/after/center/posts');
              
          });
          //单击 b 链接，加载 b.html

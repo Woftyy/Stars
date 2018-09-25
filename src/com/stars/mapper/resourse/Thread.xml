@@ -4,6 +4,7 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 	<mapper namespace="com.stars.mapper.ThreadMapper">
+	
 	    <insert id="add" parameterType="Thread" >
 	        insert into thread ( uid,fid,title,content,reply_num,views,time ) values (#{uid},#{fid},#{title},#{content},#{replyNum},#{views},#{time})    
 	    </insert>
@@ -31,6 +32,11 @@
 	     <select id="getMostViewsByfid"  resultType="Thread" parameterType="int">
 	          select * from thread where fid=#{fid} order by views desc
 	    </select>	
-	    
+	     <select id="getMostReplyNumByfid"  resultType="Thread" parameterType="int">
+	          select * from thread where fid=#{fid} order by reply_num desc
+	    </select>
+	     <select id="getPostByUid"  resultType="Thread" parameterType="int">
+	          select * from thread where uid=#{uid} order by time desc
+	    </select>
 	</mapper>
 

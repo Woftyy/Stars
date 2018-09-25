@@ -2,6 +2,7 @@ package com.stars.controller;
 
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -71,14 +72,27 @@ public class ThreadController {
 	public String returnReading(Model model, @RequestParam("tid")int tid,@RequestParam("uid")int uid,HttpServletRequest request){
 		System.out.println("reading uid"+uid);
 		System.out.println("reading tid"+tid);
+		HttpSession session = request.getSession();
 		Thread thread = new Thread();
 		User user = new User();
 		thread = threadService.getById(tid);
 		user = userService.getById(uid);
+		session.setAttribute("thread", thread);
+		session.setAttribute("user", user);
 		model.addAttribute("thread",thread);
 		model.addAttribute("user",user);
 		return "after/common/reading";
 	}
 	
-	
+	/**登录用户在个人中心查看自已的主题
+	 * @param model
+	 * @param request
+	 * @return
+	 * 2018-09-25 15:09:24
+	 */
+	@RequestMapping("/privateReading")
+	public String returnPrivateReading(Model model, HttpServletRequest request){
+		
+		return "after/common/privateReading";
+	}
 }

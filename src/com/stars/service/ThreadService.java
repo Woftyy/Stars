@@ -17,4 +17,8 @@ public interface ThreadService {
 	public List<Thread> getListByfid(int fid);
 	
 	public List<Thread> getMostViewsByfid(int fid);
+	
+	public List<Thread> getMostReplyNumByfid(int fid);
+	
+	public List<Thread> getPostByUid(int uid);
 }
