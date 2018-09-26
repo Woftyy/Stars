@@ -1,6 +1,8 @@
 package com.stars.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -12,22 +14,29 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.stars.entity.ReplyThread;
 import com.stars.entity.Thread;
+import com.stars.entity.Thumb;
 import com.stars.entity.User;
+import com.stars.service.ReplyThreadService;
 import com.stars.service.ThreadService;
+import com.stars.service.ThumbService;
 import com.stars.service.UserService;
 
 
 
 @Controller
-@RequestMapping("/after")
+@RequestMapping("/")
 public class ThreadController {
 
 	@Autowired
 	private ThreadService threadService;
 	@Autowired
 	private UserService userService;
-	
+	@Autowired
+	private ReplyThreadService replyThreadService;
+	@Autowired
+	private ThumbService thumbService;
 
 	/**点击发帖后的编辑页面
 	 * @param uid
@@ -35,7 +44,7 @@ public class ThreadController {
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping("/editing")
+	@RequestMapping("after/editing")
 	public String returnEditing(@RequestParam("uid")String uid,Model model,HttpServletRequest request){
 		System.out.println("ThreadController:"+uid);
 	model.addAttribute("uid",uid);
@@ -51,7 +60,7 @@ public class ThreadController {
 	 * @return
 	 * 2018-09-21 14:19:11
 	 */
-	@RequestMapping("/editing/post")
+	@RequestMapping("after/editing/post")
 	@ResponseBody
 	public ModelAndView PostEditing(@RequestParam("forum")String forum,@RequestParam("uid")int uid,
 			@RequestParam("title")String title,
@@ -68,19 +77,23 @@ public class ThreadController {
 		return mav;
 	}
 	
-	@RequestMapping("/reading")
+	@RequestMapping("after/reading")
 	public String returnReading(Model model, @RequestParam("tid")int tid,@RequestParam("uid")int uid,HttpServletRequest request){
-		System.out.println("reading uid"+uid);
+		System.out.println("ReturnReading uid"+uid);
 		System.out.println("reading tid"+tid);
 		HttpSession session = request.getSession();
 		Thread thread = new Thread();
 		User user = new User();
 		thread = threadService.getById(tid);
 		user = userService.getById(uid);
+		List<ReplyThread> replyThreads = replyThreadService.getReplyThreadBytid(tid);
+		List<User> users = userService.UserFromReplyThreadUid(tid);
 		session.setAttribute("thread", thread);
 		session.setAttribute("user", user);
 		model.addAttribute("thread",thread);
+		model.addAttribute("replyThreads",replyThreads);
 		model.addAttribute("user",user);
+		model.addAttribute("users",users);
 		return "after/common/reading";
 	}
 	
@@ -90,9 +103,43 @@ public class ThreadController {
 	 * @return
 	 * 2018-09-25 15:09:24
 	 */
-	@RequestMapping("/privateReading")
+	@RequestMapping("after/privateReading")
 	public String returnPrivateReading(Model model, HttpServletRequest request){
 		
 		return "after/common/privateReading";
 	}
+	/**处理点赞
+	 * @param model
+	 * @param tid
+	 * @param uid
+	 * @param request
+	 * 2018-09-26 16:23:40
+	 */
+	@RequestMapping("after/doThumb")
+	public void DoThumb(Model model, @RequestParam("rid")int rid,@RequestParam("uid")int uid,HttpServletRequest request){
+      System.out.println("访问了doThumb");
+		   List<Thumb> thumbs=thumbService.findByRidAndUid(uid,rid);
+	        if (thumbs!=null && thumbs.size()>0){
+	            //如果找到了这条记录，则删除该记录，同时文章的点赞数减1
+	            Thumb thumb=thumbs.get(0);
+	            //删除记录
+	            thumbService.delete(thumb.getId());
+	            //评论点赞数减1
+	            ReplyThread replyThread=replyThreadService.getById(rid);
+	            replyThread.setNum(replyThread.getNum()-1);
+	            replyThreadService.updateReplyThread(replyThread);
+	        }else {
+	            //如果没有找到这条记录，则添加这条记录，同时文章点赞数加1
+	            Thumb thumb=new Thumb();
+	            thumb.setRid(rid);
+	            thumb.setUid(uid);
+	            //添加记录
+	            thumbService.add(rid, uid);
+	            //文章点赞数加1
+	            ReplyThread replyThread=replyThreadService.getById(rid);
+	            replyThread.setNum(replyThread.getNum()+1);
+	            replyThreadService.updateReplyThread(replyThread);
+	        }
+	}
+	
 }

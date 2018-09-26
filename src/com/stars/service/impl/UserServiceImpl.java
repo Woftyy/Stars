@@ -1,6 +1,7 @@
 package com.stars.service.impl;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.omg.CORBA.UShortSeqHolder;
@@ -8,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.stars.entity.ReplyThread;
 import com.stars.entity.User;
+import com.stars.mapper.ReplyThreadMapper;
 import com.stars.mapper.UserMapper;
 import com.stars.service.UserService;
 
@@ -17,6 +20,8 @@ import com.stars.service.UserService;
 public class UserServiceImpl implements UserService{
 	@Autowired
     private  UserMapper userMapper;
+	@Autowired
+	private ReplyThreadMapper replyThreadMapper;
 	@Override
 	public void doRegister(String name, String password, String sex, String email) {
 		// TODO Auto-generated method stub
@@ -69,6 +74,23 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return userMapper.get(id);
 	}
+	/* (non-Javadoc)
+	 * @see com.stars.service.UserService#UserFromReplyThreadUid(int)
+	 */
+	@Override
+	public List<User> UserFromReplyThreadUid(int tid) {
+		// TODO Auto-generated method stub
+		List<ReplyThread> replyThreads = replyThreadMapper.getReplyThreadBytid(tid);
+		ReplyThread replyThread = new ReplyThread();
+		List<User> users = new ArrayList<>();
+       for(int i=0; i<replyThreads.size(); i++) {
+    	   replyThread = replyThreads.get(i);
+    	   User user =userMapper.get(replyThread.getUid());
+    	   users.add(user);
+       }
+		return users;
+	}
+	
 
 
 

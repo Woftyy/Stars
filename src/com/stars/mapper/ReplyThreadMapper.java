@@ -17,4 +17,9 @@ public interface ReplyThreadMapper {
 	
 	public List<ReplyThread> getReplyThreadBytid(int tid);
 	
+	public ReplyThread getById(int id);
+	
+	public void addNum();
+	
+	public void updateReplyThread(ReplyThread replyThread);
 }

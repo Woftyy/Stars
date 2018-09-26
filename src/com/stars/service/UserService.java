@@ -18,4 +18,6 @@ public interface UserService {
 	public List<User> getUserByThreadUid();
 	//通过id 获取User
 	public User getById(int id);
+	
+	public List<User> UserFromReplyThreadUid(int tid);
 }

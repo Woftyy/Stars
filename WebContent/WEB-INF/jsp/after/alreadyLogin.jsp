@@ -136,7 +136,7 @@
 				</div>
 
 				<div class="ContentItem"
-					onclick="javascript:window.open('${pageContext.request.contextPath}/after/reading?uid=<%=user.getId() %>&tid=<%=thread.getId()%>','_blank')">
+					onclick="javascript:window.open('${pageContext.request.contextPath}/after/reading?uid=<%=user.getId()%>&tid=<%=thread.getId()%>','_blank')">
 					<strong class="title"><%=thread.getTitle()%></strong>
 					<% System.out.println("alreadyuid="+user.getId()); 
 					System.out.println("alreadyuname="+user.getName()); 

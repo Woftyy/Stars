@@ -22,7 +22,11 @@
 	     <select id="getReplyThreadBytid" resultType="ReplyThread">
 	        select * from   reply_thread   where  tid=#{tid} 
 	    </select>	
-	    
-	    
+	    <update id="addNum" parameterType="int">
+	       update reply_thread SET num = num+1 WHERE id = #{id}
+	    </update>
+	     <update id="updateReplyThread" parameterType="ReplyThread">
+	       update reply_thread SET num = #{num} WHERE id = #{id}
+	    </update>
 	</mapper>
 

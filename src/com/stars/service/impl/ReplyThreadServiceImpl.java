@@ -55,4 +55,22 @@ public class ReplyThreadServiceImpl implements ReplyThreadService{
 		return replyThreadMapper.getReplyThreadBytid(tid);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.stars.service.ReplyThreadService#getById(int)
+	 */
+	@Override
+	public ReplyThread getById(int id) {
+		// TODO Auto-generated method stub
+		return replyThreadMapper.getById(id);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.stars.service.ReplyThreadService#updateReplyThread(com.stars.entity.ReplyThread)
+	 */
+	@Override
+	public void updateReplyThread(ReplyThread replyThread) {
+		// TODO Auto-generated method stub
+		replyThreadMapper.updateReplyThread(replyThread);
+	}
+
 }

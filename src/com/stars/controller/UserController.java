@@ -83,6 +83,7 @@ public class UserController {
 			List<User> users =userService.getUserByThreadUid();
 			HttpSession session =request.getSession();
 			session.setAttribute("uid", user.getId());
+			System.out.println("DoLogin--uid"+user.getId());
 			mav.addObject("threads",threads);
 			mav.addObject("forums",forums);
 			mav.addObject("users",users);
