@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80012
 File Encoding         : 65001
 
-Date: 2018-09-25 17:33:14
+Date: 2018-09-26 17:58:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -66,21 +66,17 @@ CREATE TABLE `reply_thread` (
   KEY `tid` (`tid`),
   CONSTRAINT `reply_thread_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`id`),
   CONSTRAINT `reply_thread_ibfk_2` FOREIGN KEY (`tid`) REFERENCES `thread` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=74 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of reply_thread
 -- ----------------------------
-INSERT INTO `reply_thread` VALUES ('1', '6', '21', '你好呀', '0', '2018-09-25 16:37:40');
-INSERT INTO `reply_thread` VALUES ('2', '6', '21', '你好呀', '0', '2018-09-25 17:13:11');
-INSERT INTO `reply_thread` VALUES ('3', '6', '21', '你好呀', '0', '2018-09-25 17:14:30');
-INSERT INTO `reply_thread` VALUES ('4', '6', '21', '你好呀', '0', '2018-09-25 17:14:41');
-INSERT INTO `reply_thread` VALUES ('5', '6', '21', '你好呀', '0', '2018-09-25 17:15:09');
-INSERT INTO `reply_thread` VALUES ('6', '6', '21', '你好呀', '0', '2018-09-25 17:17:10');
-INSERT INTO `reply_thread` VALUES ('7', '6', '21', '你好呀搜索', '0', '2018-09-25 17:23:11');
-INSERT INTO `reply_thread` VALUES ('8', '6', '21', '你好呀搜索3', '0', '2018-09-25 17:30:58');
-INSERT INTO `reply_thread` VALUES ('9', '6', '21', '你好呀搜索', '0', '2018-09-25 17:32:26');
-INSERT INTO `reply_thread` VALUES ('10', '6', '21', '你好呀搜索', '0', '2018-09-25 17:32:37');
+INSERT INTO `reply_thread` VALUES ('10', '6', '21', '你好呀搜索', '1', '2018-09-25 17:32:37');
+INSERT INTO `reply_thread` VALUES ('11', '11', '21', '你好呀搜索3', '0', '2018-09-26 09:32:54');
+INSERT INTO `reply_thread` VALUES ('16', '11', '21', '评论测试3', '0', '2018-09-26 09:34:37');
+INSERT INTO `reply_thread` VALUES ('23', '6', '22', '你好呀搜索', '0', '2018-09-26 11:03:50');
+INSERT INTO `reply_thread` VALUES ('42', '6', '21', '你好呀搜索', '0', '2018-09-26 14:49:01');
+INSERT INTO `reply_thread` VALUES ('73', '6', '22', '你好呀搜索', '0', '2018-09-26 15:57:47');
 
 -- ----------------------------
 -- Table structure for thread
@@ -129,6 +125,27 @@ INSERT INTO `thread` VALUES ('21', '5', '1', '123', '<p>1231414141414</p>', '0',
 INSERT INTO `thread` VALUES ('22', '5', '1', '123', '<p>1231414141414</p>', '0', '0', '2018-09-25 14:58:38');
 
 -- ----------------------------
+-- Table structure for thumb
+-- ----------------------------
+DROP TABLE IF EXISTS `thumb`;
+CREATE TABLE `thumb` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `uid` int(10) DEFAULT NULL,
+  `rid` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `uid` (`uid`),
+  KEY `rid` (`rid`),
+  CONSTRAINT `thumb_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `user` (`id`),
+  CONSTRAINT `thumb_ibfk_2` FOREIGN KEY (`rid`) REFERENCES `reply_thread` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of thumb
+-- ----------------------------
+INSERT INTO `thumb` VALUES ('1', '6', '10');
+INSERT INTO `thumb` VALUES ('2', '6', '23');
+
+-- ----------------------------
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -142,7 +159,7 @@ CREATE TABLE `user` (
   `src` varchar(255) DEFAULT NULL,
   `time` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
@@ -153,3 +170,4 @@ INSERT INTO `user` VALUES ('5', '123', '123昵称', '123', '1@123', '男', null,
 INSERT INTO `user` VALUES ('6', '天上星河', '天上星河昵称', '123', '1@123', '男', null, '2018-09-18 10:54:36');
 INSERT INTO `user` VALUES ('7', '1234', '1234昵称', '123', '1@123', '男', null, '2018-09-18 10:55:41');
 INSERT INTO `user` VALUES ('11', '12344', '用户6952558', '123', '1@123', '男', 'a', '2018-09-20 16:31:51');
+INSERT INTO `user` VALUES ('12', 'admin', '用户1771469', '123', '12@qq.com', '男', 'a', '2018-09-26 09:13:25');
