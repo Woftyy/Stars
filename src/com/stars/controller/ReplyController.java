@@ -18,6 +18,7 @@ import com.stars.entity.ReplyThread;
 import com.stars.entity.Thread;
 import com.stars.entity.User;
 import com.stars.service.ReplyThreadService;
+import com.stars.service.ThreadService;
 import com.stars.service.UserService;
 
 
@@ -29,6 +30,8 @@ public class ReplyController {
 	private ReplyThreadService replyThreadService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private ThreadService threadService;
 	/**处理评论
 	 * @param content
 	 * @param tid
@@ -41,9 +44,10 @@ public class ReplyController {
 	@ResponseBody
 	public void doReply(@RequestParam("content")String content,@RequestParam("tid")int tid,Model model,HttpServletRequest request){
 	  System.out.println("访问了doReply");
-		int uid =(int)request.getSession().getAttribute("uid");
+		int fromUid =(int)request.getSession().getAttribute("uid");
 	  Thread thread = new Thread();
 		User user = new User();
+		threadService.addReplyNum(tid);
 		thread = (Thread)request.getSession().getAttribute("thread");
 		user = (User)request.getSession().getAttribute("user");
 		List<ReplyThread> replyThreads = replyThreadService.getReplyThreadBytid(tid);
@@ -52,6 +56,26 @@ public class ReplyController {
 		model.addAttribute("user",user);
 		model.addAttribute("replyThreads",users);
 		model.addAttribute("users",users);
-	  replyThreadService.add(uid, tid, content);
+		Integer toUid= null;
+	  replyThreadService.add(fromUid,tid, content);
 	}
+	
+	@RequestMapping("/after/reading/doReplyUser")
+	@ResponseBody
+	public void doReplyUser(@RequestParam("content")String content,@RequestParam("tid")int tid,@RequestParam("be_uid")int be_uid,Model model,HttpServletRequest request){
+		  System.out.println("访问了doReplyUser");
+			int fromUid =(int)request.getSession().getAttribute("uid");
+		  Thread thread = new Thread();
+			User user = new User();
+			threadService.addReplyNum(tid);
+			thread = (Thread)request.getSession().getAttribute("thread");
+			user = (User)request.getSession().getAttribute("user");
+			List<ReplyThread> replyThreads = replyThreadService.getReplyThreadBytid(tid);
+			List<User> users = userService.UserFromReplyThreadUid(tid);
+			model.addAttribute("thread",thread);
+			model.addAttribute("user",user);
+			model.addAttribute("replyThreads",users);
+			model.addAttribute("users",users);
+		  replyThreadService.add(fromUid,tid, content);
+		}
 }

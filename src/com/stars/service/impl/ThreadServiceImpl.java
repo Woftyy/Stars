@@ -84,5 +84,13 @@ public class ThreadServiceImpl implements ThreadService{
 		// TODO Auto-generated method stub
 		return threadMapper.getPostByUid(uid);
 	}
+	/* (non-Javadoc)
+	 * @see com.stars.service.ThreadService#addReplyNum(int)
+	 */
+	@Override
+	public void addReplyNum(int id) {
+		// TODO Auto-generated method stub
+		threadMapper.addReplyNum(id);
+	}
 
 }

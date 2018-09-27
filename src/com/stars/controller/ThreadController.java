@@ -116,8 +116,10 @@ public class ThreadController {
 	 * 2018-09-26 16:23:40
 	 */
 	@RequestMapping("after/doThumb")
+	@ResponseBody
 	public void DoThumb(Model model, @RequestParam("rid")int rid,@RequestParam("uid")int uid,HttpServletRequest request){
       System.out.println("访问了doThumb");
+      System.out.println("rid:"+rid+"uid:"+uid);
 		   List<Thumb> thumbs=thumbService.findByRidAndUid(uid,rid);
 	        if (thumbs!=null && thumbs.size()>0){
 	            //如果找到了这条记录，则删除该记录，同时文章的点赞数减1

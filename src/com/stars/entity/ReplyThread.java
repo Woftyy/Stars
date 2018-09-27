@@ -11,7 +11,8 @@ import java.sql.Timestamp;
  */
 public class ReplyThread {
        int id;
-       int uid;
+       int fromUid;
+       int toUid;
        int tid;
        String content;
        int num;//点赞数
@@ -22,11 +23,18 @@ public class ReplyThread {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getUid() {
-		return uid;
+	
+	public int getFromUid() {
+		return fromUid;
 	}
-	public void setUid(int uid) {
-		this.uid = uid;
+	public void setFromUid(int fromUid) {
+		this.fromUid = fromUid;
+	}
+	public int getToUid() {
+		return toUid;
+	}
+	public void setToUid(int toUid) {
+		this.toUid = toUid;
 	}
 	public int getTid() {
 		return tid;

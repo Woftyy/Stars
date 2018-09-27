@@ -5,7 +5,7 @@
 
 	<mapper namespace="com.stars.mapper.ReplyThreadMapper">
 	    <insert id="add" parameterType="ReplyThread" >
-	        insert into reply_thread ( uid,tid,content,num,time ) values (#{uid},#{tid},#{content},#{num},#{time})    
+	        insert into reply_thread ( from_uid,tid,content,num,time ) values (#{fromUid},#{tid},#{content},#{num},#{time})    
 	    </insert>
 	    
 	       <delete id="delete" parameterType="ReplyThread" >

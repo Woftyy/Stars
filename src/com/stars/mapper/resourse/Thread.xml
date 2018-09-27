@@ -38,5 +38,8 @@
 	     <select id="getPostByUid"  resultType="Thread" parameterType="int">
 	          select * from thread where uid=#{uid} order by time desc
 	    </select>
+	    <update id="addReplyNum" parameterType="int">
+	       update thread SET reply_num = reply_num+1 WHERE id = #{id}
+	    </update>
 	</mapper>
 

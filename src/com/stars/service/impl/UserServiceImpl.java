@@ -85,7 +85,7 @@ public class UserServiceImpl implements UserService{
 		List<User> users = new ArrayList<>();
        for(int i=0; i<replyThreads.size(); i++) {
     	   replyThread = replyThreads.get(i);
-    	   User user =userMapper.get(replyThread.getUid());
+    	   User user =userMapper.get(replyThread.getFromUid());
     	   users.add(user);
        }
 		return users;

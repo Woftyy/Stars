@@ -32,11 +32,11 @@ public class ReplyThreadServiceImpl implements ReplyThreadService{
 	 * @see com.stars.service.ReplyThreadService#add(com.stars.entity.ReplyThread)
 	 */
 	@Override
-	public void add(int uid,int tid,String content) {
+	public void add(int fromUid,int tid,String content) {
 		// TODO Auto-generated method stub
 		ReplyThread replyThread = new ReplyThread();
 		Timestamp time = new Timestamp(System.currentTimeMillis());
-		replyThread.setUid(uid);
+		replyThread.setFromUid(fromUid);
         replyThread.setTid(tid);
         replyThread.setContent(content);
         replyThread.setTime(time);

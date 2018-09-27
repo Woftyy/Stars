@@ -52,4 +52,6 @@ public interface ThreadMapper {
 	 * 2018-09-25 14:15:18
 	 */
 	public List<Thread> getPostByUid(int uid);
+	
+	public void addReplyNum(int id);
 }

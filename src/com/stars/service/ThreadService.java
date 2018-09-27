@@ -21,4 +21,6 @@ public interface ThreadService {
 	public List<Thread> getMostReplyNumByfid(int fid);
 	
 	public List<Thread> getPostByUid(int uid);
+	
+	public void addReplyNum(int id);
 }

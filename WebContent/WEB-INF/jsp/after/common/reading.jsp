@@ -40,8 +40,9 @@
 	<!-- 头部区域 -->
 	<header id="header">
 		<!-- <div class="topbar hidden-sm hidden-xs"> -->
-		<nav class="navbar navbar-itcast navbar-static-top" data-spy="affix"
-			data-offset-top="260" data-offset-bottom="200">
+		<!-- 		data-spy="affix"
+			data-offset-top="0" data-offset-bottom="0" -->
+		<nav class="navbar navbar-itcast navbar-static-top">
 			<div class="container">
 				<button id="btn" type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#nav_list"
@@ -62,7 +63,7 @@
 								<input type="text" class="form-control"
 									placeholder="Search for..."> <span
 									class="input-group-btn">
-									<button class="btn btn-default" type="button">Go!</button>
+									<button class="btn btn-default" type="button">搜索</button>
 								</span>
 							</div> <!-- /input-group -->
 						</li>
@@ -84,22 +85,17 @@
 	<div class="container">
 		<div id="mainItem">
 			<!--  Top -->
-			<%!int rid; 
-			int uid;
-			
+			<%!int uid;%>
+			<%
+				uid = (int) request.getSession().getAttribute("uid");
+				User user = (User) request.getAttribute("user");
+				User userReply = new User();
+				UserService userService = new UserServiceImpl();
+				Thread thread = (Thread) request.getAttribute("thread");
+				ReplyThread replyThread = new ReplyThread();
+				List<ReplyThread> replyThreads = (List<ReplyThread>) request.getAttribute("replyThreads");
+				List<User> users = (List<User>) request.getAttribute("users");
 			%>
-				<%
-				 uid = (int)request.getSession().getAttribute("uid");
-				
-				
-		User user = (User) request.getAttribute("user");
-				  User userReply = new User();
-				UserService userService=new UserServiceImpl();
-		Thread thread = (Thread) request.getAttribute("thread");
-		ReplyThread replyThread = new ReplyThread();
-		List<ReplyThread> replyThreads = (List<ReplyThread>)request.getAttribute("replyThreads");
-		List<User> users = (List<User>)request.getAttribute("users");
-	%>
 			<div class="Top Card" style="padding: 16px 20px;">
 				<div>
 					&nbsp;&nbsp;&nbsp;
@@ -118,7 +114,7 @@
 			</div>
 			<!--  /Top -->
 			<div class="LeftItemContainer">
-		
+
 				<div class="Card LeftItem">
 					<div class="UserItem">
 						<img
@@ -131,45 +127,119 @@
 				</div>
 				<div class="reviews Card LeftItem">
 					<div class="ReviewList" id="ReviewList">
-                 <strong >评论列表</strong>
-                 <hr>
-                 <%       for(int i=0;i<replyThreads.size();i++){
-                	      replyThread=replyThreads.get(i);
-                	      userReply= users.get(i);
-                	 
-                	 %>
+						<strong>评论列表</strong>
+						<hr>
+						<%
+							for (int i = 0; i < replyThreads.size(); i++) {
+								replyThread = replyThreads.get(i);
+								userReply = users.get(i);
+						%>
 						<div class="ReviewItem">
 							<div>
 								<img
 									src="${pageContext.request.contextPath}/images/photo_test01.jpg"
 									style="height: 28px; width: 28px;" class="img-circle"> <strong
-									class="name" style="font-size: 12px;"><%=userReply.getName() %></strong> <span
-									style="float: right; font-size: 13px;"><%=(String.valueOf(replyThread.getTime())).substring(0, 19)%></span>
+									class="name" style="font-size: 12px;"><%=userReply.getName()%></strong>
+								<span style="float: right; font-size: 13px;"><%=(String.valueOf(replyThread.getTime())).substring(0, 19)%></span>
 							</div>
 							<div>
-								<p><%=replyThread.getContent() %></p>
+								<p><%=replyThread.getContent()%></p>
 							</div>
 							<div>
-							<button type="button" class="btn btn-default btn-sm" style="border:0;" onclick="doThumb()">
-  <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" ><%rid=replyThread.getId();%><%=replyThread.getNum()%></span>
-</button>
-					<button type="button" class="btn btn-default btn-sm" style="border:0;">
-  <span class="glyphicon glyphicon-share-alt" aria-hidden="true" >回复</span>
-</button>		
+								<input type="hidden" value="<%=replyThread.getId()%>"
+									id="replyId<%=i%>"> <input type="hidden" value="0"
+									id="countId<%=i%>">
+								<button type="button" class="btn btn-default btn-sm"
+									style="border: 0;" onclick="doThumb(<%=i%>)">
+									<span id="num<%=i%>" class="glyphicon glyphicon-thumbs-up"
+										aria-hidden="true"><%=replyThread.getNum()%></span>
+								</button>
+								<button type="button" class="btn btn-default btn-sm"
+									style="border: 0;">
+									<span class="glyphicon glyphicon-share-alt" aria-hidden="true"
+										data-toggle="collapse" data-target="#collapseExample<%=i%>"
+										aria-expanded="false" aria-controls="collapseExample">回复</span>
+								</button>
+								<div class="collapse" id="collapseExample<%=i%>">
+									<div class="well" style="padding: 0px;">
+										<form id="toReplyUser">
+											<div class="input-group">
+												<input type="hidden" name="tid" value="<%=thread.getId()%>"> 
+												<input type="hidden" name="be_uid" value="<%=replyThread.getFromUid()%>"> 
+												
+												<input type="text"
+													name="content" class="form-control" placeholder="回复内容">
+												<span class="input-group-btn">
+													<button class="btn btn-default" data-toggle="modal"
+														data-target="myModal1" onclick="toReplyUser()" id="Button2">回复</button>
+												</span>
+											</div>
+											<!-- /input-group -->
+										</form>
+									</div>
+								</div>
+
 							</div>
 
 						</div>
-<hr>
-<%} %>
-					</div>
-					<form id="submitRequest"  >
+						<hr>
+						<%
+							}
+						%>
+								<!-- 回复用户的Item -->
+						<div class="ReplyUserItem">
+							<div>
+								<img
+									src="${pageContext.request.contextPath}/images/photo_test01.jpg"
+									style="height: 28px; width: 28px;" class="img-circle"> <strong
+									class="name" style="font-size: 12px;">用户123
+									&nbsp;&nbsp;回复&nbsp;&nbsp;用户321</strong> <span
+									style="float: right; font-size: 13px;">时间在这</span>
+							</div>
+							<div>
+								<p>回复内容在这</p>
+							</div>
+							<div>
+								<button type="button" class="btn btn-default btn-sm"
+									style="border: 0;" onclick="">
+									<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">2134</span>
+								</button>
+								<button type="button" class="btn btn-default btn-sm"
+									style="border: 0;" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+									<span class="glyphicon glyphicon-share-alt" aria-hidden="true">回复</span>
+								</button>
+<div class="collapse" id="collapseExample">
+  <div class="well" style="padding: 0px; ">
+  	<form id="">
 						<div class="input-group">
-<input type="hidden"  name="tid" value="<%=thread.getId()%>">
-<input type="hidden" id="Window_OffsetY" name="Window_OffsetY" value="0">
-<input type="hidden" id="Window_OffsetX" name="Window_OffsetX" value="0">
-							<input type="text"  name="content" class="form-control" placeholder="写下你的评论">
-							<span class="input-group-btn"> 
-								<button  class="btn btn-default" data-toggle="modal" data-target="#myModal"onclick="toSubmit()" id="Button1">评论</button>
+							<input type="hidden" name="tid" value="">
+								<input type="text"
+								name="content" class="form-control" placeholder="回复内容">
+							<span class="input-group-btn">
+								<button class="btn btn-default" data-toggle="modal"
+									data-target="#myModal1" onclick="toReplyUser()" id="Button2">回复</button>
+							</span>
+						</div>
+						<!-- /input-group -->
+					</form>
+  </div>
+</div>
+							</div>
+						</div>
+						<hr>
+						<!--/ 回复用户的Item -->
+						
+					</div>
+					<form id="submitRequest">
+						<div class="input-group">
+							<input type="hidden" name="tid" value="<%=thread.getId()%>">
+							<input type="hidden" id="Window_OffsetY" name="Window_OffsetY"
+								value="0"> <input type="hidden" id="Window_OffsetX"
+								name="Window_OffsetX" value="0"> <input type="text"
+								name="content" class="form-control" placeholder="写下你的评论">
+							<span class="input-group-btn">
+								<button class="btn btn-default" data-toggle="modal"
+									data-target="#myModal" onclick="toSubmit()" id="Button1">评论</button>
 							</span>
 						</div>
 						<!-- /input-group -->
@@ -206,27 +276,39 @@
 				</div>
 			</div>
 			<!-- /右边卡片 -->
-			
-<div id="myModal" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
-  <div class="modal-dialog modal-sm" role="document">
-    <div class="modal-content">
-    <br>
-    <p> &nbsp;&nbsp;&nbsp;&nbsp;评论成功!&nbsp;&nbsp;</p>
-    <br>
-    </div>
-  </div>
-</div>
+
+			<div id="myModal" class="modal fade bs-example-modal-sm"
+				tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+				<div class="modal-dialog modal-sm" role="document">
+					<div class="modal-content">
+						<br>
+						<p>&nbsp;&nbsp;&nbsp;&nbsp;评论成功!&nbsp;&nbsp;</p>
+						<br>
+					</div>
+				</div>
+			</div>
+				<div id="myModal1" class="modal fade bs-example-modal-sm"
+				tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+				<div class="modal-dialog modal-sm" role="document">
+					<div class="modal-content">
+						<br>
+						<p>&nbsp;&nbsp;&nbsp;&nbsp;回复成功!&nbsp;&nbsp;</p>
+						<br>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 	<!-- /container -->
 	<script
 		src="${pageContext.request.contextPath}/weblib/jquery/jquery.js"></script>
-			<script
+	<script
 		src="${pageContext.request.contextPath}/weblib/jquery/jquery.form.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/weblib/bootstrap/js/bootstrap.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
-<script >
+	<script>
+
     function toSubmit(){
         //这里面可以做表单提交前的验证判断
     	 $('#submitRequest').submit(function() {
@@ -241,13 +323,40 @@
       	   return false;
       	   });
     }
-    function doThumb(){
+    
+    function toReplyUser(){
+        //这里面可以做表单提交前的验证判断
+    	 $('#toReplyUser').submit(function() {
+      	   $(this).ajaxSubmit( {
+      	      url : "${pageContext.request.contextPath}/after/reading/doReplyUser ",
+      	      success : function() {
+      	    	  location.reload(true);
+      	    	
+      	      }
+      	   });
+      	 $('#myModal1').modal('show');
+      	   return false;
+      	   });
+    }
+
+    function doThumb(i){
+    	var replayId= $('#replyId'+i).val();
+    	var num= parseInt($('#num'+i).html());
+        var countId = $('#countId'+i).val();
     	$.ajax({
-			url:"${pageContext.request.contextPath}/after/doThumb?uid=<%=uid%>&rid=<%=rid%>",
+			url:"${pageContext.request.contextPath}/after/doThumb?uid=<%=uid%>&rid="+replayId,
 			type:"get",
 			async:false,//让ajax执行代码顺序同步
 			success:function(data){
-			alert('成功');
+				
+				if(countId==1){
+					$("#num"+i).html(num-1)
+					$('#countId'+i).val("0");
+				}else{
+					$("#num"+i).html(num+1)
+					$('#countId'+i).val("1");
+				}
+				
 				}
 		});
     }
