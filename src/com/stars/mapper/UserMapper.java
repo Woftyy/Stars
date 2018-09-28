@@ -23,6 +23,5 @@ public interface UserMapper {
     public List<User> list();
     
     public List<User> getUserByThreadUid();
-    
-  
+
 }

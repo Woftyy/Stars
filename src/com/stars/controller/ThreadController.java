@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -50,6 +51,20 @@ public class ThreadController {
 	model.addAttribute("uid",uid);
 		return "after/common/editing";
 	}
+	/**点击发帖后的编辑页面
+	 * @param uid
+	 * @param model
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value ="after/privateEditing",method = RequestMethod.GET)
+	public String returnPrivateEditing(@RequestParam("uid")String uid,@RequestParam("tid")int tid,Model model,HttpServletRequest request){
+		System.out.println("ThreadController:"+uid);
+	Thread thread = threadService.getById(tid);
+	model.addAttribute("uid",uid);
+	model.addAttribute("thread",thread);
+		return "after/common/privateEditing";
+	}
 	
 	/**处理发布主题
 	 * @param forum
@@ -61,22 +76,60 @@ public class ThreadController {
 	 * 2018-09-21 14:19:11
 	 */
 	@RequestMapping("after/editing/post")
-	@ResponseBody
-	public ModelAndView PostEditing(@RequestParam("forum")String forum,@RequestParam("uid")int uid,
+	public String PostEditing(Model model,@RequestParam("forum")String forum,@RequestParam("uid")int uid,
+			@RequestParam("title")String title,
+			@RequestParam("content")String content,HttpServletRequest request){
+		threadService.add(forum, uid, title, content);
+		HttpSession session = request.getSession();
+		System.out.println("发布成功");
+		model.addAttribute("uid",uid);
+		Thread thread = threadService.getLatestThreadByUid(uid);
+		User user = userService.getById(uid);
+	
+		
+		session.setAttribute("thread", thread);
+		session.setAttribute("user", user);
+		model.addAttribute("thread",thread);
+
+		
+		return "after/common/reading";
+	}
+	
+	@RequestMapping("after/privateEditing/post")
+	public String PostPrivateEditing(Model model,@RequestParam("forum")String forum,@RequestParam("uid")int uid,@RequestParam("tid")int tid,
 			@RequestParam("title")String title,
 			@RequestParam("content")String content,HttpServletRequest request){
 		ModelAndView mav =new ModelAndView();
-		threadService.add(forum, uid, title, content);
+		threadService.update(tid, forum, uid, title, content);
+		HttpSession session = request.getSession();
 		System.out.println("发布成功");
-		mav.addObject("uid",uid);
+		model.addAttribute("uid",uid);
 		Thread thread = threadService.getLatestThreadByUid(uid);
 		User user = userService.getById(uid);
-		mav.addObject("thread",thread);
-		mav.addObject("user",user);
-		mav.setViewName("after/common/reading");
-		return mav;
+		System.out.println("发布成功");
+		//评论列表
+		List<ReplyThread> replyThreads = replyThreadService.getReviewList(tid);
+		//回复用户的列表
+		List<ReplyThread> replyUserList = replyThreadService.getReplyList(tid);
+		//评论主题的用户
+		List<User> users = userService.UserFromReviewsfromUid(tid);
+		//回复用户的用户
+		List<User> replyUsers = userService.UserFromReplyfromUid(tid);
+		//被回复的用户
+		List<User> beRepliedUsers = userService.UserFromReplytoUid(tid);
+		
+		session.setAttribute("thread", thread);
+		session.setAttribute("user", user);
+		model.addAttribute("thread",thread);
+		model.addAttribute("replyThreads",replyThreads);
+		model.addAttribute("replyUserList",replyUserList);
+		model.addAttribute("user",user);
+		model.addAttribute("users",users);
+		model.addAttribute("replyUsers",replyUsers);
+		model.addAttribute("beRepliedUsers",beRepliedUsers);
+		return "after/common/PrivateReading";
 	}
-	
+
 	@RequestMapping("after/reading")
 	public String returnReading(Model model, @RequestParam("tid")int tid,@RequestParam("uid")int uid,HttpServletRequest request){
 		System.out.println("ReturnReading uid"+uid);
@@ -86,14 +139,26 @@ public class ThreadController {
 		User user = new User();
 		thread = threadService.getById(tid);
 		user = userService.getById(uid);
-		List<ReplyThread> replyThreads = replyThreadService.getReplyThreadBytid(tid);
-		List<User> users = userService.UserFromReplyThreadUid(tid);
+		//评论列表
+		List<ReplyThread> replyThreads = replyThreadService.getReviewList(tid);
+		//回复用户的列表
+		List<ReplyThread> replyUserList = replyThreadService.getReplyList(tid);
+		//评论主题的用户
+		List<User> users = userService.UserFromReviewsfromUid(tid);
+		//回复用户的用户
+		List<User> replyUsers = userService.UserFromReplyfromUid(tid);
+		//被回复的用户
+		List<User> beRepliedUsers = userService.UserFromReplytoUid(tid);
+		
 		session.setAttribute("thread", thread);
 		session.setAttribute("user", user);
 		model.addAttribute("thread",thread);
 		model.addAttribute("replyThreads",replyThreads);
+		model.addAttribute("replyUserList",replyUserList);
 		model.addAttribute("user",user);
 		model.addAttribute("users",users);
+		model.addAttribute("replyUsers",replyUsers);
+		model.addAttribute("beRepliedUsers",beRepliedUsers);
 		return "after/common/reading";
 	}
 	
@@ -104,9 +169,36 @@ public class ThreadController {
 	 * 2018-09-25 15:09:24
 	 */
 	@RequestMapping("after/privateReading")
-	public String returnPrivateReading(Model model, HttpServletRequest request){
+	public String returnPrivateReading(Model model, @RequestParam("tid")int tid,@RequestParam("uid")int uid, HttpServletRequest request){
 		
-		return "after/common/privateReading";
+		System.out.println("returnPrivateReading uid"+uid);
+		System.out.println("returnPrivateReading tid"+tid);
+		HttpSession session = request.getSession();
+		Thread thread = new Thread();
+		User user = new User();
+		thread = threadService.getById(tid);
+		user = userService.getById(uid);
+		//评论列表
+		List<ReplyThread> replyThreads = replyThreadService.getReviewList(tid);
+		//回复用户的列表
+		List<ReplyThread> replyUserList = replyThreadService.getReplyList(tid);
+		//评论主题的用户
+		List<User> users = userService.UserFromReviewsfromUid(tid);
+		//回复用户的用户
+		List<User> replyUsers = userService.UserFromReplyfromUid(tid);
+		//被回复的用户
+		List<User> beRepliedUsers = userService.UserFromReplytoUid(tid);
+		
+		session.setAttribute("thread", thread);
+		session.setAttribute("user", user);
+		model.addAttribute("thread",thread);
+		model.addAttribute("replyThreads",replyThreads);
+		model.addAttribute("replyUserList",replyUserList);
+		model.addAttribute("user",user);
+		model.addAttribute("users",users);
+		model.addAttribute("replyUsers",replyUsers);
+		model.addAttribute("beRepliedUsers",beRepliedUsers);
+		return "after/common/PrivateReading";
 	}
 	/**处理点赞
 	 * @param model
@@ -122,7 +214,7 @@ public class ThreadController {
       System.out.println("rid:"+rid+"uid:"+uid);
 		   List<Thumb> thumbs=thumbService.findByRidAndUid(uid,rid);
 	        if (thumbs!=null && thumbs.size()>0){
-	            //如果找到了这条记录，则删除该记录，同时文章的点赞数减1
+	            //如果找到了这条记录，则删除该记录，同时回复的点赞数减1
 	            Thumb thumb=thumbs.get(0);
 	            //删除记录
 	            thumbService.delete(thumb.getId());
@@ -131,7 +223,7 @@ public class ThreadController {
 	            replyThread.setNum(replyThread.getNum()-1);
 	            replyThreadService.updateReplyThread(replyThread);
 	        }else {
-	            //如果没有找到这条记录，则添加这条记录，同时文章点赞数加1
+	            //如果没有找到这条记录，则添加这条记录，同时回复点赞数加1
 	            Thumb thumb=new Thumb();
 	            thumb.setRid(rid);
 	            thumb.setUid(uid);
@@ -142,6 +234,17 @@ public class ThreadController {
 	            replyThread.setNum(replyThread.getNum()+1);
 	            replyThreadService.updateReplyThread(replyThread);
 	        }
+	}
+	@RequestMapping("after/doDeleteThread")
+	public String doDeleteThread(@RequestParam("tid")int tid) {
+		List<ReplyThread> replyThreads = replyThreadService.getReplyThreadBytid(tid);
+		 for(int i=0;i< replyThreads.size();i++) {
+			thumbService.deleteByrid(replyThreads.get(i).getId()); 
+		 }
+		replyThreadService.deleteBytid(tid);
+		threadService.delete(tid);
+		
+	 return "after/center/personalCenter";
 	}
 	
 }

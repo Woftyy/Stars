@@ -18,6 +18,14 @@ public interface UserService {
 	public List<User> getUserByThreadUid();
 	//通过id 获取User
 	public User getById(int id);
-	
+	//获取对应主题的所有评论的用户
 	public List<User> UserFromReplyThreadUid(int tid);
+	//获取对应主题的评论主题用户
+	public List<User> UserFromReviewsfromUid(int tid);
+	//获取对应主题的回复用户的用户
+	public List<User> UserFromReplyfromUid(int tid);
+	//获取对应主题被回复的用户
+	public List<User> UserFromReplytoUid(int tid);
+	
+	
 }

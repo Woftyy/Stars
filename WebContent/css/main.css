@@ -1,73 +1,4 @@
-/*
-* 锟斤拷锟角碉拷锟皆讹拷锟斤拷锟斤拷式
-* @Author: iceStone
-* @Date:   2015-12-12 10:56:34
-* @Last Modified by:   iceStone
-* @Last Modified time: 2015-12-15 17:23:08
-*/
 
-/**
- * 1. 锟斤拷式锟斤拷通锟斤拷ID去锟睫讹拷
- * 2. 锟斤拷锟斤拷锟杰讹拷使锟斤拷直锟斤拷锟接达拷选锟斤拷锟斤拷
- */
-
-/**
- * 锟斤拷锟斤拷锟斤拷式锟斤拷锟斤拷锟斤拷色 #e92322
- * 希锟斤拷锟皆猴拷锟紺SS锟斤拷锟叫憋拷锟斤拷锟侥革拷锟斤拷
- * 希锟斤拷锟斤拷嵌锟斤拷锟斤法
- * 希锟斤拷锟叫伙拷锟斤拷锓拷锟組ixin锟斤拷
- */
-
-/*
-var mainColor='#e92322';
-body {
-  background-color: mainColor;
-}
-
-.container {
-  width: 100px;
-  .row {
-    margin-left: -15px;
-    [class^="col-"],
-    [class*=" col-"] {}
-  }
-}
-
-.div {
-  radius(10);
-}
-
-.div1 {
-  radius(15);
-}
-
-function radius(r) {
-  -webkit-border-radius: r;
-  -moz-border-radius: r;
-  -o-border-radius: r;
-  -ms-border-radius: r;
-  border-radius: r;
-}
-
-#tese > .container > .row > div {
-  margin-top: 20px;
-  margin-bottom: 20px;
-}
-
-#tese > .container > .row > div > p {}
-
-#tese > .container > .row > div > p > span {}
-
-#tese > .container > .row > div > a {
-  color: #888;
-}
-
-#tese > .container > .row > div > a:hover {
-  color: #666;
-  text-decoration: none;
-}*/
-
-/* 锟斤拷锟斤拷锟斤拷式 */
 body {
 	
 	font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue,
@@ -112,10 +43,9 @@ button{
 	width:840px;
 }
 .RightItemContainer{
-	float:left;
+	float:right;
 	width:290px;
 	position: relative;
-    left: 10px;
 }
 /* 头锟斤拷锟斤拷锟斤拷 */
 #header {

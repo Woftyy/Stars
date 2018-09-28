@@ -10,6 +10,10 @@ public interface ThreadService {
 	
 	public List<Thread> list();
 	
+	public void update(int id,String name,int uid,String title,String content);
+	
+	public void delete(int id);
+	
 	public Thread getById(int id);
 	
 	public Thread getLatestThreadByUid(int uid);
@@ -23,4 +27,6 @@ public interface ThreadService {
 	public List<Thread> getPostByUid(int uid);
 	
 	public void addReplyNum(int id);
+	
+	public List<Thread> searchThroughTitleAndContent(String content);
 }

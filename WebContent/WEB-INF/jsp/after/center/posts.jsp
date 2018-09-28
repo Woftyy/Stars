@@ -44,7 +44,7 @@ for (int i = threads.size()-1; i>=0 ; i--) {
 					</div>
 
 					<div class="ContentItem"
-						onclick="javascript:window.open('${pageContext.request.contextPath}/after/reading?uid=&tid=%>','_blank')">
+						onclick="javascript:window.open('${pageContext.request.contextPath}/after/privateReading?uid=${uid}&tid=<%=thread.getId()%>','_blank')">
 						<strong class="title"><%=thread.getTitle() %></strong>
 						
 						<p></p>

@@ -9,7 +9,7 @@ public interface ThreadMapper {
 
 	public void add(Thread thread);
 	
-	public void delete(Thread thread);
+	public void delete(int  id);
 	
 	public Thread getById(int id);
 	
@@ -54,4 +54,6 @@ public interface ThreadMapper {
 	public List<Thread> getPostByUid(int uid);
 	
 	public void addReplyNum(int id);
+	
+	public List<Thread> searchThroughTitleAndContent(String content);
 }

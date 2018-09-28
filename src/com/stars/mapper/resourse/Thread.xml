@@ -9,7 +9,7 @@
 	        insert into thread ( uid,fid,title,content,reply_num,views,time ) values (#{uid},#{fid},#{title},#{content},#{replyNum},#{views},#{time})    
 	    </insert>
 	    
-	       <delete id="delete" parameterType="Thread" >
+	       <delete id="delete" parameterType="_int" >
 	        delete from thread where id= #{id}   
 	    </delete>
 	    
@@ -17,7 +17,7 @@
 	        select * from   thread  where id= #{id}    
 	    </select>
 	    <update id="update" parameterType="Thread" >
-	        update thread set name=#{name} where id=#{id}    
+	        update thread set fid=#{fid}, uid=#{uid},title=#{title}, content=#{content}, time=#{time} where id=#{id}    
 	    </update>
 	    <select id="list" resultType="Thread">
 	        select * from   thread      
@@ -41,5 +41,9 @@
 	    <update id="addReplyNum" parameterType="int">
 	       update thread SET reply_num = reply_num+1 WHERE id = #{id}
 	    </update>
+	      <select id="searchThroughTitleAndContent"  resultType="Thread" >
+	           SELECT * from thread where title like #{content} or content like #{content}
+	    </select>
+	   
 	</mapper>
 

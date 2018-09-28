@@ -1,3 +1,5 @@
+<%@page import="com.stars.entity.Thread"%>
+<%@page import="org.springframework.web.bind.annotation.RequestParam"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -53,10 +55,16 @@
 		</nav>
 	</header>
 	<!-- /头部区域 -->
-<% System.out.print("用户id为"+request.getAttribute("uid")); %>
+	<%!Thread thread; %>
+<% System.out.print("用户id为"+request.getAttribute("uid")); 
+thread = (Thread)request.getAttribute("thread") ;
+
+%>
+
 <div class="container">
 <h2>编辑</h2>
-<form method="post" action="${pageContext.request.contextPath}/after/editing/post">
+
+<form method="post" action="${pageContext.request.contextPath}/after/privateEditing/post">
 <br>
 <select class="form-control" name="forum" >
   <option>科普讨论</option>
@@ -64,11 +72,12 @@
   <option>电影宇宙</option>
 </select>
 <br>
-<input type="text" class="form-control"  name="title" placeholder="请输入标题" >
+<input type="text" class="form-control"  name="title" placeholder="请输入标题"  value="<%=thread.getTitle()%>">
 <br>
 <div id="editor"></div>
 <div style="display:none;"><textarea id="text" name="content" style="width:100%; height:200px;"></textarea></div>
 <input type="text" style="display:none" name="uid" value="${uid}">
+<input type="hidden" name="tid" value="<%=thread.getId()%>">
 <br>
  <button type="submit" class="btn btn-default" >发布</button>
 </form>
@@ -93,6 +102,7 @@
       }
       editor.create()
       // 初始化 textarea 的值
+       editor.txt.html('<%=thread.getContent()%>')
       $text1.val(editor.txt.text())
       
 	

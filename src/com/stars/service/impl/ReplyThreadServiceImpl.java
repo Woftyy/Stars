@@ -32,12 +32,13 @@ public class ReplyThreadServiceImpl implements ReplyThreadService{
 	 * @see com.stars.service.ReplyThreadService#add(com.stars.entity.ReplyThread)
 	 */
 	@Override
-	public void add(int fromUid,int tid,String content) {
+	public void add(int fromUid,int toUid,int tid,String content) {
 		// TODO Auto-generated method stub
 		ReplyThread replyThread = new ReplyThread();
 		Timestamp time = new Timestamp(System.currentTimeMillis());
 		replyThread.setFromUid(fromUid);
         replyThread.setTid(tid);
+        replyThread.setToUid(toUid);
         replyThread.setContent(content);
         replyThread.setTime(time);
         replyThread.setNum(0);
@@ -71,6 +72,35 @@ public class ReplyThreadServiceImpl implements ReplyThreadService{
 	public void updateReplyThread(ReplyThread replyThread) {
 		// TODO Auto-generated method stub
 		replyThreadMapper.updateReplyThread(replyThread);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.stars.service.ReplyThreadService#getReviewList(int)
+	 */
+	@Override
+	public List<ReplyThread> getReviewList(int tid) {
+		// TODO Auto-generated method stub
+		
+		
+		return replyThreadMapper.getReviewList(tid);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.stars.service.ReplyThreadService#getReplyList(int)
+	 */
+	@Override
+	public List<ReplyThread> getReplyList(int tid) {
+		// TODO Auto-generated method stub
+		return replyThreadMapper.getReplyList(tid);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.stars.service.ReplyThreadService#deleteBytid(int)
+	 */
+	@Override
+	public void deleteBytid(int tid) {
+		// TODO Auto-generated method stub
+		replyThreadMapper.deleteBytid(tid);
 	}
 
 }

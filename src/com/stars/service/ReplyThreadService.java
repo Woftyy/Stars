@@ -15,7 +15,7 @@ import com.stars.entity.Thread;
 
 public interface ReplyThreadService {
 
-	public void add(int fromUid,int tid,String content);
+	public void add(int fromUid,int toUid,int tid,String content);
 	
 	public List<ReplyThread> getReplyThreadBytid(int tid);
 
@@ -23,4 +23,9 @@ public interface ReplyThreadService {
 	
 	public void updateReplyThread(ReplyThread replyThread);
 	
+	public List<ReplyThread> getReviewList(int tid);
+	
+	public List<ReplyThread> getReplyList(int tid);
+	
+	public void deleteBytid(int tid);
 }

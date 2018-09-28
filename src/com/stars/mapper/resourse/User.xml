@@ -33,7 +33,6 @@
 	        select user.id,user.name,nickname,password,email,sex,src,thread.time 
 	        from user,thread where user.id=uid  ORDER BY thread.time  
 	    </select>	
-	
-	    
+
 	</mapper>
 

@@ -92,5 +92,37 @@ public class ThreadServiceImpl implements ThreadService{
 		// TODO Auto-generated method stub
 		threadMapper.addReplyNum(id);
 	}
+	/* (non-Javadoc)
+	 * @see com.stars.service.ThreadService#searchThroughTitleAndContent(java.lang.String)
+	 */
+	@Override
+	public List<Thread> searchThroughTitleAndContent(String content) {
+		// TODO Auto-generated method stub
+		return threadMapper.searchThroughTitleAndContent(content);
+	}
+	/* (non-Javadoc)
+	 * @see com.stars.service.ThreadService#delete(com.stars.entity.Thread)
+	 */
+	@Override
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+		threadMapper.delete(id);
+	}
+	/* (non-Javadoc)
+	 * @see com.stars.service.ThreadService#update(java.lang.String, int, java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void update(int id,String name, int uid, String title, String content) {
+		// TODO Auto-generated method stub
+		Forum forum=forumMapper.getByName(name);
+		Timestamp time = new Timestamp(System.currentTimeMillis());
+		Thread thread=threadMapper.getById(id);
+		thread.setFid(forum.getId());
+		thread.setUid(uid);
+		thread.setContent(content);
+		thread.setTitle(title);
+		thread.setTime(time);
+	    threadMapper.update(thread);
+	}
 
 }

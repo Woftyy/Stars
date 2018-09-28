@@ -19,4 +19,7 @@ public interface ThumbService {
 	public void delete(int id);
 	
 	public void add(int uid,int rid);
+	
+	public void deleteByrid(int rid);
 }
+

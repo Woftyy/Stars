@@ -74,8 +74,8 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return userMapper.get(id);
 	}
-	/* (non-Javadoc)
-	 * @see com.stars.service.UserService#UserFromReplyThreadUid(int)
+	/* 
+	 *获取对应主题评论的所有用户
 	 */
 	@Override
 	public List<User> UserFromReplyThreadUid(int tid) {
@@ -90,7 +90,56 @@ public class UserServiceImpl implements UserService{
        }
 		return users;
 	}
+	/* 获取对应主题的评论主题用户
+	 * 
+	 */
+	@Override
+	public List<User> UserFromReviewsfromUid(int tid) {
+		// TODO Auto-generated method stub
+		List<ReplyThread> ReviewList = replyThreadMapper.getReviewList(tid);
+		ReplyThread replyThread = new ReplyThread();
+		List<User> users = new ArrayList<>();
+       for(int i=0; i<ReviewList.size(); i++) {
+    	   replyThread = ReviewList.get(i);
+    	   User user =userMapper.get(replyThread.getFromUid());
+    	   users.add(user);
+       }
+		return users;
+	}
+	/* 
+	 * 获取对应主题的回复用户的用户
+	 */
+	@Override
+	public List<User> UserFromReplyfromUid(int tid) {
+		// TODO Auto-generated method stub
+		List<ReplyThread> ReplyList = replyThreadMapper.getReplyList(tid);
+		ReplyThread replyThread = new ReplyThread();
+		List<User> users = new ArrayList<>();
+       for(int i=0; i<ReplyList.size(); i++) {
+    	   replyThread = ReplyList.get(i);
+    	   User user =userMapper.get(replyThread.getFromUid());
+    	   users.add(user);
+       }
+		return users;
+	}
 	
+	/* 
+	 * 	获取对应主题被回复的用户
+	 */
+	@Override
+	public List<User> UserFromReplytoUid(int tid) {
+		// TODO Auto-generated method stub
+		System.out.println("访问了UserFromReplytoUid");
+		List<ReplyThread> ReplyList = replyThreadMapper.getReplyList(tid);
+		ReplyThread replyThread = new ReplyThread();
+		List<User> users = new ArrayList<>();
+       for(int i=0; i<ReplyList.size(); i++) {
+    	   replyThread = ReplyList.get(i);
+    	   User user =userMapper.get(replyThread.getToUid());
+    	   users.add(user);
+       }
+		return users;
+	}
 
 
 

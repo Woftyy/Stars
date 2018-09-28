@@ -5,13 +5,16 @@
 
 	<mapper namespace="com.stars.mapper.ReplyThreadMapper">
 	    <insert id="add" parameterType="ReplyThread" >
-	        insert into reply_thread ( from_uid,tid,content,num,time ) values (#{fromUid},#{tid},#{content},#{num},#{time})    
+	        insert into reply_thread ( from_uid,to_uid,tid,content,num,time ) values (#{fromUid},#{toUid},#{tid},#{content},#{num},#{time})    
 	    </insert>
 	    
-	       <delete id="delete" parameterType="ReplyThread" >
+	       <delete id="delete" parameterType="_int" >
 	        delete from reply_thread where id= #{id}   
 	    </delete>
 	    
+	          <delete id="deleteBytid" parameterType="_int" >
+	        delete from reply_thread where tid= #{tid}   
+	    </delete>
 	    <select id="getById" parameterType="_int" resultType="ReplyThread">
 	        select * from   reply_thread  where id= #{id}    
 	    </select>
@@ -28,5 +31,11 @@
 	     <update id="updateReplyThread" parameterType="ReplyThread">
 	       update reply_thread SET num = #{num} WHERE id = #{id}
 	    </update>
+	    <select id="getReviewList" resultType="ReplyThread">
+	         select * from reply_thread where to_uid = 0 and tid=#{tid};
+	    </select>	
+	   <select id="getReplyList" resultType="ReplyThread" >
+	         select * from reply_thread where to_uid != 0 and tid=#{tid};
+	    </select>	
 	</mapper>
 

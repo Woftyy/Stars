@@ -50,19 +50,18 @@ public class ReplyController {
 		threadService.addReplyNum(tid);
 		thread = (Thread)request.getSession().getAttribute("thread");
 		user = (User)request.getSession().getAttribute("user");
-		List<ReplyThread> replyThreads = replyThreadService.getReplyThreadBytid(tid);
+		List<ReplyThread> replyThreads = replyThreadService.getReviewList(tid);
 		List<User> users = userService.UserFromReplyThreadUid(tid);
 		model.addAttribute("thread",thread);
 		model.addAttribute("user",user);
-		model.addAttribute("replyThreads",users);
+		model.addAttribute("replyThreads",replyThreads);
 		model.addAttribute("users",users);
-		Integer toUid= null;
-	  replyThreadService.add(fromUid,tid, content);
+	  replyThreadService.add(fromUid,0,tid, content);
 	}
 	
 	@RequestMapping("/after/reading/doReplyUser")
 	@ResponseBody
-	public void doReplyUser(@RequestParam("content")String content,@RequestParam("tid")int tid,@RequestParam("be_uid")int be_uid,Model model,HttpServletRequest request){
+	public void doReplyUser(@RequestParam("content")String content,@RequestParam("tid")int tid,@RequestParam("toUid")int toUid,Model model,HttpServletRequest request){
 		  System.out.println("访问了doReplyUser");
 			int fromUid =(int)request.getSession().getAttribute("uid");
 		  Thread thread = new Thread();
@@ -70,12 +69,23 @@ public class ReplyController {
 			threadService.addReplyNum(tid);
 			thread = (Thread)request.getSession().getAttribute("thread");
 			user = (User)request.getSession().getAttribute("user");
-			List<ReplyThread> replyThreads = replyThreadService.getReplyThreadBytid(tid);
-			List<User> users = userService.UserFromReplyThreadUid(tid);
+			//评论列表
+			List<ReplyThread> replyThreads = replyThreadService.getReviewList(tid);
+			//回复用户的列表
+			List<ReplyThread> replyUserList = replyThreadService.getReplyList(tid);
+			//评论主题的用户
+			List<User> users = userService.UserFromReviewsfromUid(tid);
+			//回复用户的用户
+			List<User> replyUsers = userService.UserFromReplyfromUid(tid);
+			//被回复的用户
+			List<User> beRepliedUsers = userService.UserFromReplytoUid(tid);
 			model.addAttribute("thread",thread);
 			model.addAttribute("user",user);
-			model.addAttribute("replyThreads",users);
+			model.addAttribute("replyThreads",replyThreads);
 			model.addAttribute("users",users);
-		  replyThreadService.add(fromUid,tid, content);
+			model.addAttribute("replyUsers",replyUsers);
+			model.addAttribute("beRepliedUsers",beRepliedUsers);
+			model.addAttribute("replyUserList",replyUserList);
+		  replyThreadService.add(fromUid,toUid,tid, content);
 		}
 }

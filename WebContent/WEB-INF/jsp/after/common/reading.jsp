@@ -59,13 +59,16 @@
 					</ul>
 					<ul class="nav navbar-nav">
 						<li>
+							<form id="requestSearch" >
 							<div class="input-group">
-								<input type="text" class="form-control"
+								<input id="content" type="text" class="form-control" 
 									placeholder="Search for..."> <span
 									class="input-group-btn">
-									<button class="btn btn-default" type="button">搜索</button>
+									<button class="btn btn-default"  
+									onclick="toSearch()">搜索</button>
 								</span>
 							</div> <!-- /input-group -->
+							</form>
 						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right hidden-sm">
@@ -134,7 +137,7 @@
 								replyThread = replyThreads.get(i);
 								userReply = users.get(i);
 						%>
-						<div class="ReviewItem">
+						<div class="ReviewItem" style="">
 							<div>
 								<img
 									src="${pageContext.request.contextPath}/images/photo_test01.jpg"
@@ -162,16 +165,16 @@
 								</button>
 								<div class="collapse" id="collapseExample<%=i%>">
 									<div class="well" style="padding: 0px;">
-										<form id="toReplyUser">
+										<form id="toReplyUser<%=i%>">
 											<div class="input-group">
 												<input type="hidden" name="tid" value="<%=thread.getId()%>"> 
-												<input type="hidden" name="be_uid" value="<%=replyThread.getFromUid()%>"> 
+												<input type="hidden" name="toUid" value="<%=replyThread.getFromUid()%>"> 
 												
 												<input type="text"
 													name="content" class="form-control" placeholder="回复内容">
 												<span class="input-group-btn">
 													<button class="btn btn-default" data-toggle="modal"
-														data-target="myModal1" onclick="toReplyUser()" id="Button2">回复</button>
+														data-target="myModal1" onclick="toReplyUser(<%=i%>)" id="Button2">回复</button>
 												</span>
 											</div>
 											<!-- /input-group -->
@@ -186,38 +189,59 @@
 						<%
 							}
 						%>
+						
+						<%  	
+						
+						List<ReplyThread> replyUserList = (List<ReplyThread>) request.getAttribute("replyUserList"); 
+						List<User> replyUsers = (List<User>) request.getAttribute("replyUsers");
+						List<User> beRepliedUsers = (List<User>) request.getAttribute("beRepliedUsers");
+						User fromUser = new User();
+						       User toUser = new User();
+						       ReplyThread replyUser = new ReplyThread();
+						
+						%>
+							<%
+							for (int i = 0; i < replyUserList.size(); i++) {
+								replyUser = replyUserList.get(i);
+								fromUser = replyUsers.get(i);
+								toUser=beRepliedUsers.get(i);
+						%>
 								<!-- 回复用户的Item -->
 						<div class="ReplyUserItem">
 							<div>
 								<img
 									src="${pageContext.request.contextPath}/images/photo_test01.jpg"
 									style="height: 28px; width: 28px;" class="img-circle"> <strong
-									class="name" style="font-size: 12px;">用户123
-									&nbsp;&nbsp;回复&nbsp;&nbsp;用户321</strong> <span
-									style="float: right; font-size: 13px;">时间在这</span>
+									class="name" style="font-size: 12px;"><%=fromUser.getName() %>
+									&nbsp;&nbsp;回复&nbsp;&nbsp;<%=toUser.getName() %></strong> <span
+									style="float: right; font-size: 13px;"><%=(String.valueOf(replyUser.getTime())).substring(0, 19) %></span>
 							</div>
 							<div>
-								<p>回复内容在这</p>
+								<p><%=replyUser.getContent() %></p>
 							</div>
 							<div>
+								<input type="hidden" value="<%=replyUser.getId()%>"
+									id="replyId<%=i+10000%>"> <input type="hidden" value="0"
+									id="countId<%=i+10000%>">
 								<button type="button" class="btn btn-default btn-sm"
-									style="border: 0;" onclick="">
-									<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true">2134</span>
+									style="border: 0;" onclick="doThumb(<%=i+10000%>)">
+									<span id="num<%=i+10000%>" class="glyphicon glyphicon-thumbs-up" aria-hidden="true"><%=replyUser.getNum() %></span>
 								</button>
 								<button type="button" class="btn btn-default btn-sm"
-									style="border: 0;" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+									style="border: 0;" data-toggle="collapse" data-target="#collapseExample<%=i+10000%>" aria-expanded="false" aria-controls="collapseExample">
 									<span class="glyphicon glyphicon-share-alt" aria-hidden="true">回复</span>
 								</button>
-<div class="collapse" id="collapseExample">
+<div class="collapse" id="collapseExample<%=i+10000%>">
   <div class="well" style="padding: 0px; ">
-  	<form id="">
+  	<form id="toReplyUser2<%=i+10000%>">
 						<div class="input-group">
-							<input type="hidden" name="tid" value="">
+							<input type="hidden" name="tid" value="<%=thread.getId()%>"> 
+												<input type="hidden" name="toUid" value="<%=replyUser.getFromUid()%>"> 
 								<input type="text"
 								name="content" class="form-control" placeholder="回复内容">
 							<span class="input-group-btn">
 								<button class="btn btn-default" data-toggle="modal"
-									data-target="#myModal1" onclick="toReplyUser()" id="Button2">回复</button>
+									data-target="#myModal1" onclick="toReplyUser2(<%=i+10000%>)" id="Button2">回复</button>
 							</span>
 						</div>
 						<!-- /input-group -->
@@ -228,7 +252,7 @@
 						</div>
 						<hr>
 						<!--/ 回复用户的Item -->
-						
+						<%} %>
 					</div>
 					<form id="submitRequest">
 						<div class="input-group">
@@ -324,9 +348,23 @@
       	   });
     }
     
-    function toReplyUser(){
+    function toReplyUser(i){
         //这里面可以做表单提交前的验证判断
-    	 $('#toReplyUser').submit(function() {
+    	 $('#toReplyUser'+i).submit(function() {
+      	   $(this).ajaxSubmit( {
+      	      url : "${pageContext.request.contextPath}/after/reading/doReplyUser ",
+      	      success : function() {
+      	    	  location.reload(true);
+      	    	
+      	      }
+      	   });
+      	 $('#myModal1').modal('show');
+      	   return false;
+      	   });
+    }
+    function toReplyUser2(i){
+        //这里面可以做表单提交前的验证判断
+    	 $('#toReplyUser2'+i).submit(function() {
       	   $(this).ajaxSubmit( {
       	      url : "${pageContext.request.contextPath}/after/reading/doReplyUser ",
       	      success : function() {
@@ -361,20 +399,17 @@
 		});
     }
   
-/*     $(document).ready(function() {
-        var options = {   
-            //需要刷新的区域id 
-            url:"${pageContext.request.contextPath}/after/reading/doReply",
-            target:'#reloadDiv',    
-        };    */
-        //绑定FORM提交事件  
-   /*      $('#submitRequest').submit(function() {  
-        	
-            $(this).ajaxSubmit(options);   
-            return false;   
-        }); 
-    });      */
-    
+    function toSearch(){
+        //这里面可以做表单提交前的验证判断
+        
+     //   javascript:window.open('${pageContext.request.contextPath}/after/search?','_blank')
+    	 $('#requestSearch').submit(function() {
+    		var content= $('#content').val();
+    		console.log(content);
+    		 window.open('${pageContext.request.contextPath}/after/search?content='+content,'_blank')
+    		 return false;
+      	   });
+    }
    
 </script>
 </body>
