@@ -39,7 +39,7 @@
 	<div class="Card  LeftItem">
 					<div class="UserItem">
 						<img
-							src="${pageContext.request.contextPath}/images/photo_test01.jpg"
+							src="${pageContext.request.contextPath}/images<%=user.getSrc() %>"
 							alt="..." class="img-circle"><strong class="name"><%=user.getNickname() %></strong><span
 							style="position: relative; left: 400px;"><%=(String.valueOf(thread.getTime())).substring(0,19) %></span>
 					</div>

@@ -45,7 +45,7 @@
 			%>
 			<div class="Card LeftItem">
 				<div class="UserItem">
-					<img src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="..." class="img-circle"><strong
+					<img src="${pageContext.request.contextPath}/images<%=user.getSrc() %>" alt="..." class="img-circle"><strong
 						class="name"><%=user.getNickname() %></strong>
 				</div>
 				<div class="ContentItem" onclick="javascript:window.open('${pageContext.request.contextPath}/after/reading?uid=<%=user.getId() %>&tid=<%=thread.getId()%>','_blank')">

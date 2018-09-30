@@ -33,6 +33,8 @@
 	        select user.id,user.name,nickname,password,email,sex,src,thread.time 
 	        from user,thread where user.id=uid  ORDER BY thread.time  
 	    </select>	
-
+     <update id="updateProfile" parameterType="User" >
+	        update user set nickname=#{nickname},email=#{email},sex=#{sex},src=#{src} where id=#{id}    
+	    </update>
 	</mapper>
 

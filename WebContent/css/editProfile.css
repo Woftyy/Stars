@@ -1,0 +1,92 @@
+.Field {
+    padding: 30px 0;
+    border-bottom: 1px solid #ebebeb;
+}
+.Field-content {
+    padding: 0 64px 0 140px;
+    line-height: 36px;
+}
+.ProfileHeader-content {
+    padding-top: 16px;
+    padding-left: 32px;
+    border-left: 164px solid transparent;
+}
+.ProfileEdit-fields {
+    padding-bottom: 100px;
+    margin-top: 10px;
+}
+.Field-label {
+    position: absolute;
+    font-size: 15px;
+    font-weight: 600;
+    font-synthesis: style;
+    line-height: 36px;
+    color: #444;
+}
+.ProfileHeader-main {
+    position: relative;
+    margin: 0 20px 24px;
+}
+.ProfileHeader-avatar {
+    position: absolute;
+    left: 0;
+    z-index: 1;
+}
+.UserAvatarEditor {
+    cursor: pointer;
+    position: relative;
+        left: 200px;
+}
+input[type="file"] {
+    display: none;
+}
+.UserAvatar {
+    display: inline-block;
+    overflow: hidden;
+    vertical-align: top;
+    background-color: #fff;
+    border: 4px solid #fff;
+    border-radius: 8px;
+}
+.UploadPicture-input {
+    display: none;
+}
+.Mask {
+    position: absolute;
+    width:168px;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    transition: opacity .2s ease-in;
+}
+.Mask-mask--black {
+    background: #1a1a1a;
+}
+.Mask-mask {
+    position: absolute;
+    z-index: -1;
+    width: 168px;
+    height: 100%;
+    opacity: .4;
+    box-sizing: border-box;
+}
+.UserAvatarEditor-maskInner {
+    z-index: 4;
+    border: 4px solid #fff;
+    border-radius: 8px;
+}
+.Mask-content {
+        position: absolute;
+    top: 50%;
+     left: 50%;
+    z-index: 5;
+    color: #fff;
+    text-align: center;
+    -webkit-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+.UserAvatarEditor-maskInnerText {
+    white-space: nowrap;
+}

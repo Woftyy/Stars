@@ -32,6 +32,7 @@
 	    <![endif]-->
 </head>
 <body>
+<% User user1 = (User)request.getSession().getAttribute("user"); %>
 	<!-- 头部区域 -->
 	<header id="header">
 		<!-- <div class="topbar hidden-sm hidden-xs"> -->
@@ -62,7 +63,8 @@
 						</li>
 					</ul>
 						<ul class="nav navbar-nav navbar-right hidden-sm">
-						<li><a href="${pageContext.request.contextPath}/after/personalCenter"><img src="${pageContext.request.contextPath}/images/photo_test01.jpg" 
+						<li><a href="${pageContext.request.contextPath}/after/personalCenter">
+						<img src="${pageContext.request.contextPath}/images<%=user1.getSrc() %>" 
 						alt="..." height="30px" width="30px" class="img-circle"></a></li>
 						<li><a href="${pageContext.request.contextPath}" class="btn btn-link btn-sm"
 							>退出登录</a></li>
@@ -75,6 +77,7 @@
 	<!-- 主要内容 -->
 		<%
 		int uid = (int)request.getSession().getAttribute("uid");
+		
 		  List<Thread> threads = (List<Thread>) request.getAttribute("threads");
 				List<User> users = (List<User>) request.getAttribute("users");
 				Forum forum = (Forum) request.getAttribute("forum");

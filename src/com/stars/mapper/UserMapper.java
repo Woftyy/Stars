@@ -24,4 +24,5 @@ public interface UserMapper {
     
     public List<User> getUserByThreadUid();
 
+    public void updateProfile(User user);
 }

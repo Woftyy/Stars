@@ -35,6 +35,7 @@
 	    <![endif]-->
 </head>
 <body>
+
 	<!-- 头部区域 -->
 	<header id="header">
 		<!-- <div class="topbar hidden-sm hidden-xs"> -->
@@ -68,8 +69,10 @@
 							</form>
 						</li>
 					</ul>
+					<%  User user1 = (User)request.getSession().getAttribute("user"); %>
 					<ul class="nav navbar-nav navbar-right hidden-sm">
-						<li><a href="${pageContext.request.contextPath}/after/personalCenter"><img src="${pageContext.request.contextPath}/images/photo_test01.jpg" 
+						<li><a href="${pageContext.request.contextPath}/after/personalCenter">
+						<img src="${pageContext.request.contextPath}/images<%=user1.getSrc() %>" 
 						alt="..." height="30px" width="30px" class="img-circle"></a></li>
 						<li><a href="${pageContext.request.contextPath}"
 							class="btn btn-link btn-sm">退出登录</a></li>
@@ -134,7 +137,7 @@
 				</div>
 				<div class="UserItem">
 					<img
-						src="${pageContext.request.contextPath}/images/photo_test01.jpg"
+						src="${pageContext.request.contextPath}/images<%=user.getSrc()%>"
 						alt="..." class="img-circle"><strong class="name"><%=user.getNickname()%></strong>
 				</div>
 

@@ -36,7 +36,7 @@
 	  </div>
        	<div>
 								<img
-									src="${pageContext.request.contextPath}/images/photo_test01.jpg"
+									src="${pageContext.request.contextPath}/images<%=user.getSrc() %>"
 									style="height: 28px; width: 28px;" class="img-circle"> <strong
 									class="name" style="font-size: 12px;"><%=user.getNickname()%> &nbsp;&nbsp;(我)</strong>
 								<span style="float: right; font-size: 13px;"><%=(String.valueOf(replyThread.getTime())).substring(0,19) %></span>

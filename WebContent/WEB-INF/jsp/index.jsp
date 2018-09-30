@@ -118,7 +118,7 @@
 
 				</div>
 				<div class="UserItem">
-					<img src="images/photo_test01.jpg" alt="..." class="img-circle"><strong
+					<img src="${pageContext.request.contextPath}/images<%=user.getSrc() %>" alt="..." class="img-circle"><strong
 						class="name"><a href="#"><%=user.getNickname() %></a></strong>
 				</div>
 

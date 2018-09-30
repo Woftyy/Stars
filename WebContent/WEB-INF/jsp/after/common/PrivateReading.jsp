@@ -37,6 +37,7 @@
 	    <![endif]-->
 </head>
 <body>
+<%User user = (User) request.getAttribute("user"); %>
 	<!-- 头部区域 -->
 	<header id="header">
 		<!-- <div class="topbar hidden-sm hidden-xs"> -->
@@ -71,7 +72,7 @@
 					<ul class="nav navbar-nav navbar-right hidden-sm">
 						<li><a
 							href="${pageContext.request.contextPath}/after/personalCenter"><img
-								src="${pageContext.request.contextPath}/images/photo_test01.jpg"
+								src="${pageContext.request.contextPath}/images<%=user.getSrc() %>"
 								alt="..." height="30px" width="30px" class="img-circle"></a></li>
 						<li><a href="${pageContext.request.contextPath}"
 							class="btn btn-link btn-sm">退出登录</a></li>
@@ -88,7 +89,7 @@
 			<%!int uid;%>
 			<%
 				uid = (int) request.getSession().getAttribute("uid");
-				User user = (User) request.getAttribute("user");
+				
 				User userReply = new User();
 				UserService userService = new UserServiceImpl();
 				Thread thread = (Thread) request.getAttribute("thread");
@@ -143,7 +144,7 @@
 				<div class="Card LeftItem">
 					<div class="UserItem">
 						<img
-							src="${pageContext.request.contextPath}/images/photo_test01.jpg"
+							src="${pageContext.request.contextPath}/images<%=user.getSrc() %>"
 							alt="..." class="img-circle"><strong class="name"><%=user.getNickname()%></strong>
 					</div>
 					<div class="contents">
@@ -162,7 +163,7 @@
 						<div class="ReviewItem" style="">
 							<div>
 								<img
-									src="${pageContext.request.contextPath}/images/photo_test01.jpg"
+									src="${pageContext.request.contextPath}/images<%=user.getSrc() %>"
 									style="height: 28px; width: 28px;" class="img-circle"> <strong
 									class="name" style="font-size: 12px;"><%=userReply.getName()%></strong>
 								<span style="float: right; font-size: 13px;"><%=(String.valueOf(replyThread.getTime())).substring(0, 19)%></span>
@@ -232,7 +233,7 @@
 						<div class="ReplyUserItem">
 							<div>
 								<img
-									src="${pageContext.request.contextPath}/images/photo_test01.jpg"
+									src="${pageContext.request.contextPath}/images<%=user.getSrc() %>"
 									style="height: 28px; width: 28px;" class="img-circle"> <strong
 									class="name" style="font-size: 12px;"><%=fromUser.getName() %>
 									&nbsp;&nbsp;回复&nbsp;&nbsp;<%=toUser.getName() %></strong> <span

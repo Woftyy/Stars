@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>天上星河-个人中心</title>
 <link
 	href="${pageContext.request.contextPath}/weblib/bootstrap/css/bootstrap.css"
 	rel="stylesheet">
@@ -25,6 +25,10 @@
 </style>
 </head>
 <body>
+<%
+	User user = (User)request.getAttribute("user");
+	
+	%>
 	<!-- 头部区域 -->
 	<header id="header">
 		<!-- <div class="topbar hidden-sm hidden-xs"> -->
@@ -57,20 +61,17 @@
 					<ul class="nav navbar-nav navbar-right hidden-sm">
 						<li><a
 							href="${pageContext.request.contextPath}/after/personalCenter"><img
-								src="${pageContext.request.contextPath}/images/photo_test01.jpg"
+								src="${pageContext.request.contextPath}/images<%=user.getSrc() %>"
 								alt="..." height="30px" width="30px" class="img-circle"></a></li>
-						<li><a href="#" class="btn btn-link btn-sm"
-							data-toggle="modal" data-target="#login_form">退出登录</a></li>
+						<li><a href="${pageContext.request.contextPath}" class="btn btn-link btn-sm"
+							>退出登录</a></li>
 					</ul>
 				</div>
 			</div>
 		</nav>
 	</header>
 	<!-- /头部区域 -->
-	<%
-	User user = (User)request.getAttribute("user");
 	
-	%>
 	<div class="container">
 		<!-- mainItem -->
 		<div id="mainItem">
@@ -80,7 +81,7 @@
 				<div
 					style="padding-top: 40px; padding-left: 100px; padding-right: 30px;">
 					<img
-						src="${pageContext.request.contextPath}/images/photo_test01.jpg"
+						src="${pageContext.request.contextPath}/images<%=user.getSrc() %>"
 						alt="..." height="120px" width="120px" class="img-circle"> <strong
 						style="padding-left: 20px; font-size: 23px;">昵称：<%=user.getNickname() %></strong>
 				</div>

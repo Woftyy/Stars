@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService{
 		user.setSex(sex);
 		user.setEmail(email);
 		user.setTime(time);
-		user.setSrc("a");
+		user.setSrc("photo_test01.jpg");
 		userMapper.add(user);
 	}
 	@Override
@@ -139,6 +139,14 @@ public class UserServiceImpl implements UserService{
     	   users.add(user);
        }
 		return users;
+	}
+	/* (non-Javadoc)
+	 * @see com.stars.service.UserService#updateProfile(com.stars.entity.User)
+	 */
+	@Override
+	public void updateProfile(User user) {
+		// TODO Auto-generated method stub
+		userMapper.updateProfile(user);
 	}
 
 

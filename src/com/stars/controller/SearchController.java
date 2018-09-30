@@ -42,10 +42,12 @@ public class SearchController {
 		List<Thread> threads = threadService.searchThroughTitleAndContent("%"+content+"%");
 		List<User> users  = new ArrayList<User>();
 		List<Forum> forums  = new ArrayList<Forum>();
+		User user = userService.getById((int)request.getSession().getAttribute("uid"));
 		for(int i=0; i<threads.size(); i++) {
 			users.add(userService.getById(threads.get(i).getUid()));
 			forums.add(forumService.getById(threads.get(i).getFid()));
 		}
+		model.addAttribute("user",user);
 		 model.addAttribute("threads",threads);
 		 model.addAttribute("users",users);
 		 model.addAttribute("forums",forums);
