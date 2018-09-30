@@ -36,9 +36,7 @@
 					<div class="ContentItem"
 						onclick="javascript:window.open('${pageContext.request.contextPath}/after/reading?uid=&tid=%>','_blank')">
 						<strong class="title">tittle</strong>
-						<%-- 	<% System.out.println("alreadyuid="+user.getId()); 
-					System.out.println("alreadyuname="+user.getName()); 
-					%> --%>
+					
 						<p></p>
 						<button type="button" class="comment_button">
 							<span class="glyphicon glyphicon-comment" aria-hidden="true">18条评论</span>

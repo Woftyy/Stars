@@ -16,9 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.stars.entity.ReplyThread;
 import com.stars.entity.Thread;
+import com.stars.entity.Thumb;
 import com.stars.entity.User;
 import com.stars.service.ReplyThreadService;
 import com.stars.service.ThreadService;
+import com.stars.service.ThumbService;
 import com.stars.service.UserService;
 
 
@@ -32,6 +34,9 @@ public class ReplyController {
 	private UserService userService;
 	@Autowired
 	private ThreadService threadService;
+	@Autowired
+	private ThumbService thumbService;
+	
 	/**处理评论
 	 * @param content
 	 * @param tid
@@ -88,4 +93,20 @@ public class ReplyController {
 			model.addAttribute("replyUserList",replyUserList);
 		  replyThreadService.add(fromUid,toUid,tid, content);
 		}
+	
+	
+	/**删除评论
+	 * @param rid
+	 * @return
+	 * 2018-09-29 11:36:47
+	 */
+	@RequestMapping("after/doDeleteReply")
+	public String doDeleteReply(@RequestParam("rid")int rid) {
+		System.out.println("访问了doDeleteReply");
+		thumbService.deleteByrid(rid);
+		replyThreadService.delete(rid);
+		
+	 return "after/center/personalCenter";
+	}
+	
 }

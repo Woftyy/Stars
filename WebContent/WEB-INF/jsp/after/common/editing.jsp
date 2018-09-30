@@ -93,7 +93,7 @@
       }
       editor.create()
       // 初始化 textarea 的值
-      $text1.val(editor.txt.text())
+      $text.val(editor.txt.text())
       
 	
 function toSearch(){

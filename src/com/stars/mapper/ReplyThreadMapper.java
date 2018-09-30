@@ -40,4 +40,6 @@ public interface ReplyThreadMapper {
 	 * 2018-09-28 09:24:01
 	 */
 	public List<ReplyThread> getReplyList(int tid);
+	
+    public List<ReplyThread> getReplyThreadByfromUid(int fromUid);
 }

@@ -28,19 +28,20 @@
 </head>
 <body>
 <%
-      List<Thread> threads =  ( List<Thread>) request.getAttribute("threads");
-Thread thread= new Thread();
-   User user = (User)request.getAttribute("user");
-for (int i = threads.size()-1; i>=0 ; i--) {
+       List<Thread> threads =  ( List<Thread>) request.getAttribute("threads");
+      Thread thread= new Thread();
+     User user = (User)request.getAttribute("user");
+    for (int i = 0; i<threads.size() ; i++) {
 	thread = threads.get(i);
+	
 %>
 
-	<div class="Card Card LeftItem">
+	<div class="Card  LeftItem">
 					<div class="UserItem">
 						<img
 							src="${pageContext.request.contextPath}/images/photo_test01.jpg"
 							alt="..." class="img-circle"><strong class="name"><%=user.getNickname() %></strong><span
-							style="position: relative; left: 400px;">发表于<%=(String.valueOf(thread.getTime())).substring(0,19) %></span>
+							style="position: relative; left: 400px;"><%=(String.valueOf(thread.getTime())).substring(0,19) %></span>
 					</div>
 
 					<div class="ContentItem"

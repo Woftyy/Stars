@@ -1,24 +1,42 @@
 package com.stars.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.stars.entity.Forum;
+import com.stars.entity.ReplyThread;
 import com.stars.entity.Thread;
 import com.stars.entity.User;
 import com.stars.service.ForumService;
+import com.stars.service.ReplyThreadService;
 import com.stars.service.ThreadService;
 import com.stars.service.UserService;
 
@@ -31,6 +49,8 @@ public class UserController {
 	private ThreadService threadService;
 	@Autowired
 	private ForumService forumService;
+	@Autowired
+	private ReplyThreadService replyThreadService;
 	/**
 	 *  未登录的主页
 	 * @param model
@@ -102,6 +122,12 @@ public class UserController {
 	public String returnRegister(){
 		return "register";
 	}
+	/**判断名字是否重复
+	 * @param name
+	 * @param request
+	 * @return
+	 * 2018-09-29 14:39:30
+	 */
 	@RequestMapping(value="/register/checkName", method=RequestMethod.POST)
 	@ResponseBody
 	public String validate(@RequestParam("name")String name,HttpServletRequest request){
@@ -210,7 +236,17 @@ public class UserController {
 	 */
 	@RequestMapping("after/center/comments")
 	public String personalCenterComment(Model model, HttpServletRequest request) {
+		int fromUid = (int) request.getSession().getAttribute("uid");
+		List<ReplyThread> replyfromUidLists = replyThreadService.getReplyThreadByfromUid(fromUid);
+		List<Thread> whereFromThreads = new ArrayList<Thread>();
+		User user= userService.getById(fromUid);
+		for (int i=0 ; i<replyfromUidLists.size();i++) {
+			whereFromThreads.add(threadService.getById(replyfromUidLists.get(i).getTid()));
+		}
 		
+		model.addAttribute("replyfromUidLists",replyfromUidLists);
+		model.addAttribute("whereFromThreads",whereFromThreads);
+		model.addAttribute("user",user);
 		return "after/center/comments";
 		
 	}
@@ -218,10 +254,88 @@ public class UserController {
 	 * @return
 	 * 2018-09-25 14:09:03
 	 */
-	@RequestMapping("after/center/collectionsr")
+	@RequestMapping("after/center/collections")
 	public String personalCenterColection(Model model, HttpServletRequest request) {
 		
 		return "after/center/collections";
 		
 	}
+	
+	/**编辑个人资料
+	 * @param model
+	 * @param request
+	 * @return
+	 * 2018-09-29 14:53:08
+	 */
+	@RequestMapping("after/editProfile")
+public String editProfile(Model model, HttpServletRequest request) {
+		
+		
+		return "after/center/editProfile";
+		
+	}
+	
+	@RequestMapping( "up_tx")
+    public void uploadFile(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("访问了");
+		   String savePath = request.getSession().getServletContext()
+	                .getRealPath("");
+	        //保存文件的路径
+	        savePath = savePath + "/upload/";
+	        File f1 = new File(savePath);
+	        System.out.println(savePath);
+	        //如果文件不存在,就新建一个
+	        if (!f1.exists()) {
+	            f1.mkdirs();
+	        }
+	        //这个是文件上传需要的类,具体去百度看看,现在只管使用就好
+	        DiskFileItemFactory fac = new DiskFileItemFactory();
+	        ServletFileUpload upload = new ServletFileUpload(fac);
+	        upload.setHeaderEncoding("utf-8");
+	        List fileList = null;
+	        try {
+	            fileList = upload.parseRequest(request);
+	        } catch (FileUploadException ex) {
+	        }
+	        //迭代器,搜索前端发送过来的文件
+	        Iterator<FileItem> it = fileList.iterator();
+	        String name = "";
+	        String extName = "";
+	        while (it.hasNext()) {
+	            FileItem item = it.next();
+	            //判断该表单项是否是普通类型
+	            if (!item.isFormField()) {
+	                name = item.getName();
+	                long size = item.getSize();
+	                String type = item.getContentType();
+	                System.out.println(size + " " + type);
+	                if (name == null || name.trim().equals("")) {
+	                    continue;
+	                }
+	                // 扩展名格式： extName就是文件的后缀,例如 .txt
+	                if (name.lastIndexOf(".") >= 0) {
+	                    extName = name.substring(name.lastIndexOf("."));
+	                }
+	                File file = null;
+	                do {
+	                    // 生成文件名：
+	                    name = UUID.randomUUID().toString();
+	                    file = new File(savePath + name + extName);
+	                } while (file.exists());
+	                File saveFile = new File(savePath + name + extName);
+	                try {
+	                    item.write(saveFile);
+	                } catch (Exception e) {
+	                    e.printStackTrace();
+	                }
+	            }
+	        }
+	        try {
+				response.getWriter().print(name + extName);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+}
+    
 }

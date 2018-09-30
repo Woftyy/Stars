@@ -28,4 +28,9 @@ public interface ReplyThreadService {
 	public List<ReplyThread> getReplyList(int tid);
 	
 	public void deleteBytid(int tid);
+	
+    public List<ReplyThread> getReplyThreadByfromUid(int fromUid);
+    
+	public void delete(int id);
+    
 }

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>个人中心-主题编辑</title>
 <link href="${pageContext.request.contextPath}/weblib/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/alreadyLogin.css" type="text/css">
@@ -74,12 +74,12 @@ thread = (Thread)request.getAttribute("thread") ;
 <br>
 <input type="text" class="form-control"  name="title" placeholder="请输入标题"  value="<%=thread.getTitle()%>">
 <br>
-<div id="editor"></div>
-<div style="display:none;"><textarea id="text" name="content" style="width:100%; height:200px;"></textarea></div>
+<div id="editor"><%=thread.getContent()%></div>
+<div style="display:none"><textarea id="text" name="content" style="width:100%; height:200px;"></textarea></div>
 <input type="text" style="display:none" name="uid" value="${uid}">
 <input type="hidden" name="tid" value="<%=thread.getId()%>">
 <br>
- <button type="submit" class="btn btn-default" >发布</button>
+ <button type="submit" class="btn btn-default" >确认修改</button>
 </form>
 </div>
 
@@ -93,6 +93,7 @@ thread = (Thread)request.getAttribute("thread") ;
 
 	  var E = window.wangEditor
       var editor = new E('#editor')
+	
       // 或者 var editor = new E( document.getElementById('editor') )
 	  var $text = $('#text')
 	  editor.customConfig.uploadImgShowBase64 = true
@@ -102,8 +103,7 @@ thread = (Thread)request.getAttribute("thread") ;
       }
       editor.create()
       // 初始化 textarea 的值
-       editor.txt.html('<%=thread.getContent()%>')
-      $text1.val(editor.txt.text())
+      $text.val(editor.txt.text());
       
 	
 function toSearch(){

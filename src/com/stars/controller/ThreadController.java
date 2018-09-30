@@ -85,11 +85,27 @@ public class ThreadController {
 		model.addAttribute("uid",uid);
 		Thread thread = threadService.getLatestThreadByUid(uid);
 		User user = userService.getById(uid);
-	
+		int tid = thread.getId();
+		//评论列表
+		List<ReplyThread> replyThreads = replyThreadService.getReviewList(tid);
+		//回复用户的列表
+		List<ReplyThread> replyUserList = replyThreadService.getReplyList(tid);
+		//评论主题的用户
+		List<User> users = userService.UserFromReviewsfromUid(tid);
+		//回复用户的用户
+		List<User> replyUsers = userService.UserFromReplyfromUid(tid);
+		//被回复的用户
+		List<User> beRepliedUsers = userService.UserFromReplytoUid(tid);
 		
 		session.setAttribute("thread", thread);
 		session.setAttribute("user", user);
 		model.addAttribute("thread",thread);
+		model.addAttribute("replyThreads",replyThreads);
+		model.addAttribute("replyUserList",replyUserList);
+		model.addAttribute("user",user);
+		model.addAttribute("users",users);
+		model.addAttribute("replyUsers",replyUsers);
+		model.addAttribute("beRepliedUsers",beRepliedUsers);
 
 		
 		return "after/common/reading";
@@ -235,6 +251,11 @@ public class ThreadController {
 	            replyThreadService.updateReplyThread(replyThread);
 	        }
 	}
+	/**删除主题
+	 * @param tid
+	 * @return
+	 * 2018-09-29 11:32:16
+	 */
 	@RequestMapping("after/doDeleteThread")
 	public String doDeleteThread(@RequestParam("tid")int tid) {
 		List<ReplyThread> replyThreads = replyThreadService.getReplyThreadBytid(tid);

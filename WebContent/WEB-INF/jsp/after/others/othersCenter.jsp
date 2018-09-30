@@ -1,4 +1,3 @@
-<%@page import="com.stars.entity.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -67,10 +66,6 @@
 		</nav>
 	</header>
 	<!-- /头部区域 -->
-	<%
-	User user = (User)request.getAttribute("user");
-	
-	%>
 	<div class="container">
 		<!-- mainItem -->
 		<div id="mainItem">
@@ -82,12 +77,12 @@
 					<img
 						src="${pageContext.request.contextPath}/images/photo_test01.jpg"
 						alt="..." height="120px" width="120px" class="img-circle"> <strong
-						style="padding-left: 20px; font-size: 23px;">昵称：<%=user.getNickname() %></strong>
+						style="padding-left: 20px; font-size: 23px;">用户名在这</strong>
 				</div>
 
 				<div class="btn-group" role="group">
 					<button type="button" class="btn btn-default"
-						style="position: relative; left: 888px;" onclick="window.location='${pageContext.request.contextPath}/after/editProfile'">编辑个人资料</button>
+						style="position: relative; left: 888px;">编辑个人资料</button>
 				</div>
 
 

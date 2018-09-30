@@ -42,7 +42,7 @@
 	       update thread SET reply_num = reply_num+1 WHERE id = #{id}
 	    </update>
 	      <select id="searchThroughTitleAndContent"  resultType="Thread" >
-	           SELECT * from thread where title like #{content} or content like #{content}
+	           SELECT * from thread where title like #{content} 
 	    </select>
 	   
 	</mapper>

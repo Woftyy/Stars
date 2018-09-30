@@ -135,11 +135,6 @@
 			<!-- 右边卡片 -->
 			<div class="RightItemContainer">
 				<div class="Card RightItem">
-
-					<div class="">
-						<strong>关于作者</strong>
-
-					</div>
 				</div>
 				<div class="Card RightItem">
 					<div class="hotForum">
