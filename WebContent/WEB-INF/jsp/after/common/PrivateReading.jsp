@@ -163,9 +163,9 @@
 						<div class="ReviewItem" style="">
 							<div>
 								<img
-									src="${pageContext.request.contextPath}/images<%=user.getSrc() %>"
+									src="${pageContext.request.contextPath}/images<%=userReply.getSrc() %>"
 									style="height: 28px; width: 28px;" class="img-circle"> <strong
-									class="name" style="font-size: 12px;"><%=userReply.getName()%></strong>
+									class="name" style="font-size: 12px;"><a href="${pageContext.request.contextPath}/after/othersCenter?otherUid=<%=userReply.getId()%>"><%=userReply.getNickname()%></a></strong>
 								<span style="float: right; font-size: 13px;"><%=(String.valueOf(replyThread.getTime())).substring(0, 19)%></span>
 							</div>
 							<div>
@@ -175,7 +175,7 @@
 								<input type="hidden" value="<%=replyThread.getId()%>"
 									id="replyId<%=i%>"> <input type="hidden" value="0"
 									id="countId<%=i%>">
-								<button type="button" class="btn btn-default btn-sm"
+							<button type="button" class="btn btn-default btn-sm"
 									style="border: 0;" onclick="doThumb(<%=i%>)">
 									<span id="num<%=i%>" class="glyphicon glyphicon-thumbs-up"
 										aria-hidden="true"><%=replyThread.getNum()%></span>
@@ -233,10 +233,11 @@
 						<div class="ReplyUserItem">
 							<div>
 								<img
-									src="${pageContext.request.contextPath}/images<%=user.getSrc() %>"
+									src="${pageContext.request.contextPath}/images<%=fromUser.getSrc() %>"
 									style="height: 28px; width: 28px;" class="img-circle"> <strong
-									class="name" style="font-size: 12px;"><%=fromUser.getName() %>
-									&nbsp;&nbsp;回复&nbsp;&nbsp;<%=toUser.getName() %></strong> <span
+									class="name" style="font-size: 12px;"><a href="${pageContext.request.contextPath}/after/othersCenter?otherUid=<%=fromUser.getId()%>">
+									<%=fromUser.getNickname()%></a>
+									&nbsp;&nbsp;回复&nbsp;&nbsp;<a href="${pageContext.request.contextPath}/after/othersCenter?otherUid=<%=toUser.getId()%>"><%=toUser.getNickname()%></a></strong> <span
 									style="float: right; font-size: 13px;"><%=(String.valueOf(replyUser.getTime())).substring(0, 19) %></span>
 							</div>
 							<div>
@@ -297,26 +298,20 @@
 
 			<!-- 右边卡片 -->
 			<div class="RightItemContainer">
-				<div class="Card RightItem">
-
-					<div class="">
-						<strong>关于作者</strong>
-
-					</div>
-				</div>
+			
 				<div class="Card RightItem">
 					<div class="hotForum">
 						<strong>热门板块</strong>
 						<hr />
 						<ul>
-							<li><p>
-									<a href="#">科普讨论</a>
+								<li><p>
+									<a href="${pageContext.request.contextPath}/after/science">科普讨论</a>
 								</p></li>
 							<li><p>
-									<a href="#">摄影天地</a>
+									<a href="${pageContext.request.contextPath}/after/photograph">摄影天地</a>
 								</p></li>
 							<li><p>
-									<a href="#">电影宇宙</a>
+									<a href="${pageContext.request.contextPath}/after/movie">电影宇宙</a>
 								</p></li>
 						</ul>
 					</div>

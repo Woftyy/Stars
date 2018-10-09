@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService{
 		user.setSex(sex);
 		user.setEmail(email);
 		user.setTime(time);
-		user.setSrc("photo_test01.jpg");
+		user.setSrc("/photo_test01.jpg");
 		userMapper.add(user);
 	}
 	@Override

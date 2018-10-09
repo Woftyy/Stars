@@ -61,7 +61,7 @@
 							</form>
 						</li>
 					</ul>
-					<%User user1 = (User)request.getAttribute("uid"); %>
+					<%User user1 = (User)request.getAttribute("user"); %>
 					<ul class="nav navbar-nav navbar-right hidden-sm">
 						<li><a
 							href="${pageContext.request.contextPath}/after/personalCenter"><img
@@ -135,21 +135,20 @@
 			<!-- /左边卡片 -->
 			<!-- 右边卡片 -->
 			<div class="RightItemContainer">
-				<div class="Card RightItem">
-				</div>
+				
 				<div class="Card RightItem">
 					<div class="hotForum">
 						<strong>热门板块</strong>
 						<hr />
 						<ul>
-							<li><p>
-									<a href="#">科普讨论</a>
+						<li><p>
+									<a href="${pageContext.request.contextPath}/after/science">科普讨论</a>
 								</p></li>
 							<li><p>
-									<a href="#">摄影天地</a>
+									<a href="${pageContext.request.contextPath}/after/photograph">摄影天地</a>
 								</p></li>
 							<li><p>
-									<a href="#">电影宇宙</a>
+									<a href="${pageContext.request.contextPath}/after/movie">电影宇宙</a>
 								</p></li>
 						</ul>
 					</div>

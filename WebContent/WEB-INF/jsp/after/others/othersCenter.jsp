@@ -1,3 +1,4 @@
+<%@page import="com.stars.entity.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -24,11 +25,17 @@
 </style>
 </head>
 <body>
+<%
+      User LoginUser = (User) request.getAttribute("LoginUser");
+  
+
+
+%>
 	<!-- 头部区域 -->
 	<header id="header">
 		<!-- <div class="topbar hidden-sm hidden-xs"> -->
-		<nav class="navbar navbar-itcast navbar-static-top" data-spy="affix"
-			data-offset-top="260" data-offset-bottom="200">
+		<nav class="navbar navbar-itcast navbar-static-top" 
+			>
 			<div class="container">
 				<button id="btn" type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#nav_list"
@@ -56,7 +63,7 @@
 					<ul class="nav navbar-nav navbar-right hidden-sm">
 						<li><a
 							href="${pageContext.request.contextPath}/after/personalCenter"><img
-								src="${pageContext.request.contextPath}/images/photo_test01.jpg"
+								src="${pageContext.request.contextPath}/images<%=LoginUser.getSrc() %>"
 								alt="..." height="30px" width="30px" class="img-circle"></a></li>
 						<li><a href="#" class="btn btn-link btn-sm"
 							data-toggle="modal" data-target="#login_form">退出登录</a></li>
@@ -66,25 +73,49 @@
 		</nav>
 	</header>
 	<!-- /头部区域 -->
+	<%
+	User user = (User)request.getAttribute("user");
+	
+	
+	%>
 	<div class="container">
 		<!-- mainItem -->
 		<div id="mainItem">
 			<!-- top card -->
-			<div class="top Card" style="height: 200px;">
+			<div class="top Card" style="height: 100%;">
 
 				<div
 					style="padding-top: 40px; padding-left: 100px; padding-right: 30px;">
 					<img
 						src="${pageContext.request.contextPath}/images/photo_test01.jpg"
 						alt="..." height="120px" width="120px" class="img-circle"> <strong
-						style="padding-left: 20px; font-size: 23px;">用户名在这</strong>
+						style="padding-left: 20px; font-size: 23px;"><%=user.getNickname() %></strong>
 				</div>
-
-				<div class="btn-group" role="group">
-					<button type="button" class="btn btn-default"
-						style="position: relative; left: 888px;">编辑个人资料</button>
-				</div>
-
+                 <div class="panel" style=""> 
+  
+     <div id="collapseOne" class="panel-collapse collapse"> 
+     <div class="panel-body"> 
+         <div>
+         <table style="position:relative;left:250px;width:500px;padding:20px;">
+         <tr style="">
+         <td style="width:50px;padding-bottom:20px;"><strong>性别</strong></td>
+           <td style="width:100px;font-color:grey;padding-bottom:20px;font-size:15px;"><%=user.getSex() %></td>
+         </tr>
+           <tr>
+         <td style="width:50px;"><strong>email</strong></td>
+           <td style="width:100px;font-color:grey;"><%=user.getEmail() %></td>
+         </tr>
+         </table>
+         </div>
+     </div> 
+     </div> 
+        <div class="panel-heading" style="position:relative;left:500px;"> 
+     <a data-toggle="collapse" data-parent="#accordion"  
+        href="#collapseOne" class="myCollapse" onclick="changeSpan()"> 
+                             <span id="change" class="glyphicon glyphicon-chevron-down" aria-hidden="true">点击查看资料 </span> 
+     </a> 
+     </div> 
+     </div>
 
 			</div>
 			<!-- /top card -->
@@ -94,7 +125,7 @@
 				<div class="Card LeftItem ">
 					<ol class="breadcrumb">
 						<li class="active"><a href="#" id="a1">发布</a></li>
-						<li><a href="#" id="a2">评论</a></li>
+						<li><a href="#" id="a2"></a></li>
 					</ol>
 				</div>
 				<!--card leftItem -->
@@ -108,21 +139,24 @@
 			<!-- leftITem -->
 			<!-- RightItem -->
 			<div class="RightItemContainer">
+			
+			
 				<div class="Card RightItem">
-				</div>
-				<div class="Card RightItem data">
-					<button>
-						<div>
-							<div>总访问数</div>
-							<div></div>
-						</div>
-					</button>
-					<button class="rightButton">
-						<div>
-							<div>被收藏数</div>
-							<div>421</div>
-						</div>
-					</button>
+					<div class="hotForum">
+						<strong>热门板块</strong>
+						<hr />
+						<ul>
+					<li><p>
+									<a href="${pageContext.request.contextPath}/after/science">科普讨论</a>
+								</p></li>
+							<li><p>
+									<a href="${pageContext.request.contextPath}/after/photograph">摄影天地</a>
+								</p></li>
+							<li><p>
+									<a href="${pageContext.request.contextPath}/after/movie">电影宇宙</a>
+								</p></li>
+						</ul>
+					</div>
 				</div>
 
 			</div>
@@ -141,21 +175,45 @@
 	
 	 $(document).ready(function(){
          //页面加载的时候，内容框默认显示 a.html
-         $('#con').load('${pageContext.request.contextPath}/after/center/posts');
+         $('#con').load('${pageContext.request.contextPath}/after/others/posts');
          //单击 a 链接，加载 a.html
          $("#a1").click(function(){
-             $('#con').load('${pageContext.request.contextPath}/after/center/posts');
+             $('#con').load('${pageContext.request.contextPath}/after/others/posts');
              
          });
          //单击 b 链接，加载 b.html
          $("#a2").click(function(){
-             $('#con').load('${pageContext.request.contextPath}/after/center/comments');
+             $('#con').load('${pageContext.request.contextPath}/after/others/comments');
          });
        
      });
 	 
-
+	 $(function () { 
+		    //修复collapse不能正常折叠的问题 
+		    $(".myCollapse").click(function () {// .myCollapse 根据实际情况 
+		        var itemHref = $(this).attr("href"); 
+		        var itemClass = $(itemHref).attr("class"); 
+		        if (itemClass === "panel-collapse collapse") { 
+		            $(itemHref).attr("class", "panel-collapse collapse in").css("height", "auto"); 
+		        } else { 
+		            $(itemHref).attr("class", "panel-collapse collapse").css("height", "0px"); 
+		        } 
+		        return false;//停止运行bootstrap自带的函数 
+		    }); 
+		}) 
 	
+		function changeSpan(){
+		 var itemClass = $("#change").attr("class");
+		 var itemHtml= $("#change").html();
+		 if(itemClass=="glyphicon glyphicon-chevron-down"){
+			 $("#change").attr("class","glyphicon glyphicon-chevron-up")
+			 $("#change").html("点击收起");
+		 }else{
+			 $("#change").attr("class","glyphicon glyphicon-chevron-down")
+			 $("#change").html("点击查看资料");
+		 }
+		 
+	 }
 	</script>
 	
 

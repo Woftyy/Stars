@@ -20,6 +20,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.expression.spel.ast.FunctionReference;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -68,9 +69,13 @@ public class UserController {
 			request.getSession().invalidate();
 		}
 
+		List<Forum> forums = new ArrayList<Forum>();
 		List<Thread> threads = threadService.list();
-		List<Forum> forums = forumService.getforumByThreadFid();
-		List<User> users = userService.getUserByThreadUid();
+		List<User> users = new ArrayList<User>();
+		for(int i=0;i<threads.size();i++) {
+		forums.add(forumService.getById(threads.get(i).getFid()));
+		users.add(userService.getById(threads.get(i).getUid()));
+		}
 		model.addAttribute("threads", threads);
 		model.addAttribute("forums", forums);
 		model.addAttribute("users", users);
@@ -103,13 +108,18 @@ public class UserController {
 		if (userService.checkLogin(name, password)) {
 			User user = new User();
 			user = userService.getUserByName(name);
+			List<Forum> forums = new ArrayList<Forum>();
 			List<Thread> threads = threadService.list();
-			List<Forum> forums = forumService.getforumByThreadFid();
-			List<User> users = userService.getUserByThreadUid();
+			List<User> users = new ArrayList<User>();
+			for(int i=0;i<threads.size();i++) {
+			forums.add(forumService.getById(threads.get(i).getFid()));
+			users.add(userService.getById(threads.get(i).getUid()));
+			}
 			HttpSession session = request.getSession();
 			session.setAttribute("uid", user.getId());
 			session.setAttribute("user", user);
 			System.out.println("DoLogin--uid" + user.getId());
+			mav.addObject ("user", user);
 			mav.addObject("threads", threads);
 			mav.addObject("forums", forums);
 			mav.addObject("users", users);
@@ -185,9 +195,13 @@ public class UserController {
 
 	public String returnAlreadyLogin(Model model, HttpServletRequest request) {
         int id = (int) request.getSession().getAttribute("uid");
+    	List<Forum> forums = new ArrayList<Forum>();
 		List<Thread> threads = threadService.list();
-		List<Forum> forums = forumService.getforumByThreadFid();
-		List<User> users = userService.getUserByThreadUid();
+		List<User> users = new ArrayList<User>();
+		for(int i=0;i<threads.size();i++) {
+		forums.add(forumService.getById(threads.get(i).getFid()));
+		users.add(userService.getById(threads.get(i).getUid()));
+		}
 		User user = userService.getById(id);
 		model.addAttribute("user", user);
 		model.addAttribute("threads", threads);
@@ -206,9 +220,13 @@ public class UserController {
 	public String logout(Model model, HttpServletRequest request) {
 		request.getSession().setAttribute("account", null);
 		System.out.println("session为" + request.getSession() + "登出了");
+		List<Forum> forums = new ArrayList<Forum>();
 		List<Thread> threads = threadService.list();
-		List<Forum> forums = forumService.getforumByThreadFid();
-		List<User> users = userService.getUserByThreadUid();
+		List<User> users = new ArrayList<User>();
+		for(int i=0;i<threads.size();i++) {
+		forums.add(forumService.getById(threads.get(i).getFid()));
+		users.add(userService.getById(threads.get(i).getUid()));
+		}
 		model.addAttribute("threads", threads);
 		model.addAttribute("forums", forums);
 		model.addAttribute("users", users);
@@ -231,7 +249,7 @@ public class UserController {
 		return "after/center/personalCenter";
 
 	}
-
+	
 	/**
 	 * 个人中心发布
 	 * 
@@ -279,6 +297,65 @@ public class UserController {
 	public String personalCenterColection(Model model, HttpServletRequest request) {
 
 		return "after/center/collections";
+
+	}
+	/** 查看其它用户个人中心
+	 * @param model
+	 * @param otherUid
+	 * @param request
+	 * @return
+	 * 2018-10-09 09:55:14
+	 */
+	@RequestMapping("after/othersCenter")
+	public String othersCenter(Model model,@RequestParam ("otherUid") int otherUid, HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		int uid = (int) session.getAttribute("uid");
+		session.setAttribute("otherUid", otherUid);
+		List<Thread> threads = threadService.getPostByUid(otherUid);
+		User user = userService.getById(otherUid);
+		User LoginUser =userService.getById(uid);
+		model.addAttribute("threads", threads);
+		model.addAttribute("user", user);
+		model.addAttribute("LoginUser", LoginUser);
+		return "after/others/othersCenter";
+	}
+	/**其它用户发布
+	 * @param model
+	 * @param request
+	 * @return
+	 * 2018-10-09 09:58:56
+	 */
+	@RequestMapping("after/others/posts")
+	public String othersCenterPost(Model model, HttpServletRequest request) {
+		int otherUid = (int) request.getSession().getAttribute("otherUid");
+		List<Thread> threads = threadService.getPostByUid(otherUid);
+		User user = userService.getById(otherUid);
+		model.addAttribute("threads", threads);
+		model.addAttribute("user", user);
+		return "after/others/posts";
+
+	}
+	
+	/** 其它用户评论
+	 * @param model
+	 * @param request
+	 * @return
+	 * 2018-10-09 10:05:03
+	 */
+	@RequestMapping("after/others/comments")
+	public String othersCenterComment(Model model, HttpServletRequest request) {
+		int otherUid = (int) request.getSession().getAttribute("otherUid");
+		List<ReplyThread> replyfromUidLists = replyThreadService.getReplyThreadByfromUid(otherUid);
+		List<Thread> whereFromThreads = new ArrayList<Thread>();
+		User user = userService.getById(otherUid);
+		for (int i = 0; i < replyfromUidLists.size(); i++) {
+			whereFromThreads.add(threadService.getById(replyfromUidLists.get(i).getTid()));
+		}
+
+		model.addAttribute("replyfromUidLists", replyfromUidLists);
+		model.addAttribute("whereFromThreads", whereFromThreads);
+		model.addAttribute("user", user);
+		return "after/others/comments";
 
 	}
 

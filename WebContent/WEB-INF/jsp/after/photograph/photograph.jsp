@@ -17,7 +17,7 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no">
 <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-<title>天上星河-科普讨论</title>
+<title>天上星河-摄影天地</title>
 <!-- 引入Bootstrap核心样式表文件 -->
 <link href="${pageContext.request.contextPath}/weblib/bootstrap/css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" type="text/css">
@@ -94,11 +94,11 @@
 				<div class="media">
 					<div class="media-left">
 						<a href="#"> <img class="media-object img-circle"
-							src="${pageContext.request.contextPath}/images/science.jpg" alt="...">
+							src="${pageContext.request.contextPath}/images/photography.jpg" alt="...">
 						</a>
 					</div>
 					<div class="media-body">
-						<h2 class="media-heading">科普讨论</h2>
+						<h2 class="media-heading"><%=forum.getName() %></h2>
 						<%=forum.getIntroduction() %>
 					</div>
 				</div>
@@ -176,18 +176,18 @@
 	
 	 $(document).ready(function(){
          //页面加载的时候，内容框默认显示 a.html
-         $('#con').load('${pageContext.request.contextPath}/after/science_theme');
+         $('#con').load('${pageContext.request.contextPath}/after/photograph_theme');
          //单击 a 链接，加载 a.html
          $("#a1").click(function(){
-             $('#con').load('${pageContext.request.contextPath}/after/science_theme');
+             $('#con').load('${pageContext.request.contextPath}/after/photograph_theme');
              
          });
          //单击 b 链接，加载 b.html
          $("#a2").click(function(){
-             $('#con').load('${pageContext.request.contextPath}/after/science_hot');
+             $('#con').load('${pageContext.request.contextPath}/after/photograph_hot');
          });
          $("#a3").click(function(){
-             $('#con').load('${pageContext.request.contextPath}/after/science_reply');
+             $('#con').load('${pageContext.request.contextPath}/after/photograph_reply');
          });
      });
 	 

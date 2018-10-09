@@ -25,10 +25,7 @@
         	thread = threads.get(i);
     %>
     <div class="item" >
-  	  <div style="float: right;"><button type="button" class="comment_button" data-toggle="modal" data-target="#deleteComfirm<%=i%>">
-					<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-				</button>
-				</div>
+  	
        	<div>
        	<!--  -->
 	  <h5><strong>所在主题：<a onclick="javascript:window.open('${pageContext.request.contextPath}/after/reading?uid=${uid}&tid=<%=thread.getId()%>','_blank')"><%=thread.getTitle() %></a></strong></h5>
@@ -37,7 +34,7 @@
 								<img
 									src="${pageContext.request.contextPath}/images<%=user.getSrc() %>"
 									style="height: 28px; width: 28px;" class="img-circle"> <strong
-									class="name" style="font-size: 12px;"><%=user.getNickname()%> &nbsp;&nbsp;(我)</strong>
+									class="name" style="font-size: 12px;"><%=user.getNickname()%> </strong>
 								<span style="float: right; font-size: 13px;"><%=(String.valueOf(replyThread.getTime())).substring(0,19) %></span>
 							</div>
 							<div>
@@ -45,25 +42,7 @@
 							</div>
     </div>
     <hr>
-        	<!-- 弹出框 -->	
-			<div id="deleteComfirm<%=i %>" class="modal fade" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title">警告</h4>
-      </div>
-      <div class="modal-body">
-        <p>确定删除吗？</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-        <button  class="btn btn-primary" onclick="window.location='${pageContext.request.contextPath}/after/doDeleteReply?rid=<%=replyThread.getId() %>'">确定</button>
-      </div>
-    </div><!-- /.modal-content -->
-  </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
-<!-- /弹出框 -->	
+   	
     
     <% } %>
     

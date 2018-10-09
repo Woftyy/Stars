@@ -32,8 +32,8 @@
 	<!-- 头部区域 -->
 	<header id="header">
 		<!-- <div class="topbar hidden-sm hidden-xs"> -->
-		<nav class="navbar navbar-itcast navbar-static-top" data-spy="affix"
-			data-offset-top="260" data-offset-bottom="200">
+		<nav class="navbar navbar-itcast navbar-static-top" 
+			>
 			<div class="container">
 				<button id="btn" type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#nav_list"
@@ -115,28 +115,27 @@
 			<!-- RightItem -->
 			<div class="RightItemContainer">
 				<div class="Card RightItem">
-				</div>
-				<div class="Card RightItem data">
-					<button>
-						<div>
-							<div>总访问数</div>
-							<div></div>
-						</div>
-					</button>
-					<button class="rightButton">
-						<div>
-							<div>被收藏数</div>
-							<div>421</div>
-						</div>
-					</button>
+					<div class="hotForum">
+						<strong>热门板块</strong>
+						<hr />
+						<ul>
+					<li><p>
+									<a href="${pageContext.request.contextPath}/after/science">科普讨论</a>
+								</p></li>
+							<li><p>
+									<a href="${pageContext.request.contextPath}/after/photograph">摄影天地</a>
+								</p></li>
+							<li><p>
+									<a href="${pageContext.request.contextPath}/after/movie">电影宇宙</a>
+								</p></li>
+						</ul>
+					</div>
 				</div>
 
 			</div>
 		</div>
 		<!-- /mainItem -->
 	</div>
-
-
 	<script
 		src="${pageContext.request.contextPath}/weblib/jquery/jquery.js"></script>
 	<script

@@ -69,7 +69,10 @@
 							</form>
 						</li>
 					</ul>
-					<%  User user1 = (User)request.getSession().getAttribute("user"); %>
+					<%!  User user1=new User(); %>
+					<%
+					user1 = (User)request.getAttribute("user");
+					System.out.println("AlreadyLogin--url--"+user1.getSrc()); %>
 					<ul class="nav navbar-nav navbar-right hidden-sm">
 						<li><a href="${pageContext.request.contextPath}/after/personalCenter">
 						<img src="${pageContext.request.contextPath}/images<%=user1.getSrc() %>" 
@@ -138,7 +141,8 @@
 				<div class="UserItem">
 					<img
 						src="${pageContext.request.contextPath}/images<%=user.getSrc()%>"
-						alt="..." class="img-circle"><strong class="name"><%=user.getNickname()%></strong>
+						alt="..." class="img-circle"><strong class="name">
+						<a href="${pageContext.request.contextPath}/after/othersCenter?otherUid=<%=user.getId()%>"><%=user.getNickname()%></a></strong>
 				</div>
 
 				<div class="ContentItem"
@@ -180,15 +184,15 @@
 					<strong>热门板块</strong>
 					<hr />
 					<ul>
-						<li><p>
-								<a href="${pageContext.request.contextPath}/after/science">科普讨论</a>
-							</p></li>
-						<li><p>
-								<a href="#">摄影天地</a>
-							</p></li>
-						<li><p>
-								<a href="#">电影宇宙</a>
-							</p></li>
+								<li><p>
+									<a href="${pageContext.request.contextPath}/after/science">科普讨论</a>
+								</p></li>
+							<li><p>
+									<a href="${pageContext.request.contextPath}/after/photograph">摄影天地</a>
+								</p></li>
+							<li><p>
+									<a href="${pageContext.request.contextPath}/after/movie">电影宇宙</a>
+								</p></li>
 					</ul>
 				</div>
 			</div>

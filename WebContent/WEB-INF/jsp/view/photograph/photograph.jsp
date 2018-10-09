@@ -1,3 +1,9 @@
+<%@page import="com.alibaba.druid.sql.visitor.functions.Substring"%>
+<%@page import="com.stars.entity.Forum"%>
+<%@page import="com.stars.entity.User"%>
+<%@page import="com.stars.entity.Thread"%>
+<%@page import="java.util.List"%>
+<%@page import="com.stars.service.ThreadService"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -48,9 +54,9 @@
 						<li>
 							<div class="input-group">
 								<input type="text" class="form-control"
-									placeholder="Search for..."> <span
+									placeholder="输入关键字搜索"> <span
 									class="input-group-btn">
-									<button class="btn btn-default" type="button">Go!</button>
+									<button class="btn btn-default" type="button" onclick="window.location.href='${pageContext.request.contextPath}/login'">搜索</button>
 								</span>
 							</div> <!-- /input-group -->
 						</li>
@@ -65,54 +71,49 @@
 	</header>
 	<!-- /头部区域 -->
 	<!-- 主要内容 -->
+		<%
+		  List<Thread> threads = (List<Thread>) request.getAttribute("threads");
+				List<User> users = (List<User>) request.getAttribute("users");
+				Forum forum = (Forum) request.getAttribute("forum");
+		%>
 	<div class="container">
 		<div id="mainItem">
 			<!-- 左边卡片 -->
+			<div class="LeftItemContainer">
 			<!-- 介绍 -->
 			<div class="Card LeftItem introduction">
 				<div class="media">
 					<div class="media-left">
 						<a href="#"> <img class="media-object img-circle"
-							src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="...">
+							src="${pageContext.request.contextPath}/images/photography.jpg" alt="...">
 						</a>
 					</div>
 					<div class="media-body">
-						<h2 class="media-heading">科普讨论</h2>
-						...
+						<h2 class="media-heading"><%=forum.getName() %></h2>
+						<%=forum.getIntroduction() %>
 					</div>
 				</div>
-
 			</div>
-			
 <div class="Card LeftItem TagButton">
 	<ul class="nav nav-pills nav-justified">
 	 <li role="presentation" class="active"><a href="#" id="a1">最新主题</a></li>
-	 <li role="presentation"><a href="#"  id="a2">最热</a></li>
-  <li role="presentation" ><a href="#" id="a3">最新回复</a></li>
- 
-  
+	 <li role="presentation"><a href="#"  id="a2">最多查看</a></li>
+  <li role="presentation" ><a href="#" id="a3">最多评论</a></li>
 </ul>
-
-
 </div>
-<div  class="LeftItem" >
-<div id="editor">
-
-
-</div>
-<div></div>
-</div>
-
 			<div id="con" >
-			
 			</div>
-
+</div>
+		<!-- /左边卡片 -->
+	
+		
 		
 			<!-- 右边卡片 -->
+			<div class="RightItemContainer">
 			<div class="Card RightItem ">
 
 				<div class="post">
-				<button onclick="CreateEditor()">
+				<button onclick="window.location.href='${pageContext.request.contextPath}/login'">
 				<span class="glyphicon glyphicon-pencil"> </span><strong>发帖</strong>
 				</button>
 					
@@ -122,30 +123,15 @@
 				<button>
 					<div>
 						<div>总访问数</div>
-						<div>21321421</div>
+						<div><%=forum.getViews() %></div>
 					</div>
 				</button>
 				<button class="rightButton">
 					<div>
 						<div>主题数</div>
-						<div>421</div>
+						<div><%=threads.size() %></div>
 					</div>
 				</button>
-			</div>
-			<div class="Card RightItem">
-				<div class="positive">
-					<strong>活跃用户</strong>
-					<hr />
-					<ul>
-						<li><img class="img-circle"
-							src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="...">名字在这
-						</li>
-						<li><img class="img-circle"
-							src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="...">名字在这</li>
-						<li><img class="img-circle"
-							src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="...">名字在这</li>
-					</ul>
-				</div>
 			</div>
 			<div class="Card RightItem">
 				<div class="hotForum">
@@ -156,13 +142,14 @@
 								<a href="${pageContext.request.contextPath}/view/science">科普讨论</a>
 							</p></li>
 						<li><p>
-								<a href="#">摄影天地</a>
+								<a href="${pageContext.request.contextPath}/view/photograph">摄影天地</a>
 							</p></li>
 						<li><p>
-								<a href="#">电影宇宙</a>
+								<a href="${pageContext.request.contextPath}/view/movie">电影宇宙</a>
 							</p></li>
 					</ul>
 				</div>
+			</div>
 			</div>
 			<!-- /右边卡片 -->
 		</div>
@@ -173,25 +160,24 @@
 	<script src="${pageContext.request.contextPath}/weblib/jquery/jquery.js"></script>
 	<script src="${pageContext.request.contextPath}/weblib/bootstrap/js/bootstrap.js"></script>
 	<script src="${pageContext.request.contextPath}/js/main.js"></script>
-	<script src="${pageContext.request.contextPath}/js/wangEditor.min.js"></script>
 	<script>
 
 	
 	
 	 $(document).ready(function(){
          //页面加载的时候，内容框默认显示 a.html
-         $('#con').load('${pageContext.request.contextPath}/view/science_theme');
+         $('#con').load('${pageContext.request.contextPath}/view/photograph_theme');
          //单击 a 链接，加载 a.html
          $("#a1").click(function(){
-             $('#con').load('${pageContext.request.contextPath}/view/science_theme');
+             $('#con').load('${pageContext.request.contextPath}/view/photograph_theme');
              
          });
          //单击 b 链接，加载 b.html
          $("#a2").click(function(){
-             $('#con').load('${pageContext.request.contextPath}/view/science_hot');
+             $('#con').load('${pageContext.request.contextPath}/view/photograph_hot');
          });
          $("#a3").click(function(){
-             $('#con').load('${pageContext.request.contextPath}/view/science_reply');
+             $('#con').load('${pageContext.request.contextPath}/view/photograph_reply');
          });
      });
 	 
@@ -200,19 +186,6 @@
          $(this).addClass("active");
 })
 
-function CreateEditor(){
-		  var E = window.wangEditor
-	        var editor = new E('#editor')
-		  var content = $("#editor").html();
-	        // 或者 var editor = new E( document.getElementById('editor') )
-		  if(content == null || content.length == 0){
-			  editor.create();
-		  }else{
-			  editor.innerHtml="";
-		  }
-	        
-		 
-	 }
 	</script>
 	 
 </body>

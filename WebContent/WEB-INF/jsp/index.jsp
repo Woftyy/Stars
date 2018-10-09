@@ -161,14 +161,14 @@
 					<strong>热门板块</strong>
 					<hr />
 					<ul>
-						<li><p>
+				<li><p>
 								<a href="${pageContext.request.contextPath}/view/science">科普讨论</a>
-							</p></li> 
-						<li><p>
-								<a href="#">摄影天地</a>
 							</p></li>
 						<li><p>
-								<a href="#">电影宇宙</a>
+								<a href="${pageContext.request.contextPath}/view/photograph">摄影天地</a>
+							</p></li>
+						<li><p>
+								<a href="${pageContext.request.contextPath}/view/movie">电影宇宙</a>
 							</p></li>
 					</ul>
 				</div>

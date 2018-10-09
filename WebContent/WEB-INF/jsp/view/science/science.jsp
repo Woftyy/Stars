@@ -85,11 +85,11 @@
 				<div class="media">
 					<div class="media-left">
 						<a href="#"> <img class="media-object img-circle"
-							src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="...">
+							src="${pageContext.request.contextPath}/images/science.jpg" alt="...">
 						</a>
 					</div>
 					<div class="media-body">
-						<h2 class="media-heading">科普讨论</h2>
+						<h2 class="media-heading"><%=forum.getName() %></h2>
 						<%=forum.getIntroduction() %>
 					</div>
 				</div>
@@ -134,21 +134,6 @@
 				</button>
 			</div>
 			<div class="Card RightItem">
-				<div class="positive">
-					<strong>活跃用户</strong>
-					<hr />
-					<ul>
-						<li><img class="img-circle"
-							src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="...">名字在这
-						</li>
-						<li><img class="img-circle"
-							src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="...">名字在这</li>
-						<li><img class="img-circle"
-							src="${pageContext.request.contextPath}/images/photo_test01.jpg" alt="...">名字在这</li>
-					</ul>
-				</div>
-			</div>
-			<div class="Card RightItem">
 				<div class="hotForum">
 					<strong>热门板块</strong>
 					<hr />
@@ -157,10 +142,10 @@
 								<a href="${pageContext.request.contextPath}/view/science">科普讨论</a>
 							</p></li>
 						<li><p>
-								<a href="#">摄影天地</a>
+								<a href="${pageContext.request.contextPath}/view/photograph">摄影天地</a>
 							</p></li>
 						<li><p>
-								<a href="#">电影宇宙</a>
+								<a href="${pageContext.request.contextPath}/view/movie">电影宇宙</a>
 							</p></li>
 					</ul>
 				</div>

@@ -125,7 +125,7 @@
 					<div class="UserItem">
 						<img
 							src="${pageContext.request.contextPath}/images<%=user.getSrc() %>"
-							alt="..." class="img-circle"><strong class="name"><%=user.getNickname()%></strong>
+							alt="..." class="img-circle"><strong class="name"><a href="${pageContext.request.contextPath}/after/othersCenter?otherUid=<%=user.getId()%>"><%=user.getNickname()%></a></strong>
 					</div>
 					<div class="contents">
 						<%=thread.getContent()%>
@@ -143,9 +143,9 @@
 						<div class="ReviewItem" style="">
 							<div>
 								<img
-									src="${pageContext.request.contextPath}/images<%=user.getSrc() %>"
+									src="${pageContext.request.contextPath}/images<%=userReply.getSrc() %>"
 									style="height: 28px; width: 28px;" class="img-circle"> <strong
-									class="name" style="font-size: 12px;"><%=userReply.getName()%></strong>
+									class="name" style="font-size: 12px;"><a href="${pageContext.request.contextPath}/after/othersCenter?otherUid=<%=userReply.getId()%>"><%=userReply.getNickname()%></a></strong>
 								<span style="float: right; font-size: 13px;"><%=(String.valueOf(replyThread.getTime())).substring(0, 19)%></span>
 							</div>
 							<div>
@@ -213,11 +213,11 @@
 						<div class="ReplyUserItem">
 							<div>
 								<img
-									src="${pageContext.request.contextPath}/images/photo_test01.jpg"
-									style="height: 28px; width: 28px;" class="img-circle"> <strong
-									class="name" style="font-size: 12px;"><%=fromUser.getName() %>
-									&nbsp;&nbsp;回复&nbsp;&nbsp;<%=toUser.getName() %></strong> <span
-									style="float: right; font-size: 13px;"><%=(String.valueOf(replyUser.getTime())).substring(0, 19) %></span>
+									src="${pageContext.request.contextPath}/images<%=fromUser.getSrc() %>" style="height: 28px; width: 28px;" class="img-circle"> 
+									<strong class="name" style="font-size: 12px;"><a href="${pageContext.request.contextPath}/after/othersCenter?otherUid=<%=fromUser.getId()%>"><%=fromUser.getNickname()%></a></strong> 
+									&nbsp;&nbsp;回复&nbsp;&nbsp;
+									<strong class="name" style="font-size: 12px;"><a href="${pageContext.request.contextPath}/after/othersCenter?otherUid=<%=toUser.getId()%>"><%=toUser.getNickname()%></a></strong> 
+									<span style="float: right; font-size: 13px;"><%=(String.valueOf(replyUser.getTime())).substring(0, 19) %></span>
 							</div>
 							<div>
 								<p><%=replyUser.getContent() %></p>
@@ -277,26 +277,20 @@
 
 			<!-- 右边卡片 -->
 			<div class="RightItemContainer">
-				<div class="Card RightItem">
-
-					<div class="">
-						<strong>关于作者</strong>
-
-					</div>
-				</div>
+			
 				<div class="Card RightItem">
 					<div class="hotForum">
 						<strong>热门板块</strong>
 						<hr />
 						<ul>
 							<li><p>
-									<a href="#">科普讨论</a>
+									<a href="${pageContext.request.contextPath}/after/science">科普讨论</a>
 								</p></li>
 							<li><p>
-									<a href="#">摄影天地</a>
+									<a href="${pageContext.request.contextPath}/after/photograph">摄影天地</a>
 								</p></li>
 							<li><p>
-									<a href="#">电影宇宙</a>
+									<a href="${pageContext.request.contextPath}/after/movie">电影宇宙</a>
 								</p></li>
 						</ul>
 					</div>

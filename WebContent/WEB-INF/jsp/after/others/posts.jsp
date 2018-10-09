@@ -45,7 +45,7 @@
 					</div>
 
 					<div class="ContentItem"
-						onclick="window.location='${pageContext.request.contextPath}/after/privateReading?uid=${uid}&tid=<%=thread.getId()%>'">
+						onclick="javascript:window.open('${pageContext.request.contextPath}/after/reading?uid=<%=user.getId()%>&tid=<%=thread.getId()%>','_blank')">
 						<strong class="title"><%=thread.getTitle() %></strong>
 						
 						<p></p>

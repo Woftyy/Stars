@@ -37,7 +37,7 @@ public class ReplyController {
 	@Autowired
 	private ThumbService thumbService;
 	
-	/**处理评论
+	/**发布处理回复主题的评论
 	 * @param content
 	 * @param tid
 	 * @param model
@@ -64,6 +64,14 @@ public class ReplyController {
 	  replyThreadService.add(fromUid,0,tid, content);
 	}
 	
+	/**发布处理回复用户的评论
+	 * @param content
+	 * @param tid
+	 * @param toUid
+	 * @param model
+	 * @param request
+	 * 2018-10-09 09:20:37
+	 */
 	@RequestMapping("/after/reading/doReplyUser")
 	@ResponseBody
 	public void doReplyUser(@RequestParam("content")String content,@RequestParam("tid")int tid,@RequestParam("toUid")int toUid,Model model,HttpServletRequest request){
@@ -101,11 +109,15 @@ public class ReplyController {
 	 * 2018-09-29 11:36:47
 	 */
 	@RequestMapping("after/doDeleteReply")
-	public String doDeleteReply(@RequestParam("rid")int rid) {
+	public String doDeleteReply(Model model, @RequestParam("rid")int rid,HttpServletRequest request) {
 		System.out.println("访问了doDeleteReply");
+		int uid = (int) request.getSession().getAttribute("uid");
+		List<Thread> threads = threadService.getPostByUid(uid);
+		User user = userService.getById(uid);
 		thumbService.deleteByrid(rid);
 		replyThreadService.delete(rid);
-		
+		model.addAttribute("threads", threads);
+		model.addAttribute("user", user);
 	 return "after/center/personalCenter";
 	}
 	

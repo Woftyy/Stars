@@ -51,7 +51,7 @@ public class ThreadController {
 	model.addAttribute("uid",uid);
 		return "after/common/editing";
 	}
-	/**点击发帖后的编辑页面
+	/**进入编辑页面
 	 * @param uid
 	 * @param model
 	 * @param request
@@ -111,6 +111,17 @@ public class ThreadController {
 		return "after/common/reading";
 	}
 	
+	/** 处理 私人编辑的发布
+	 * @param model
+	 * @param forum
+	 * @param uid
+	 * @param tid
+	 * @param title
+	 * @param content
+	 * @param request
+	 * @return
+	 * 2018-10-09 09:10:37
+	 */
 	@RequestMapping("after/privateEditing/post")
 	public String PostPrivateEditing(Model model,@RequestParam("forum")String forum,@RequestParam("uid")int uid,@RequestParam("tid")int tid,
 			@RequestParam("title")String title,
@@ -146,6 +157,14 @@ public class ThreadController {
 		return "after/common/PrivateReading";
 	}
 
+	/**  看别人发布的主题
+	 * @param model
+	 * @param tid
+	 * @param uid
+	 * @param request
+	 * @return
+	 * 2018-10-09 09:13:02
+	 */
 	@RequestMapping("after/reading")
 	public String returnReading(Model model, @RequestParam("tid")int tid,@RequestParam("uid")int uid,HttpServletRequest request){
 		System.out.println("ReturnReading uid"+uid);
@@ -178,7 +197,7 @@ public class ThreadController {
 		return "after/common/reading";
 	}
 	
-	/**登录用户在个人中心查看自已的主题
+	/** 查看自已的主题
 	 * @param model
 	 * @param request
 	 * @return
@@ -257,14 +276,18 @@ public class ThreadController {
 	 * 2018-09-29 11:32:16
 	 */
 	@RequestMapping("after/doDeleteThread")
-	public String doDeleteThread(@RequestParam("tid")int tid) {
+	public String doDeleteThread(Model model,@RequestParam("tid")int tid,HttpServletRequest request) {
 		List<ReplyThread> replyThreads = replyThreadService.getReplyThreadBytid(tid);
 		 for(int i=0;i< replyThreads.size();i++) {
 			thumbService.deleteByrid(replyThreads.get(i).getId()); 
 		 }
 		replyThreadService.deleteBytid(tid);
 		threadService.delete(tid);
-		
+		int uid = (int) request.getSession().getAttribute("uid");
+		List<Thread> threads = threadService.getPostByUid(uid);
+		User user = userService.getById(uid);
+		model.addAttribute("threads", threads);
+		model.addAttribute("user", user);
 	 return "after/center/personalCenter";
 	}
 	
