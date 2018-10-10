@@ -148,6 +148,14 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		userMapper.updateProfile(user);
 	}
+	/* (non-Javadoc)
+	 * @see com.stars.service.UserService#list()
+	 */
+	@Override
+	public List<User> list() {
+		// TODO Auto-generated method stub
+		return userMapper.list();
+	}
 
 
 

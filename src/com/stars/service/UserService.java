@@ -12,6 +12,8 @@ public interface UserService {
 	public boolean checkName(String name);
 	//登录判断
 	public boolean checkLogin(String name, String password);
+	//获取全部用户
+	public List<User> list();
 	//通过姓名获取User
 	public User getUserByName(String name); 
 	//通过thread uid 获取 User

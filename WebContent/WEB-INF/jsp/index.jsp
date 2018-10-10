@@ -173,6 +173,7 @@
 					</ul>
 				</div>
 			</div>
+			<a href="${pageContext.request.contextPath}/admin">管理员</a>
 			</div>
 			<!-- /右边卡片 -->
 		</div>
