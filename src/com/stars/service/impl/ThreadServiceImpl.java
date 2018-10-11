@@ -124,5 +124,13 @@ public class ThreadServiceImpl implements ThreadService{
 		thread.setTime(time);
 	    threadMapper.update(thread);
 	}
+	/* (non-Javadoc)
+	 * @see com.stars.service.ThreadService#deleteByUid(int)
+	 */
+	@Override
+	public void deleteByUid(int uid) {
+		// TODO Auto-generated method stub
+		threadMapper.deleteByUid(uid);
+	}
 
 }

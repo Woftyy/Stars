@@ -63,4 +63,13 @@ public class ThumbServiceImpl implements ThumbService{
 		thumbMapper.deleteByrid(rid);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.stars.service.ThumbService#deleteByUid(int)
+	 */
+	@Override
+	public void deleteByUid(int uid) {
+		// TODO Auto-generated method stub
+		thumbMapper.deleteByUid(uid);
+	}
+
 }

@@ -32,5 +32,7 @@ public interface ReplyThreadService {
     public List<ReplyThread> getReplyThreadByfromUid(int fromUid);
     
 	public void delete(int id);
+	
+	public void deleteByUid(int fromUid);
     
 }

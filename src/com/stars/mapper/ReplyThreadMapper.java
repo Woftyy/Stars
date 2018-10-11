@@ -21,6 +21,8 @@ public interface ReplyThreadMapper {
 	
 	public void deleteBytid(int tid);
 	
+	public void deleteByUid(int fromUid);
+	
 	public ReplyThread getById(int id);
 	
 	public void addNum();

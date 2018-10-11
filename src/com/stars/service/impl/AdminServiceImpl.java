@@ -3,6 +3,8 @@
  */
 package com.stars.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -45,5 +47,32 @@ public class AdminServiceImpl implements AdminService{
 		// TODO Auto-generated method stub
 		return adminMapper.getAdminById(id);
 	}
+
+	/* (non-Javadoc)
+	 * @see com.stars.service.AdminService#list()
+	 */
+	@Override
+	public List<Admin> list() {
+		// TODO Auto-generated method stub
+		return adminMapper.list();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.stars.service.AdminService#add(com.stars.entity.Admin)
+	 */
+	@Override
+	public void add(Admin admin) {
+		// TODO Auto-generated method stub
+	  adminMapper.add(admin);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.stars.service.AdminService#delete(java.lang.String)
+	 */
+	@Override
+	public void delete(String id) {
+		// TODO Auto-generated method stub
+      adminMapper.delete(id);
+}
 
 }

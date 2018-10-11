@@ -15,11 +15,14 @@
 	          <delete id="deleteBytid" parameterType="_int" >
 	        delete from reply_thread where tid= #{tid}   
 	    </delete>
+	          <delete id="deleteByUid" parameterType="_int" >
+	        delete from reply_thread where  from_uid=#{fromUid} or to_uid= #{fromUid}    
+	    </delete>
 	    <select id="getById" parameterType="_int" resultType="ReplyThread">
 	        select * from   reply_thread  where id= #{id}    
 	    </select>
 	    <select id="list" resultType="ReplyThread">
-	        select * from   reply_thread      
+	        select * from   reply_thread  
 	    </select>	
 	
 	     <select id="getReplyThreadBytid" resultType="ReplyThread">

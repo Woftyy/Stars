@@ -22,4 +22,6 @@ public interface ThumbMapper {
 	public List<Thumb> findByRidAndUid(int uid,int rid );
 	
 	public void deleteByrid(int rid);
+	
+	public void deleteByUid(int uid);
 } 

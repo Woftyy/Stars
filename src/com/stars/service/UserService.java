@@ -30,5 +30,6 @@ public interface UserService {
 	public List<User> UserFromReplytoUid(int tid);
 	//修改资料
     public void updateProfile(User user);
-	
+	//
+    public void delete(int id);
 }

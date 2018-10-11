@@ -17,6 +17,8 @@
 <delete id="deleteByrid" parameterType="_int">
  delete from thumb where rid= #{rid}   
 </delete>
-
+<delete id="deleteByUid" parameterType="_int">
+ delete from thumb where uid= #{uid}   
+</delete>
 	</mapper>
 

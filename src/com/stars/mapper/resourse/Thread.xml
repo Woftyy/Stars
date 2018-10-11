@@ -12,7 +12,9 @@
 	       <delete id="delete" parameterType="_int" >
 	        delete from thread where id= #{id}   
 	    </delete>
-	    
+	     <delete id="deleteByUid" parameterType="_int" >
+	        delete from thread where uid= #{uid}   
+	    </delete>
 	    <select id="getById" parameterType="_int" resultType="Thread">
 	        select * from   thread  where id= #{id}    
 	    </select>

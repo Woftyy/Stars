@@ -156,6 +156,14 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return userMapper.list();
 	}
+	/* (non-Javadoc)
+	 * @see com.stars.service.UserService#delete(int)
+	 */
+	@Override
+	public void delete(int id) {
+		// TODO Auto-generated method stub
+		userMapper.delete(id);
+	}
 
 
 

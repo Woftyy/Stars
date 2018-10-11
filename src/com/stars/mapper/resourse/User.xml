@@ -9,7 +9,7 @@
 	        ,#{email},#{sex},#{src},#{time})    
 	    </insert>
 	    
-	    <delete id="delete" parameterType="User" >
+	    <delete id="delete" parameterType="_int" >
 	        delete from user where id= #{id}   
 	    </delete>
 	    

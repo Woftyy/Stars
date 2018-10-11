@@ -79,6 +79,7 @@ public class ThreadController {
 	public String PostEditing(Model model,@RequestParam("forum")String forum,@RequestParam("uid")int uid,
 			@RequestParam("title")String title,
 			@RequestParam("content")String content,HttpServletRequest request){
+		ModelAndView mav = new ModelAndView();
 		threadService.add(forum, uid, title, content);
 		HttpSession session = request.getSession();
 		System.out.println("发布成功");
@@ -97,8 +98,18 @@ public class ThreadController {
 		//被回复的用户
 		List<User> beRepliedUsers = userService.UserFromReplytoUid(tid);
 		
+		
 		session.setAttribute("thread", thread);
 		session.setAttribute("user", user);
+	/*	mav.setViewName("after/common/reading?tid="+tid+"&uid="+uid);
+		mav.addObject("thread",thread);
+		mav.addObject("replyThreads",replyThreads);
+		mav.addObject("replyUserList",replyUserList);
+		mav.addObject("user",user);
+		mav.addObject("users",users);
+		mav.addObject("replyUsers",replyUsers);
+		mav.addObject("beRepliedUsers",beRepliedUsers);*/
+		
 		model.addAttribute("thread",thread);
 		model.addAttribute("replyThreads",replyThreads);
 		model.addAttribute("replyUserList",replyUserList);
@@ -108,7 +119,7 @@ public class ThreadController {
 		model.addAttribute("beRepliedUsers",beRepliedUsers);
 
 		
-		return "after/common/reading";
+		return "redirect: ../reading?tid="+tid;
 	}
 	
 	/** 处理 私人编辑的发布

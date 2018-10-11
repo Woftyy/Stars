@@ -1,4 +1,3 @@
-<%@page import="com.stars.entity.Admin"%>
 <%@page import="com.stars.entity.Thread"%>
 <%@page import="com.stars.entity.User"%>
 <%@page import="java.util.List"%>
@@ -63,23 +62,12 @@
     </head>
 
     <body>
-    <%
-        Admin admin = (Admin) request.getAttribute("admin");
-    
-    %>
         <div id="wrap">
             <!-- 左侧菜单栏目块 -->
             <div class="leftMeun" id="leftMeun">
                 <div id="logoDiv">
                     <p id="logoP"><a href="${pageContext.request.contextPath}">返回首页</a><span></span></p>
                 </div>
-                <div>
-               <font style="font-size:15px;color:white;">当前管理员:</font> 
-                </div>
-                  <div>
-            <font style="font-size:15px;color:white;">   <%=admin.getId() %></font>
-               </div>
-                <br>
              
              <!--     <div class="meun-title">账号管理</div>
                 <div class="meun-item meun-item-active" href="#sour" aria-controls="sour" role="tab" data-toggle="tab"><img src="${pageContext.request.contextPath}/images/icon_source.png">资源管理</div>
@@ -87,13 +75,9 @@
                 <div class="meun-item" href="#user" aria-controls="user" role="tab" data-toggle="tab"><img src="${pageContext.request.contextPath}/images/icon_user_grey.png">用户管理</div>
                 <div class="meun-item" href="#chan" aria-controls="chan" role="tab" data-toggle="tab"><img src="${pageContext.request.contextPath}/images/icon_change_grey.png">修改密码</div>
                 -->
-                
-                   <div class="meun-title">后台管理</div>
-                <div class="meun-item meun-item-active" href="#adminUser" aria-controls="adminUser" role="tab" data-toggle="tab"><img src="${pageContext.request.contextPath}/images/icon_source.png">管理员管理</div>
-                <div class="meun-title">论坛管理</div>
+                <div class="meun-title">后台管理</div>
                 <div class="meun-item " href="#scho" aria-controls="scho" role="tab" data-toggle="tab"><img src="${pageContext.request.contextPath}/images/icon_house_grey.png">用户管理</div>
-                <div class="meun-item" href="#thd" aria-controls="thd" role="tab" data-toggle="tab"><img src="${pageContext.request.contextPath}/images/icon_rule_grey.png">主题管理</div>
-             
+                <div class="meun-item meun-item-active" href="#thd" aria-controls="thd" role="tab" data-toggle="tab"><img src="${pageContext.request.contextPath}/images/icon_rule_grey.png">主题管理</div>
               <!--    <div class="meun-item" href="#stud" aria-controls="stud" role="tab" data-toggle="tab"><img src="${pageContext.request.contextPath}/images/icon_card_grey.png">管理</div>
                 <div class="meun-item" href="#sitt" aria-controls="sitt" role="tab" data-toggle="tab"><img src="${pageContext.request.contextPath}/images/icon_char_grey.png">座位管理</div>-->
             </div>
@@ -104,232 +88,6 @@
                 </a>
                 <!-- Tab panes -->
                 <div class="tab-content">
-                <!-- 管理员管理模块 -->
-                 <div role="tabpanel" class="tab-pane active" id="adminUser">
-
-                <div class="check-div form-inline">
-                    <div class="col-xs-3">
-                      <button class="btn btn-yellow btn-xs" data-toggle="modal" data-target="#addAdmin">添加管理员 </button>
-                    </div>
-                    <div class="col-lg-4 col-xs-5">
-               
-                    </div>
-                  
-                </div>
-                <div class="data-div">
-                    <div class="row tableHeader">
-                        <div class="col-xs-4 ">
-                            用户名
-                        </div>
-                     
-                      
-                        <div class="col-xs-4">
-                            密码
-                        </div>
-                     
-                 
-                        <div class="col-xs-4">
-                            操作
-                        </div>
-                    </div>
-                    <%
-                    List<Admin> admins = (List<Admin>) request.getAttribute("admins");
-                    Admin admin1 = new Admin();
-                    for (int i=0;i< admins.size();i++){
-                    	admin1= admins.get(i);
-                    %>
-                    <div class="tablebody">
-
-                        <div class="row">
-                   <div class="col-xs-4 ">
-                                        <%=admin1.getId() %>
-                        </div>
-                        <div class="col-xs-4">
-                         <%=admin1.getPassword()%>
-                        </div>
-                            
-                        <div class="col-xs-4">
-                      <!--      <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#reviseUser<%=i %>">修改</button>--> 
-                                <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteAdmin<%=i %>">删除</button>
-                        </div>
-                           
-                            <div class="modal fade" id="deleteAdmin<%=i%>" role="dialog" aria-labelledby="gridSystemModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    确定要删除该用户？删除后不可恢复！
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                                <button type="button" class="btn btn-xs btn-danger" 
-                                onclick= "window.location='${pageContext.request.contextPath}/admin/deleteAdmin?id=<%=admin1.getId() %>'"
-                                >确 定</button>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <!-- /.modal -->
-                        </div>
-
-                    </div>
-                    
-                       <!--弹出删除管理员警告窗口-->
-                <div class="modal fade" id="deleteAdmin<%=i%>" role="dialog" aria-labelledby="gridSystemModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="gridSystemModalLabel">提示</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    确定要删除该管理员？删除后不可恢复！
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                                <button type="button" class="btn btn-xs btn-danger" 
-                                onclick= "window.location='${pageContext.request.contextPath}/admin/deleteAdmin?id=<%=admin1.getId()%>'"
-                                >确 定</button>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <!-- /.modal -->
-               
-                    
-                 <%} %>
-                </div>
-                
-                <div class="modal fade" id="addAdmin" role="dialog" aria-labelledby="gridSystemModalLabel" aria-hidden="true" style="display: none;">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                                        <h4 class="modal-title" id="gridSystemModalLabel">添加管理员</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="container-fluid">
-                                            <form class="form-horizontal" action="${pageContext.request.contextPath}/admin/addAdmin">
-                                                <div class="form-group ">
-                                                    <label for="sName" class="col-xs-3 control-label">用户名：</label>
-                                                    <div class="col-xs-8 ">
-                                                        <input type="text" name="id" class="form-control input-sm duiqi" id="sName" placeholder="">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group">
-                                                    <label for="sLink" class="col-xs-3 control-label">密码：</label>
-                                                    <div class="col-xs-8 ">
-                                                        <input type="password" name="password" class="form-control input-sm duiqi" id="sLink" placeholder="">
-                                                    </div>
-                                                </div>
-                                                 <div class="modal-footer">
-                                        <button type="button" class="btn btn-xs btn-xs btn-white" data-dismiss="modal">取 消</button>
-                                        <button type="submit" class="btn btn-xs btn-xs btn-green">保 存</button>
-                                    </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                   
-                                </div>
-                                <!-- /.modal-content -->
-                            </div>
-                            <!-- /.modal-dialog -->
-                        </div>
-                <!--页码块-->
-                <footer class="footer">
-                    <ul class="pagination">
-                        <li>
-                            <select>
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                                <option>6</option>
-                                <option>7</option>
-                                <option>8</option>
-                                <option>9</option>
-                                <option>10</option>
-                            </select>
-                            页
-                        </li>
-                        <li class="gray">
-                            共20页
-                        </li>
-                        <li>
-                            <i class="glyphicon glyphicon-menu-left">
-                            </i>
-                        </li>
-                        <li>
-                            <i class="glyphicon glyphicon-menu-right">
-                            </i>
-                        </li>
-                    </ul>
-                </footer>
-
-                <!--弹出添加用户窗口-->
-                <div class="modal fade" id="addSchool" role="dialog" aria-labelledby="gridSystemModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="gridSystemModalLabel">添加地区</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    <form class="form-horizontal">
-                                        <div class="form-group ">
-                                            <label for="sName" class="col-xs-3 control-label">地区名称：</label>
-                                            <div class="col-xs-8 ">
-                                                <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group ">
-                                            <label for="sName" class="col-xs-3 control-label">经度：</label>
-                                            <div class="col-xs-8 ">
-                                                <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="sLink" class="col-xs-3 control-label">纬度：</label>
-                                            <div class="col-xs-8 ">
-                                                <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="sOrd" class="col-xs-3 control-label">简称：</label>
-                                            <div class="col-xs-8">
-                                                <input type="" class="form-control input-sm duiqi" id="sOrd" placeholder="">
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                                <button type="button" class="btn btn-xs btn-green">保 存</button>
-                            </div>
-                        </div>
-                        <!-- /.modal-content -->
-                    </div>
-                    <!-- /.modal-dialog -->
-                </div>
-                <!-- /.modal -->
-            </div>
-                
-                
-                
             <!--用户管理模块-->
             <div role="tabpanel" class="tab-pane " id="scho">
 
@@ -397,8 +155,8 @@
                         </div>
                             
                         <div class="col-xs-2">
-                      <!--      <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#reviseUser<%=i %>">修改</button>--> 
-                                <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteUser<%=i %>">删除</button>
+                           <button class="btn btn-success btn-xs" data-toggle="modal" data-target="#reviseSchool<%=i %>">修改</button>
+                                <button class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deleteSchool<%=i %>">删除</button>
                         </div>
                            
                            
@@ -407,7 +165,7 @@
                     </div>
                     
                        <!--弹出删除用户警告窗口-->
-                <div class="modal fade" id="deleteUser<%=i%>" role="dialog" aria-labelledby="gridSystemModalLabel">
+                <div class="modal fade" id="deleteSchool<%=i%>" role="dialog" aria-labelledby="gridSystemModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -421,9 +179,7 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                                <button type="button" class="btn btn-xs btn-danger" 
-                                onclick= "window.location='${pageContext.request.contextPath}/admin/deleteUser?uid=<%=user.getId() %>'"
-                                >确 定</button>
+                                <button type="button" class="btn btn-xs btn-danger">保 存</button>
                             </div>
                         </div>
                         <!-- /.modal-content -->
@@ -432,7 +188,7 @@
                 </div>
                 <!-- /.modal -->
                                  <!--弹出修改用户窗口-->
-                <div class="modal fade" id="reviseUser<%=i %>" role="dialog" aria-labelledby="gridSystemModalLabel">
+                <div class="modal fade" id="reviseSchool<%=i %>" role="dialog" aria-labelledby="gridSystemModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -564,7 +320,7 @@
             </div>
             <!-- 主题管理模块 -->
             
-           <div role="tabpanel" class="tab-pane " id="thd">
+           <div role="tabpanel" class="tab-pane active" id="thd">
 
                 <div class="check-div form-inline">
                     <div class="col-xs-3">
@@ -638,7 +394,7 @@
                            
                            
                         </div>
-       <!--弹出删除用户警告窗口-->
+       <!--弹出删除主题警告窗口-->
                 <div class="modal fade" id="deleteThread<%=i%>" role="dialog" aria-labelledby="gridSystemModalLabel">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -698,7 +454,54 @@
                     </ul>
                 </footer>
 
-            
+                <!--弹出添加用户窗口-->
+                <div class="modal fade" id="addSchool" role="dialog" aria-labelledby="gridSystemModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="gridSystemModalLabel">添加地区</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="container-fluid">
+                                    <form class="form-horizontal">
+                                        <div class="form-group ">
+                                            <label for="sName" class="col-xs-3 control-label">地区名称：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="sName" class="col-xs-3 control-label">经度：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="email" class="form-control input-sm duiqi" id="sName" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sLink" class="col-xs-3 control-label">纬度：</label>
+                                            <div class="col-xs-8 ">
+                                                <input type="" class="form-control input-sm duiqi" id="sLink" placeholder="">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="sOrd" class="col-xs-3 control-label">简称：</label>
+                                            <div class="col-xs-8">
+                                                <input type="" class="form-control input-sm duiqi" id="sOrd" placeholder="">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                                <button type="button" class="btn btn-xs btn-green">保 存</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
 
             	<div id="myModal" class="modal fade bs-example-modal-sm"
 				tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -714,7 +517,6 @@
         
         </div>
     </div>
-</div>
 </div>
 <!-- 滑块js -->
 <!--	<script type="text/javascript">

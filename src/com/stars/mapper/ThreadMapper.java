@@ -11,6 +11,8 @@ public interface ThreadMapper {
 	
 	public void delete(int  id);
 	
+	public void deleteByUid(int  uid);
+	
 	public Thread getById(int id);
 	
 	public void update(Thread thread);

@@ -4,7 +4,9 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 	<mapper namespace="com.stars.mapper.AdminMapper">
-	
+	 <insert id="add" parameterType="Admin" >
+	        insert into admin (id,password) values (#{id},#{password})    
+	    </insert>
 	  
 	    <select id="getAdminById" parameterType="String" resultType="Admin">
 	        select * from   admin  where id= #{id}    
@@ -13,5 +15,12 @@
 	   <select id="checkName" parameterType="String" resultType="Boolean">
         select * from   admin  where id= #{id}
         </select>
+        
+           <select id="list" resultType="Admin" >
+        select * from   admin  
+        </select>
+        <delete id="delete" parameterType="String">
+ delete from admin where id= #{id}   
+</delete>
 	</mapper>
 

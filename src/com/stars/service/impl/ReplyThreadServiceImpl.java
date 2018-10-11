@@ -121,4 +121,13 @@ public class ReplyThreadServiceImpl implements ReplyThreadService{
 		replyThreadMapper.delete(id);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.stars.service.ReplyThreadService#deleteByUid(int)
+	 */
+	@Override
+	public void deleteByUid(int fromUid) {
+		// TODO Auto-generated method stub
+		replyThreadMapper.deleteByUid(fromUid);
+	}
+
 }
