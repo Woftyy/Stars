@@ -181,7 +181,7 @@
 			</div>
 			<div class="Card RightItem">
 				<div class="hotForum">
-					<strong>热门板块</strong>
+					<strong>热门版块</strong>
 					<hr />
 					<ul>
 								<li><p>

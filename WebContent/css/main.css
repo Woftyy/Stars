@@ -47,9 +47,13 @@ button{
 	width:290px;
 	position: relative;
 }
-/* 头锟斤拷锟斤拷锟斤拷 */
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color: #fff;
+    background-color: #0a161f5e;
+}
+/* 头 */
 #header {
-	
 }
 
 #header>.topbar {
@@ -184,6 +188,9 @@ button{
 	padding-left: 20px;
 	font-style: sans-serif;
 	font-size: 15px
+}
+#mainItem .UserItem .name a {
+	color:black;
 }
 #mainItem  .ContentItem{
 	cursor:pointer

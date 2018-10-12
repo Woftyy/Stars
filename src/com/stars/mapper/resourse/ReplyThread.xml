@@ -31,6 +31,9 @@
 	    <update id="addNum" parameterType="int">
 	       update reply_thread SET num = num+1 WHERE id = #{id}
 	    </update>
+	     <update id="deleteNum" parameterType="int">
+	       update reply_thread SET num = num-1 WHERE id = #{id}
+	    </update>
 	     <update id="updateReplyThread" parameterType="ReplyThread">
 	       update reply_thread SET num = #{num} WHERE id = #{id}
 	    </update>

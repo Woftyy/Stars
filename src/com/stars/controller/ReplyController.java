@@ -22,6 +22,7 @@ import com.stars.service.ReplyThreadService;
 import com.stars.service.ThreadService;
 import com.stars.service.ThumbService;
 import com.stars.service.UserService;
+import com.stars.utils.WordFilter;
 
 
 @Controller
@@ -61,7 +62,9 @@ public class ReplyController {
 		model.addAttribute("user",user);
 		model.addAttribute("replyThreads",replyThreads);
 		model.addAttribute("users",users);
-	  replyThreadService.add(fromUid,0,tid, content);
+		//敏感词过滤
+		String afterContent = WordFilter.doFilter(content);
+	  replyThreadService.add(fromUid,0,tid, afterContent);
 	}
 	
 	/**发布处理回复用户的评论
@@ -99,7 +102,9 @@ public class ReplyController {
 			model.addAttribute("replyUsers",replyUsers);
 			model.addAttribute("beRepliedUsers",beRepliedUsers);
 			model.addAttribute("replyUserList",replyUserList);
-		  replyThreadService.add(fromUid,toUid,tid, content);
+			//敏感词过滤
+			String afterContent = WordFilter.doFilter(content);
+		  replyThreadService.add(fromUid,toUid,tid, afterContent);
 		}
 	
 	
@@ -114,7 +119,9 @@ public class ReplyController {
 		int uid = (int) request.getSession().getAttribute("uid");
 		List<Thread> threads = threadService.getPostByUid(uid);
 		User user = userService.getById(uid);
+		
 		thumbService.deleteByrid(rid);
+		threadService.deleteReplyNum(replyThreadService.getById(rid).getTid());
 		replyThreadService.delete(rid);
 		model.addAttribute("threads", threads);
 		model.addAttribute("user", user);

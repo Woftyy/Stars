@@ -18,6 +18,11 @@
 	    <select id="getById" parameterType="_int" resultType="Thread">
 	        select * from   thread  where id= #{id}    
 	    </select>
+	    <update id="updateThread" parameterType="Thread" >
+	        update thread set fid=#{fid}, uid=#{uid},title=#{title}, content=#{content}, time=#{time},
+	        reply_num=#{replyNum},views=#{views}
+	         where id=#{id}    
+	    </update>
 	    <update id="update" parameterType="Thread" >
 	        update thread set fid=#{fid}, uid=#{uid},title=#{title}, content=#{content}, time=#{time} where id=#{id}    
 	    </update>
@@ -42,6 +47,9 @@
 	    </select>
 	    <update id="addReplyNum" parameterType="int">
 	       update thread SET reply_num = reply_num+1 WHERE id = #{id}
+	    </update>
+	     <update id="deleteReplyNum" parameterType="int">
+	       update thread SET reply_num = reply_num-1 WHERE id = #{id}
 	    </update>
 	      <select id="searchThroughTitleAndContent"  resultType="Thread" >
 	           SELECT * from thread where title like #{content} 

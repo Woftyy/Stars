@@ -13,6 +13,8 @@ public interface ThreadService {
 	
 	public void update(int id,String name,int uid,String title,String content);
 	
+	public void updateThread(Thread thread);
+	
 	public void delete(int id);
 	
 	public void deleteByUid(int  uid);
@@ -30,6 +32,8 @@ public interface ThreadService {
 	public List<Thread> getPostByUid(int uid);
 	
 	public void addReplyNum(int id);
+	
+	public void deleteReplyNum(int id);
 	
 	public List<Thread> searchThroughTitleAndContent(String content);
 

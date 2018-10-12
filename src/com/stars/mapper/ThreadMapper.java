@@ -17,6 +17,8 @@ public interface ThreadMapper {
 	
 	public void update(Thread thread);
 	
+	public void updateThread(Thread thread);
+	
 	public List<Thread> list();
 	
 	
@@ -56,6 +58,8 @@ public interface ThreadMapper {
 	public List<Thread> getPostByUid(int uid);
 	
 	public void addReplyNum(int id);
+	
+	public void deleteReplyNum(int id);
 	
 	public List<Thread> searchThroughTitleAndContent(String content);
 }

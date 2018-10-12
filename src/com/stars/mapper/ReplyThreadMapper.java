@@ -27,6 +27,8 @@ public interface ReplyThreadMapper {
 	
 	public void addNum();
 	
+	public void deleteNum();
+	
 	public void updateReplyThread(ReplyThread replyThread);
 	
 	/**获取相应主题的评论

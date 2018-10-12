@@ -132,5 +132,21 @@ public class ThreadServiceImpl implements ThreadService{
 		// TODO Auto-generated method stub
 		threadMapper.deleteByUid(uid);
 	}
+	/* (non-Javadoc)
+	 * @see com.stars.service.ThreadService#deleteReplyNum(int)
+	 */
+	@Override
+	public void deleteReplyNum(int id) {
+		// TODO Auto-generated method stub
+		threadMapper.deleteReplyNum(id);
+	}
+	/* (non-Javadoc)
+	 * @see com.stars.service.ThreadService#updateThread(com.stars.entity.Thread)
+	 */
+	@Override
+	public void updateThread(Thread thread) {
+		// TODO Auto-generated method stub
+		threadMapper.updateThread(thread);
+	}
 
 }

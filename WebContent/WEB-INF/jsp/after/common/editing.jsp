@@ -1,3 +1,4 @@
+<%@page import="com.stars.entity.User"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -11,6 +12,8 @@
 </head>
 <body>
 <!-- 头部区域 -->
+
+<%User user = (User)request.getAttribute("user"); %>
 	<header id="header">
 		<!-- <div class="topbar hidden-sm hidden-xs"> -->
 		<nav class="navbar navbar-itcast navbar-static-top" data-spy="affix"
@@ -43,7 +46,7 @@
 						</li>
 					</ul>
 					<ul class="nav navbar-nav navbar-right hidden-sm">
-						<li><a href="${pageContext.request.contextPath}/after/personalCenter"><img src="${pageContext.request.contextPath}/images/photo_test01.jpg" 
+						<li><a href="${pageContext.request.contextPath}/after/personalCenter"><img src="${pageContext.request.contextPath}/images<%=user.getSrc() %>" 
 						alt="..." height="30px" width="30px" class="img-circle"></a></li>
 						<li><a href="${pageContext.request.contextPath}" class="btn btn-link btn-sm"
 							>退出登录</a></li>

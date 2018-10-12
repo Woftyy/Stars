@@ -23,6 +23,7 @@ import com.stars.service.ReplyThreadService;
 import com.stars.service.ThreadService;
 import com.stars.service.ThumbService;
 import com.stars.service.UserService;
+import com.stars.utils.WordFilter;
 
 
 
@@ -46,8 +47,10 @@ public class ThreadController {
 	 * @return
 	 */
 	@RequestMapping("after/editing")
-	public String returnEditing(@RequestParam("uid")String uid,Model model,HttpServletRequest request){
+	public String returnEditing(@RequestParam("uid")int uid,Model model,HttpServletRequest request){
 		System.out.println("ThreadController:"+uid);
+		 User user = (User)userService.getById(uid);
+		 model.addAttribute("user",user);
 	model.addAttribute("uid",uid);
 		return "after/common/editing";
 	}
@@ -80,7 +83,10 @@ public class ThreadController {
 			@RequestParam("title")String title,
 			@RequestParam("content")String content,HttpServletRequest request){
 		ModelAndView mav = new ModelAndView();
-		threadService.add(forum, uid, title, content);
+		//敏感词过滤
+		String afterTitle=WordFilter.doFilter(title);
+		String afterContent = WordFilter.doFilter(content);
+		threadService.add(forum, uid, afterTitle, afterContent);
 		HttpSession session = request.getSession();
 		System.out.println("发布成功");
 		model.addAttribute("uid",uid);
@@ -138,7 +144,10 @@ public class ThreadController {
 			@RequestParam("title")String title,
 			@RequestParam("content")String content,HttpServletRequest request){
 		ModelAndView mav =new ModelAndView();
-		threadService.update(tid, forum, uid, title, content);
+		//敏感词过滤
+		String afterTitle=WordFilter.doFilter(title);
+		String afterContent = WordFilter.doFilter(content);
+		threadService.update(tid, forum, uid, afterTitle, afterContent);
 		HttpSession session = request.getSession();
 		System.out.println("发布成功");
 		model.addAttribute("uid",uid);
@@ -195,7 +204,8 @@ public class ThreadController {
 		List<User> replyUsers = userService.UserFromReplyfromUid(tid);
 		//被回复的用户
 		List<User> beRepliedUsers = userService.UserFromReplytoUid(tid);
-		
+		thread.setViews(thread.getViews()+1); 
+		threadService.updateThread(thread);
 		session.setAttribute("thread", thread);
 		session.setAttribute("user", user);
 		model.addAttribute("thread",thread);
@@ -275,7 +285,7 @@ public class ThreadController {
 	            thumb.setUid(uid);
 	            //添加记录
 	            thumbService.add(rid, uid);
-	            //文章点赞数加1
+	            //评论点赞数加1
 	            ReplyThread replyThread=replyThreadService.getById(rid);
 	            replyThread.setNum(replyThread.getNum()+1);
 	            replyThreadService.updateReplyThread(replyThread);

@@ -114,15 +114,15 @@ public class AdminController {
 			replyThreadService.deleteBytid(tid);
 			threadService.delete(tid);
 			List<Thread> threads = threadService.list();
-			List<Forum> forums = new ArrayList<Forum>();
 			List<User> users = userService.list();
-		
 			Admin admin = adminService.getAdminById(String.valueOf(request.getSession().getAttribute("name")));
+			List<Admin> admins = adminService.list();
+			model.addAttribute("admins",admins);
 			model.addAttribute("admin",admin);
 			model.addAttribute("users", users);
 			model.addAttribute("threads",threads);
 			
-			return "/admin/afterDelete";
+			return "/admin/main";
 		}
 		/** 删除主题后跳转界面
 		 * @param model
@@ -150,6 +150,10 @@ public class AdminController {
 		@RequestMapping("/admin/deleteUser")
 		public String deleteUser(Model model, @RequestParam("uid")int uid,HttpServletRequest request) {
              thumbService.deleteByUid(uid);			
+             List<Thread> uidThreads = threadService.getPostByUid(uid);
+             for(int i=0;i<uidThreads.size();i++) {
+            	replyThreadService.deleteBytid(uidThreads.get(i).getId());
+             }
              replyThreadService.deleteByUid(uid);
              threadService.deleteByUid(uid);
              userService.delete(uid);
@@ -157,6 +161,7 @@ public class AdminController {
 			List<User> users = userService.list();
 	Admin admin = adminService.getAdminById(String.valueOf(request.getSession().getAttribute("name")));
 	List<Admin> admins = adminService.list();
+
 				model.addAttribute("admin",admin);
 				model.addAttribute("admins",admins);
 			model.addAttribute("users", users);

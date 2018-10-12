@@ -65,8 +65,8 @@
 							href="${pageContext.request.contextPath}/after/personalCenter"><img
 								src="${pageContext.request.contextPath}/images<%=LoginUser.getSrc() %>"
 								alt="..." height="30px" width="30px" class="img-circle"></a></li>
-						<li><a href="#" class="btn btn-link btn-sm"
-							data-toggle="modal" data-target="#login_form">退出登录</a></li>
+						<li><a href="${pageContext.request.contextPath}"
+							class="btn btn-link btn-sm">退出登录</a></li>
 					</ul>
 				</div>
 			</div>
@@ -87,7 +87,7 @@
 				<div
 					style="padding-top: 40px; padding-left: 100px; padding-right: 30px;">
 					<img
-						src="${pageContext.request.contextPath}/images/photo_test01.jpg"
+						src="${pageContext.request.contextPath}/images<%=user.getSrc() %>"
 						alt="..." height="120px" width="120px" class="img-circle"> <strong
 						style="padding-left: 20px; font-size: 23px;"><%=user.getNickname() %></strong>
 				</div>
@@ -143,7 +143,7 @@
 			
 				<div class="Card RightItem">
 					<div class="hotForum">
-						<strong>热门板块</strong>
+						<strong>热门版块</strong>
 						<hr />
 						<ul>
 					<li><p>

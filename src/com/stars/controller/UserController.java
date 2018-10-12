@@ -40,6 +40,7 @@ import com.stars.service.ForumService;
 import com.stars.service.ReplyThreadService;
 import com.stars.service.ThreadService;
 import com.stars.service.UserService;
+import com.stars.utils.CopyFiles;
 import com.sun.net.httpserver.Authenticator.Result;
 
 @Controller
@@ -381,13 +382,15 @@ public class UserController {
 		//如果文件不为空，写入上传路径       
 		int uid = (int) request.getSession().getAttribute("uid");
 		User user =userService.getById(uid);
-		MultipartFile file2= file;
 		if(!file.isEmpty()) 
 		{    	   long uuid = (long) (Math.random()*10000000);  
 		//上传文件路径    	
+		//公司本机地址
 		String path1 = "D:\\carlos\\eclipse-workplace\\Stars\\WebContent\\images" + File.separator + user.getName(); 
+		//服务器地址
 		String path2 = request.getServletContext().getRealPath("images")+ File.separator +  user.getName();  
-//		String path = "D:/carlos/eclipse-workplace/Stars" + File.separator + uuid;    
+		//个人电脑地址
+//		String path = "D:\\carlos\\eclipse-workplace\\Stars\\WebContent\\images" + File.separator + uuid;    
 		//上传文件名           
 		String filename = file.getOriginalFilename();          
 		File filepath1 = new File(path1,filename);    
@@ -399,7 +402,8 @@ public class UserController {
 		}        
 		//将上传文件保存到一个目标文件当中       
 		String src = File.separator + user.getName()+"/"+filename;
-		file2.transferTo(new File(path2 + File.separator +filename));   
+		file.transferTo(new File(path2 + File.separator +filename)); 
+		CopyFiles copy = new CopyFiles(path2+ File.separator +filename, path1);
 		System.out.println("上传成功到path1" +path1);
 		System.out.println("上传成功到path2" +path2);
 		model.addAttribute("user",user);
