@@ -19,6 +19,8 @@ public interface ThreadMapper {
 	
 	public void updateThread(Thread thread);
 	
+	public void updateView(Thread thread);
+	
 	public List<Thread> list();
 	
 	

@@ -15,6 +15,8 @@ public interface ThreadService {
 	
 	public void updateThread(Thread thread);
 	
+	public void updateView(Thread thread);
+	
 	public void delete(int id);
 	
 	public void deleteByUid(int  uid);

@@ -10,4 +10,6 @@ public interface ForumService {
 		public List<Forum> getforumByThreadFid();
 		
 		public Forum getById(int id);
+		
+		public void update(Forum forum);
 }

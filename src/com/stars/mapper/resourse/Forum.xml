@@ -21,7 +21,7 @@
 	        select * from   forum  where name= #{name}    
 	    </select>
 	    <update id="update" parameterType="Forum" >
-	        update forum set name=#{name} where id=#{id}    
+	        update forum set name=#{name}, introduction=#{introduction},views=#{views}   where id=#{id}    
 	    </update>
 	    <select id="list" resultType="Forum">
 	        select * from   forum      

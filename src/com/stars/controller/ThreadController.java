@@ -1,7 +1,13 @@
 package com.stars.controller;
 
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -13,16 +19,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.stars.constant.Constants;
+import com.stars.entity.AdPictureURL;
+import com.stars.entity.Forum;
+import com.stars.entity.ImgInfo;
 import com.stars.entity.ReplyThread;
 import com.stars.entity.Thread;
 import com.stars.entity.Thumb;
 import com.stars.entity.User;
+import com.stars.service.ForumService;
 import com.stars.service.ReplyThreadService;
 import com.stars.service.ThreadService;
 import com.stars.service.ThumbService;
 import com.stars.service.UserService;
+import com.stars.utils.CopyFiles;
 import com.stars.utils.WordFilter;
 
 
@@ -39,6 +52,8 @@ public class ThreadController {
 	private ReplyThreadService replyThreadService;
 	@Autowired
 	private ThumbService thumbService;
+	@Autowired
+	private ForumService forumService;
 
 	/**点击发帖后的编辑页面
 	 * @param uid
@@ -194,6 +209,7 @@ public class ThreadController {
 		User user = new User();
 		thread = threadService.getById(tid);
 		user = userService.getById(uid);
+		Forum forum = forumService.getById(thread.getFid());
 		//评论列表
 		List<ReplyThread> replyThreads = replyThreadService.getReviewList(tid);
 		//回复用户的列表
@@ -204,8 +220,12 @@ public class ThreadController {
 		List<User> replyUsers = userService.UserFromReplyfromUid(tid);
 		//被回复的用户
 		List<User> beRepliedUsers = userService.UserFromReplytoUid(tid);
+		//主题访问数加1
 		thread.setViews(thread.getViews()+1); 
 		threadService.updateThread(thread);
+	    //总访问数加1
+		forum.setViews(forum.getViews()+1);
+		forumService.update(forum);
 		session.setAttribute("thread", thread);
 		session.setAttribute("user", user);
 		model.addAttribute("thread",thread);
@@ -302,7 +322,14 @@ public class ThreadController {
 		 for(int i=0;i< replyThreads.size();i++) {
 			thumbService.deleteByrid(replyThreads.get(i).getId()); 
 		 }
+		 //删除评论
 		replyThreadService.deleteBytid(tid);
+		//减总查看数
+		Thread thread =threadService.getById(tid);
+            Forum forum = forumService.getById(thread.getFid());
+            forum.setViews(forum.getViews()-thread.getViews());
+            forumService.update(forum);
+            //删除主题
 		threadService.delete(tid);
 		int uid = (int) request.getSession().getAttribute("uid");
 		List<Thread> threads = threadService.getPostByUid(uid);
@@ -311,5 +338,56 @@ public class ThreadController {
 		model.addAttribute("user", user);
 	 return "after/center/personalCenter";
 	}
+	
+	
+	/** 上传图片
+	 * @param list
+	 * @return
+	 * 2018-10-15 14:21:54
+	 */
+	@RequestMapping("after/editing/upLoadImg")
+	@ResponseBody
+	public AdPictureURL  UpLoadImg(@RequestParam("imgFiles")List<MultipartFile> list,HttpServletRequest request) {
+	        int errno = 0;
+	        List<String> urls = new ArrayList<>();
+	        AdPictureURL returnAd= new AdPictureURL();
+	        Map<String, Object> map = new HashMap<>();
+	        List<String> adList = new ArrayList<>();
+	    	String fileName = UUID.randomUUID().toString();
+	        
+	      //公司本机地址
+			String path1 = Constants.IMGURL + File.separator; 
+			//服务器地址
+			String path2 = request.getServletContext().getRealPath("images/picture")+ File.separator;  
+			//个人电脑地址
+//			String path = "D:\\carlos\\eclipse-workplace\\Stars\\WebContent\\images" + File.separator + uuid;    
+	        if (list.size()==0) {
+	        	errno =1 ;
+			}
+	        //将img保存进数据库
+	        ImgInfo img = new ImgInfo();
+	       for(MultipartFile file: list) {
+	    	   String realName ="";
+	    	   if (file!=null) {
+			
+				 File newFile = new File(path2+ File.separator+fileName);
+		try {
+			file.transferTo(newFile);
+			String databaseUrl= Constants.DATABASEURL+fileName;
+			CopyFiles copy = new CopyFiles(path2+ File.separator +fileName, path1);
+			urls.add(databaseUrl);
+		} catch (Exception e) {
+			// TODO: handle exception
+			errno = 1;
+			e.printStackTrace();
+		}
+	    	   }
+	       }
+	       returnAd.setData(urls);
+	       returnAd.setErrno(errno);
+	      return returnAd;
+	}
+	
+	
 	
 }

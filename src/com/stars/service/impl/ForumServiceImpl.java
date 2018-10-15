@@ -29,6 +29,14 @@ public class ForumServiceImpl implements ForumService{
 		// TODO Auto-generated method stub
 		return forumMapper.getById(id);
 	}
+	/* (non-Javadoc)
+	 * @see com.stars.service.ForumService#update(com.stars.entity.Forum)
+	 */
+	@Override
+	public void update(Forum forum) {
+		// TODO Auto-generated method stub
+		forumMapper.update(forum);
+	}
 
 	
 }

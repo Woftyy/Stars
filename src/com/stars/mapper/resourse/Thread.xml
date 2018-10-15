@@ -24,7 +24,12 @@
 	         where id=#{id}    
 	    </update>
 	    <update id="update" parameterType="Thread" >
-	        update thread set fid=#{fid}, uid=#{uid},title=#{title}, content=#{content}, time=#{time} where id=#{id}    
+	        update thread set fid=#{fid}, uid=#{uid},title=#{title}, content=#{content}, time=#{time} 
+	        where id=#{id}    
+	    </update>
+	    <update id="updateView" parameterType="Thread" >
+	        update thread set views=#{views}
+	        where id=#{id}    
 	    </update>
 	    <select id="list" resultType="Thread">
 	        select * from   thread      

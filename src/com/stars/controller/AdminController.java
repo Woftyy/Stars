@@ -111,7 +111,14 @@ public class AdminController {
 			 for(int i=0;i< replyThreads.size();i++) {
 				thumbService.deleteByrid(replyThreads.get(i).getId()); 
 			 }
-			replyThreadService.deleteBytid(tid);
+			 //删除评论
+				replyThreadService.deleteBytid(tid);
+				//减总查看数
+				Thread thread =threadService.getById(tid);
+		            Forum forum = forumService.getById(thread.getFid());
+		            forum.setViews(forum.getViews()-thread.getViews());
+		            forumService.update(forum);
+		            //删除主题
 			threadService.delete(tid);
 			List<Thread> threads = threadService.list();
 			List<User> users = userService.list();

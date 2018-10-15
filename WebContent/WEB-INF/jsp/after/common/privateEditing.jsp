@@ -91,20 +91,23 @@ thread = (Thread)request.getAttribute("thread") ;
 	<script src="${pageContext.request.contextPath}/js/wangEditor.min.js"></script>
 <script>
 
-	  var E = window.wangEditor
-      var editor = new E('#editor')
-	
-      // 或者 var editor = new E( document.getElementById('editor') )
-	  var $text = $('#text')
-	  editor.customConfig.uploadImgShowBase64 = true
-      editor.customConfig.onchange = function (text) {
-          // 监控变化，同步更新到 textarea
-          $text.val(text)
-      }
-      editor.create()
-      // 初始化 textarea 的值
-      $text.val(editor.txt.text());
-      
+
+var E = window.wangEditor
+var editor = new E('#editor')
+// 或者 var editor = new E( document.getElementById('editor') )
+var $text = $('#text')
+editor.customConfig.uploadImgShowBase64 = true
+editor.customConfig.uploadImgServer = 'editing/upLoadImg'
+	  editor.customConfig.uploadFileName = 'imgFiles'
+editor.customConfig.onchange = function (text) {
+    // 监控变化，同步更新到 textarea
+    $text.val(text)
+} 
+editor.create()
+// 初始化 textarea 的值
+$text.val(editor.txt.text())
+
+
 	
 function toSearch(){
     //这里面可以做表单提交前的验证判断

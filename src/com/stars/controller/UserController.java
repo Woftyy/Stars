@@ -32,6 +32,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.stars.constant.Constants;
 import com.stars.entity.Forum;
 import com.stars.entity.ReplyThread;
 import com.stars.entity.Thread;
@@ -386,7 +387,7 @@ public class UserController {
 		{    	   long uuid = (long) (Math.random()*10000000);  
 		//上传文件路径    	
 		//公司本机地址
-		String path1 = "D:\\carlos\\eclipse-workplace\\Stars\\WebContent\\images" + File.separator + user.getName(); 
+		String path1 = Constants.UPLOADURL + File.separator + user.getName(); 
 		//服务器地址
 		String path2 = request.getServletContext().getRealPath("images")+ File.separator +  user.getName();  
 		//个人电脑地址

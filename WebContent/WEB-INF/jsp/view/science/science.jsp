@@ -8,7 +8,7 @@
 	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
-<head>
+<head> 
 <!-- 设置当前HTML 文件字符编码 -->
 <meta charset="utf-8">
 <!-- 设置浏览器兼容性 -->

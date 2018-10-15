@@ -148,5 +148,13 @@ public class ThreadServiceImpl implements ThreadService{
 		// TODO Auto-generated method stub
 		threadMapper.updateThread(thread);
 	}
+	/* (non-Javadoc)
+	 * @see com.stars.service.ThreadService#updateView(com.stars.entity.Thread)
+	 */
+	@Override
+	public void updateView(Thread thread) {
+		// TODO Auto-generated method stub
+		threadMapper.updateView(thread);
+	}
 
 }
