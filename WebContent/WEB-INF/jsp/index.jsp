@@ -35,7 +35,7 @@
 	<header id="header">
 		<!-- <div class="topbar hidden-sm hidden-xs"> -->
 		<nav class="navbar navbar-itcast navbar-static-top" data-spy="affix"
-			data-offset-top="260" data-offset-bottom="200">
+			data-offset-top="100" data-offset-bottom="100">
 			<div class="container">
 				<button id="btn" type="button" class="navbar-toggle collapsed"
 					data-toggle="collapse" data-target="#nav_list"

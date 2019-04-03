@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.stars.mapper.ThumbMapper">
+	    <insert id="add" parameterType="Thumb" >
+	        insert into thumb ( uid,rid) values (#{uid},#{rid})    
+	    </insert>
+<select id="findByRidAndUid" resultType="Thumb">
+      select * from thumb where uid=#{0} and rid=#{1}
+</select>
+
+<delete id="delete" parameterType="_int">
+ delete from thumb where id= #{id}   
+</delete>
+<delete id="deleteByrid" parameterType="_int">
+ delete from thumb where rid= #{rid}   
+</delete>
+<delete id="deleteByUid" parameterType="_int">
+ delete from thumb where uid= #{uid}   
+</delete>
+	</mapper>
+

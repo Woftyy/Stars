@@ -384,7 +384,7 @@
 			async:false,//让ajax执行代码顺序同步
 			success:function(data){
 				
-				if(countId==1){
+				if(num==1){
 					$("#num"+i).html(num-1)
 					$('#countId'+i).val("0");
 				}else{

@@ -1,5 +1,6 @@
 package com.stars.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.stars.entity.Thread;
@@ -64,4 +65,16 @@ public interface ThreadMapper {
 	public void deleteReplyNum(int id);
 	
 	public List<Thread> searchThroughTitleAndContent(String content);
+	
+    /**
+     * 分页操作，调用findByPage limit分页方法
+     * @param map
+     * @return
+     */
+    public List<Thread> findByPage(HashMap<String,Object> map);
+    /**
+     * 查询用户记录总数
+     * @return
+     */
+    public int selectCount();
 }

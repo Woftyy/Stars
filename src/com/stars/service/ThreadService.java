@@ -2,6 +2,7 @@ package com.stars.service;
 
 import java.util.List;
 
+import com.stars.entity.PageBean;
 import com.stars.entity.Thread;
 import com.stars.entity.User;
 
@@ -38,5 +39,9 @@ public interface ThreadService {
 	public void deleteReplyNum(int id);
 	
 	public List<Thread> searchThroughTitleAndContent(String content);
+	
+    public PageBean<Thread> findByPage(int currentPage);
+    
+    public int selectCount();
 
 }

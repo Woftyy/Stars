@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<mapper namespace="com.stars.mapper.ForumMapper">
+	    <insert id="add" parameterType="Forum" >
+	        insert into forum ( name,introduction,views) values (#{name},#{introduction}
+	        ,#{views})    
+	    </insert>
+	    
+	    <delete id="delete" parameterType="Forum" >
+	        delete from forum where id= #{id}   
+	    </delete>
+	    
+	    <select id="getById" parameterType="_int" resultType="Forum">
+	        select * from   forum  where id= #{id}    
+	    </select>
+	    
+	     <select id="getByName" parameterType="String" resultType="Forum">
+	        select * from   forum  where name= #{name}    
+	    </select>
+	    <update id="update" parameterType="Forum" >
+	        update forum set name=#{name}, introduction=#{introduction},views=#{views}   where id=#{id}    
+	    </update>
+	    <select id="list" resultType="Forum">
+	        select * from   forum      
+	    </select>	   
+	         <select id="getForumByThreadFid"  resultType="Forum">
+	        select forum.id,forum.name,introduction,forum.views,url_view,url_after
+	        from forum,thread where forum.id=fid   
+	    </select> 
+	</mapper>
+

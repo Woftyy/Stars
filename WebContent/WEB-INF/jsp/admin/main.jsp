@@ -4,6 +4,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+  <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html lang="ch">
 
@@ -685,7 +686,19 @@
                             页
                         </li>
                         <li class="gray">
-                            共20页
+                          <span>第${requestScope.pagemsg.currPage }/ ${requestScope.pagemsg.totalPage}页</span>  
+   <span>总记录数：${requestScope.pagemsg.totalCount }  每页显示:${requestScope.pagemsg.pageSize}</span>  
+   <span>
+       <c:if test="${requestScope.pagemsg.currPage != 1}">
+           <a href="${pageContext.request.contextPath }/admin/main?currentPage=1">[首页]</a>  
+           <a href="${pageContext.request.contextPath }/admin/main?currentPage=${requestScope.pagemsg.currPage-1}">[上一页]</a>  
+       </c:if>
+       
+       <c:if test="${requestScope.pagemsg.currPage != requestScope.pagemsg.totalPage}">
+           <a href="${pageContext.request.contextPath }/admin/main?currentPage=${requestScope.pagemsg.currPage+1}">[下一页]</a>  
+           <a href="${pageContext.request.contextPath }/admin/main?currentPage=${requestScope.pagemsg.totalPage}">[尾页]</a>  
+       </c:if>
+   </span>
                         </li>
                         <li>
                             <i class="glyphicon glyphicon-menu-left">

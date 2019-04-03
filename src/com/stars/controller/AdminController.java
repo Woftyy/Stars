@@ -56,7 +56,7 @@ public class AdminController {
 	
 }
 		@RequestMapping("/admin/main")
-		public String adminMain(Model model, HttpServletRequest request){
+		public String adminMain(@RequestParam(value="currentPage",defaultValue="1",required=false)int currentPage,Model model, HttpServletRequest request){
 			
 			List<Forum> forums = new ArrayList<Forum>();
 			List<Thread> threads = threadService.list();
@@ -67,7 +67,7 @@ public class AdminController {
 				model.addAttribute("admins",admins);
 			model.addAttribute("users", users);
 			model.addAttribute("threads",threads);
-			
+			model.addAttribute("pagemsg", threadService.findByPage(currentPage));//回显分页数据
 			return "admin/main";
 	
 }
